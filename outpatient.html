@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Outpatient Audit Form
+        </title>
+        <style>
+            #t1, #t2, #t3, #t4, #t5, #t6  {
+                width: 50%;
+                border: none;
+            }
+            #t1 td, #t2 td, #t3 td, #t4 td, #t5 td, #t6 td {
+                border: none;
+                font-weight: normal;
+            }
+            #t1 th, #t2 th, #t3 th, #t4 th, #t5 th, #t6 th {
+                
+                border: none;
+            }
+            table, th, td {
+                border-spacing: 1px;
+                border: 1px solid black;
+            }
+            th {
+                font-weight: bold;
+                color: #00008B;
+                text-align: left;
+            }
+            td {
+              font-weight: bold;  
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div class="problems">
+            <table id="problems_table" onchange="select_level('problem', 'problem_level')">
+                <tr>
+                    <th style="color:red"> <u>Number and Complexity of Problems Addressed</u>  <button type="button" onclick="clear_problem()"> Clear</button><span style="float:right;color:#00008B;"> Level</span></th>
+
+                    <th>2<input type="radio" id="problem_level-2" name="problem_level" value=2></th>
+                    <th>3<input type="radio" id="problem_level-3" name="problem_level" value=3></th>
+                    <th>4<input type="radio" id="problem_level-4" name="problem_level" value=4></th>
+                    <th>5<input type="radio" id="problem_level-5" name="problem_level" value=5></th>
+                </tr>
+                <tr>
+                    <td>Self-limited or Minor</td>
+                    <td>1<input type="checkbox" id="self-limited_1" name="problem" value=2></td>
+                    <td>2+<input type="checkbox" id="self-limited_2+" name="problem" value=3></td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td style="background-color:#D3D3D3"></td>
+                </tr>
+                <tr>
+                    <td>Stable Chronic Illness(= at treatment goal)</td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td>1<input type="checkbox" id="stable-chronic_1" name="problem" value=3></td>
+                    <td>2+<input type="checkbox" id="stable-chronic_2+" name="problem" value=4></td>
+                    <td style="background-color:#D3D3D3"></td>
+                </tr>
+                <tr>
+                    <td>Acute, Uncomplicated Illness or Injury</td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td>1+<input type="checkbox"  id="acute-uncomplicated_1+" name="problem" value=3></td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td style="background-color:#D3D3D3"></td>
+                </tr>
+                <tr>
+                    <td>Chronic w/Exacerbation/progression/side effects</td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td>1+<input type="checkbox" id="chronic-exacerbation_1+" name="problem" value=4></td>
+                    <td style="background-color:#D3D3D3"></td>
+                </tr>
+                <tr>
+                    <td>Undiagnosed New Problem w/ Uncertain Prognosis</td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td>1+<input type="checkbox" id="undiagnosed_1+" name="problem" value=4></td>
+                    <td style="background-color:#D3D3D3"></td>
+                </tr>
+                <tr>
+                    <td>Acute Illness w/ Systemic Symptoms</td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td>1+<input type="checkbox" id="acute-illness_1+" name="problem" value=4></td>
+                    <td style="background-color:#D3D3D3"></td>
+                </tr>
+                <tr>
+                    <td>Chronic w/ Severe Exacerbation/progression/side effects</td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td>1+<input type="checkbox" id="chronic-severe_1+" name="problem" value=5></td>
+                </tr>
+                <tr>
+                    <td>Acute or Chronic Illness/injury threat to life/bodily function</td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td>1+<input type="checkbox" id="acute-chronic_1+" name="problem" value=5></td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <div class="risk">
+            <table id="risk_table" onchange="select_level('risk', 'risk_level')">
+                <tr>
+                    <th style="color:red"> <u>Risk</u> <button type="button" onclick="clear_risk()"> Clear</button><span style="float:right;color:#00008B;">Level</span></th>
+                    <th>2<input type="radio" id="risk_level-2" name="risk_level" value=2></th>
+                    <th>3<input type="radio" id="risk_level-3" name="risk_level" value=3></th>
+                    <th>4<input type="radio" id="risk_level-4" name="risk_level" value=4></th>
+                    <th>5<input type="radio" id="risk_level-5" name="risk_level" value=5></th>
+                </tr>
+                <tr>
+                    <td>Minimal risk of recurrences morbidity from additional diagnostic testing or treatment</td>
+                    <td><input type="checkbox" id="minimal-risk" name="risk" value=2></td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td style="background-color:#D3D3D3"></td>
+                </tr>
+                <tr>
+                    <td>Low risk of mordbidity from additional diagnostic testing or treatment
+                        <table id="t1" onchange="get_level('low-risk')">
+                            <tr>
+                                <td><input type="checkbox" id="over-the-counter" name="low-risk" value=3>Over-the-counter drugs</td>
+                                <td><input type="checkbox" id="minor-surgery" name="low-risk" value=3>Minor surgery w/o riskfactors</td>
+                                <td><input type="checkbox" id="low-recurrences" name="low-risk" value=3>Low recurrences</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" id="Physical/Occupational" name="low-risk" value=3>Physical/Occupational Therapy</td>
+                                <td><input type="checkbox" id="IV-fluids" name="low-risk" value=3>IV fluids without additives</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td><input type="checkbox" id="low-risk" name="risk" value=3></td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td style="background-color:#D3D3D3"></td>
+                </tr>
+                <tr>
+                    <td>Moderate risk of morbidity from additional diagnostic testing or treatment
+                        <table id="t2" onchange="get_level('moderate-risk')">
+                            <tr>
+                                <td><input type="checkbox" id="RX-minor-surgery" name="moderate-risk" value=4>RX Minor surgery w/o risk factors</td>
+                                <td><input type="checkbox" id="Elective-major-surgery" name="moderate-risk" value=4>Elective major surgery w/o risk factors</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" id="Diagnosis/treatment" name="moderate-risk" value=4>Diagnosis/treatment significantly limited by social determinants of health</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" id="IV-with-additives" name="moderate-risk" value=4>IV with additives (Fe infusion)</td>
+                                <td><input type="checkbox" id="moderate-risk-recurrence" name="moderate-risk" value=4>Moderate risk of recurrence</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td><input type="checkbox" id="moderate-risk" name="risk" value=4></td>
+                    <td style="background-color:#D3D3D3"></td>
+                </tr>
+                <tr>
+                    <td>High risk of mordbidity from additional diagnostic testing or treatment
+                        <table id="t3" onchange="get_level('high-risk')">
+                            <tr>
+                                <td><input type="checkbox" id="drug-therapy" name="high-risk" value=5>Drug Therapy intensive monitoring for toxicity</td>
+                                <td><input type="checkbox" id="major_surgery_risks" name="high-risk" value=5>Major surgery w/ risk factors</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" id="hospitalization" name="high-risk" value=5>Hospitalization</td>
+                                <td><input type="checkbox" id="de-escalate" name="high-risk" value=5>De-escalate care/poor prognosis (example hospice)</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" id="high-risk-recurrence" name="high-risk" value=5>High risk of recurrence</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td><input type="checkbox" id="high-risk" name="risk" value=5></td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <div class="data">
+            <table id="data_tabel" onchange="select_level('data', 'data_level')">
+                <tr>
+                    <th style="color:red;"><u>Data</u> <button type="button" onclick="clear_category()"> Clear</button><span style="float:right;color:#00008B;">Level</span></th>
+                    <th>2<input type="radio" id="data_level-2" name="data_level" value=2></th>
+                    <th>3<input type="radio" id="data_level-3" name="data_level" value=3></th>
+                    <th>4<input type="radio" id="data_level-4" name="data_level" value=4></th>
+                    <th>5<input type="radio" id="data_level-5" name="data_level" value=5></th>
+                </tr>
+                <tr>
+                    <td>0 - 1</td>
+                    <td><input type="checkbox" id="0-1" name="data" value=2></td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td style="background-color:#D3D3D3"></td>
+                </tr>
+                <tr>
+                    <td onchange="get_level('category_a')"><span style="color:#00BFFF">Category 1:</span> <span style="color:red"> 2 </span><input type="checkbox" id="level3_cat1" name="category_a" value=3> Or Independent Historian(s) <input type="checkbox" id="indep_hist" name="category_a" value=3></td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td><input type="checkbox" id="category_a" name="data" value=3></td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td style="background-color:#D3D3D3"></td>
+                </tr>
+                <tr>
+                    <td onchange="get_level('category_b')"><span style="color:#00BFFF">Category 1:</span><span style="color:red"> 3 </span><input type="checkbox" id="level4_cat1" name="category_b" value=4> Or <span style="color:green">Category 2:</span><span style="color:red"> 1 </span><input type="checkbox" id="level4_cat2" name="category_b" value=4> Or <span style="color:red">Category 3: 1 </span><input type="checkbox" id="level4_cat3" name="category_b" value=4></td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td><input type="checkbox" id="category_b" name="data" value=4></td>
+                    <td style="background-color:#D3D3D3"></td>
+                </tr>
+                <tr>
+                    <td onchange="get_level('category_c')">Must Meet 2 of 3 Below:<br>
+                     <span style="color:#00BFFF">Category 1:</span><span style="color:red"> 3 </span><input type="checkbox" id="level5_cat1" name="category_c" value=5> <span style="color:green">Category 2:</span><span style="color:red"> 1 </span><input type="checkbox" id="level5_cat2" name="category_c" value=5> <span style="color:red">Category 3: 1 </span><input type="checkbox" id="level5_cat3" name="category_c" value=5></td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td style="background-color:#D3D3D3"></td>
+                    <td style="background-color:#D3D3D3"></td>  
+                    <td><input type="checkbox" id="category_c" name="data" value=5></td>
+                </tr>
+            </table>
+            <div class="category1">
+                <table id="t4" onchange='category_level()'>
+                    <tr>
+                        <th style="color:#00BFFF;text-decoration:underline">Category 1: Tests, documents, or independent historian(s)</th>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" id="review_prior_1" name="category1" value=1> <input type="checkbox" id="review_prior_2" name="category1" value=2> <input type="checkbox" id="review_prior_3" name="category1" value=3> Review of prior external note(s) from each <span style="color:red;">unique</span> source (not your own notes)</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" id="review_results_1" name="category1" value=1> <input type="checkbox" id="review_results_2" name="category1" value=2> <input type="checkbox" id="review_results_3" name="category1" value=3> Review of the result(s) of each <span style="color:red;">unique</span> test (Not previously used in prior visit(s))</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" id="ordering_1" name="category1" value=1> <input type="checkbox" id="ordering_2" name="category1" value=2> <input type="checkbox" id="ordering_3" name="category1" value=3> Ordering of  each <span style="color:red;">unique</span> test</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" id="assesment" name="category1" value=1> Assesment requiring an independent historian(s)</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="category2" onchange='category_level()'>
+                <table id="t5">
+                    <tr>
+                        <th style="color:green;text-decoration:underline">Category 2: Independent interpretation of tests</th>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" id="independent_interpretation" name="category2" value=1> Independent interpretation of a test performedby another physician/other qualified healthcare proffessional (not separately reported)</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="category3" onchange='category_level()'>
+                <table id="t6">
+                    <tr>
+                        <th style="color:red;text-decoration:underline">Category 3: Disscussion of management or test interpretation</th>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" id="disscussion_management" name="category3" value=1> Disscussion of management or test interpretation with external physician/other qualified health care professional/appropriate source (not seperately reported)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="level">
+        	<p id="overallLevel"></p>
+        </div>
+        <button type="button" onclick="clear_form()"> Clear </button>
+    </body>
+    <script>
+    	function select_level(name, level) {
+    		const checkboxes = document.querySelectorAll('input[name="'+name+'"]:checked');
+    		let max = 0;
+    		checkboxes.forEach((checkbox)=>{if (parseInt(checkbox.value)>max) {max = parseInt(checkbox.value)}});
+    		const levels = document.querySelectorAll('input[name="'+level+'"]');
+    		levels.forEach((level)=>{if(parseInt(level.value)==max) {level.checked=true}});
+    		overall_level();
+    	}
+
+    	function get_level(name) {
+    		const checkboxes = document.querySelectorAll('input[name="'+name+'"]:checked');
+    		if (checkboxes.length > 0) {
+    			document.getElementById(name).checked = true;
+    		}
+    	}
+
+    	function category_level() {
+    		let category_1 = document.querySelectorAll('input[name="category1"]:checked').length;
+    		let category_2 = document.querySelectorAll('input[name="category2"]:checked').length;
+    		let category_3 = document.querySelectorAll('input[name="category3"]:checked').length;
+    		if (category_3>0) {
+    			if (category_2>0) {
+    				document.getElementById('level5_cat2').checked=true;
+    				document.getElementById('level5_cat3').checked=true;
+    				let turn_off = document.querySelectorAll('input[name="category_a"]');
+ 					turn_off.forEach((checkbox)=>{checkbox.checked = false;})
+ 					turn_off = document.querySelectorAll('input[name="category_b"]')
+ 					turn_off.forEach((checkbox)=>{checkbox.checked = false;})
+    				document.getElementById('0-1').checked=false;
+    				get_level('category_c');
+    			}
+    			if (category_1>2) {
+    				document.getElementById('level5_cat3').checked=true;
+    				document.getElementById('level5_cat1').checked=true;
+    				let turn_off = document.querySelectorAll('input[name="category_a"]');
+ 					turn_off.forEach((checkbox)=>{checkbox.checked = false;})
+ 					turn_off = document.querySelectorAll('input[name="category_b"]')
+ 					turn_off.forEach((checkbox)=>{checkbox.checked = false;})
+    				document.getElementById('0-1').checked=false;
+    				get_level('category_c');
+    			}
+    			if (!(category_1>2) && !(category_2>0)){
+    				document.getElementById('level4_cat3').checked=true;
+    				document.getElementById('0-1').checked=false;
+    				let turn_off = document.querySelectorAll('input[name="category_a"]');
+ 					turn_off.forEach((checkbox)=>{checkbox.checked = false;})
+ 					turn_off = document.querySelectorAll('input[name="category_c"]')
+ 					turn_off.forEach((checkbox)=>{checkbox.checked = false;})
+    				get_level('category_b');
+    			}
+    		} else if (category_2>0) {
+    			if (category_1>2) {
+    				document.getElementById('level5_cat2').checked=true;
+    				document.getElementById('level5_cat1').checked=true;
+	    			let turn_off = document.querySelectorAll('input[name="category_a"]');
+ 					turn_off.forEach((checkbox)=>{checkbox.checked = false;})
+ 					turn_off = document.querySelectorAll('input[name="category_b"]')
+ 					turn_off.forEach((checkbox)=>{checkbox.checked = false;})
+    				document.getElementById('0-1').checked=false;
+    				get_level('category_c');
+    			} else {
+    				document.getElementById('level4_cat2').checked=true;
+    				let turn_off = document.querySelectorAll('input[name="category_a"]');
+ 					turn_off.forEach((checkbox)=>{checkbox.checked = false;})
+ 					turn_off = document.querySelectorAll('input[name="category_c"]')
+ 					turn_off.forEach((checkbox)=>{checkbox.checked = false;})
+    				document.getElementById('0-1').checked=false;
+    				get_level('category_b');
+    			}
+    		} else if (category_1>2) {
+    			document.getElementById('level4_cat1').checked=true;
+    			document.getElementById('0-1').checked=false;
+    			let turn_off = document.querySelectorAll('input[name="category_a"]');
+ 				turn_off.forEach((checkbox)=>{checkbox.checked = false;})
+ 				turn_off = document.querySelectorAll('input[name="category_c"]')
+ 				turn_off.forEach((checkbox)=>{checkbox.checked = false;})
+    			get_level('category_b');
+    		} else if (category_1==2) {
+    			document.getElementById('level3_cat1').checked=true;
+ 				let turn_off = document.querySelectorAll('input[name="category_b"]');
+ 				turn_off.forEach((checkbox)=>{checkbox.checked = false;})
+ 				turn_off = document.querySelectorAll('input[name="category_c"]')
+ 				turn_off.forEach((checkbox)=>{checkbox.checked = false;})
+    			document.getElementById('0-1').checked=false;
+    			get_level('category_a');
+    		} else {
+    			let turn_off = document.querySelectorAll('input[name="category_a"]');
+ 				turn_off.forEach((checkbox)=>{checkbox.checked = false;})
+ 				turn_off = document.querySelectorAll('input[name="category_b"]')
+ 				turn_off.forEach((checkbox)=>{checkbox.checked = false;})
+ 				turn_off = document.querySelectorAll('input[name="category_c"]')
+ 				turn_off.forEach((checkbox)=>{checkbox.checked = false;})
+    			document.getElementById('0-1').checked=true;
+    		}
+    		select_level('data', 'data_level');
+    	}
+
+    	function clear_category() {
+    		let clear = document.querySelectorAll('input[name="data_level"]');
+    		clear.forEach((radio)=>{radio.checked= false});
+    		clear = document.querySelectorAll('input[name="data"]');
+    		clear.forEach((checkbox)=>{checkbox.checked=false});
+    		clear = document.querySelectorAll('input[name="category_a"]');
+    		clear.forEach((checkbox)=>{checkbox.checked=false});
+    		clear = document.querySelectorAll('input[name="category_b"]');
+    		clear.forEach((checkbox)=>{checkbox.checked=false});
+    		clear = document.querySelectorAll('input[name="category_c"]');
+    		clear.forEach((checkbox)=>{checkbox.checked=false});
+    		clear = document.querySelectorAll('input[name="category1"]');
+    		clear.forEach((checkbox)=>{checkbox.checked=false});
+    		clear = document.querySelectorAll('input[name="category2"]');
+    		clear.forEach((checkbox)=>{checkbox.checked=false});
+    		clear = document.querySelectorAll('input[name="category3"]');
+    		clear.forEach((checkbox)=>{checkbox.checked=false});
+    	}
+
+    	function clear_risk() {
+    		let clear = document.querySelectorAll('input[name="risk_level"]');
+    		clear.forEach((radio)=>{radio.checked= false});
+    		clear = document.querySelectorAll('input[name="risk"]');
+    		clear.forEach((radio)=>{radio.checked= false});
+    		clear = document.querySelectorAll('input[name="low-risk"]');
+    		clear.forEach((radio)=>{radio.checked= false});
+    		clear = document.querySelectorAll('input[name="moderate-risk"]');
+    		clear.forEach((radio)=>{radio.checked= false});
+    		clear = document.querySelectorAll('input[name="high-risk"]');
+    		clear.forEach((radio)=>{radio.checked= false});
+    	}
+
+    	function clear_problem() {
+    		let clear = document.querySelectorAll('input[name="problem_level"]');
+    		clear.forEach((radio)=>{radio.checked= false});
+    		clear = document.querySelectorAll('input[name="problem"]');
+    		clear.forEach((radio)=>{radio.checked= false});
+    	}
+
+    	function clear_form() {
+    		clear_problem();
+    		clear_risk();
+    		clear_category();
+    	}
+
+    	function overall_level() {
+    		let levels = [];
+    		let problem_level = document.querySelector('input[name="problem_level"]:checked').value;
+    		let risk_level = document.querySelector('input[name="risk_level"]:checked').value;
+    		let data_level = document.querySelector('input[name="data_level"]:checked').value;
+    		levels.push(problem_level);
+    		levels.push(risk_level);
+    		levels.push(data_level);
+    		levels.sort();
+    		console.log(levels[1]);
+    		document.getElementById("overallLevel").innerHTML = "Level: " + levels[1];
+    		//return levels[1];
+    	}
+    </script>
+</html>
