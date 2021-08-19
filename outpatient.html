@@ -15,33 +15,34 @@
         crossorigin="anonymous"></script>
 </head>
 
+<style>
+    h2 {
+        font-size: 1.17em; font-weight: bolder; color:red; text-decoration: underline; display:inline-block;
+    }
+    .h2-label {
+        float:right; color:#00008B; font-size: 1.17em; font-weight: bolder; display:inline-block;
+    }
+    h3 {
+        font-size: 1.10em; font-weight: bolder;
+    }
+</style>
 <body>
     <div class="d-flex flex-column">
         <div class="accordion m-auto order-2" id="accordion-full">
             <div class="accordion-item">
                 <div class="problems">
                     <div class="container" id="problems_div" onchange="select_level('problem', 'problem_level')">
-                        <h3 class="accordion-header" id="accordion-problems-header">
-                            <div class="row">
-                                <div class="col-8" style="color:red"> <u>Number and Complexity of Problems Addressed</u>
-                                    <button class="btn btn-primary btn-sm" type="button"
-                                        onclick="clear_problem()">Clear</button><span
-                                        style="float:right;color:#00008B;"> Level</span>
+                        <div class="row" class="accordion-header" id="accordion-problems-header">
+                                <div class="col-8">
+                                    <h2>Number and Complexity of Problems Addressed</h2>
+                                    <button class="btn btn-primary btn-sm" type="button" onclick="clear_problem()">Clear</button>
+                                    <span class="h2-label">Level</span>
                                 </div>
-                                <div class="col-1">2<input type="radio" id="problem_level-2" name="problem_level"
-                                        value=2>
-                                </div>
-                                <div class="col-1">3<input type="radio" id="problem_level-3" name="problem_level"
-                                        value=3>
-                                </div>
-                                <div class="col-1">4<input type="radio" id="problem_level-4" name="problem_level"
-                                        value=4>
-                                </div>
-                                <div class="col-1">5<input type="radio" id="problem_level-5" name="problem_level"
-                                        value=5>
-                                </div>
-                            </div>
-                        </h3>
+                                <div class="col-1">2<input type="radio" id="problem_level-2" name="problem_level" value=2></div>
+                                <div class="col-1">3<input type="radio" id="problem_level-3" name="problem_level" value=3></div>
+                                <div class="col-1">4<input type="radio" id="problem_level-4" name="problem_level" value=4></div>
+                                <div class="col-1">5<input type="radio" id="problem_level-5" name="problem_level" value=5></div>                        
+                        </div>
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
                             data-bs-target="#accordion-problems-collapse" aria-expanded="true"
                             aria-controls="accordion-problems-collapse">
@@ -57,59 +58,59 @@
                                     <div class="col-1">2+<input type="checkbox" id="self-limited_2+" name="problem"
                                             value=3>
                                     </div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
+                                    <div class="col-1"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-8">Stable Chronic Illness(= at treatment goal)</div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
                                     <div class="col-1">1<input type="checkbox" id="sdiv-chronic_1" name="problem"
                                             value=3>
                                     </div>
                                     <div class="col-1">2+<input type="checkbox" id="sdiv-chronic_2+" name="problem"
                                             value=4>
                                     </div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-8">Acute, Uncomplicated Illness or Injury</div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
                                     <div class="col-1">1+<input type="checkbox" id="acute-uncomplicated_1+"
                                             name="problem" value=3></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
+                                    <div class="col-1"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-8">Chronic w/Exacerbation/progression/side effects</div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
+                                    <div class="col-1"></div>
                                     <div class="col-1">1+<input type="checkbox" id="chronic-exacerbation_1+"
                                             name="problem" value=4></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-8">Undiagnosed New Problem w/ Uncertain Prognosis</div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
+                                    <div class="col-1"></div>
                                     <div class="col-1">1+<input type="checkbox" id="undiagnosed_1+" name="problem"
                                             value=4>
                                     </div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-8">Acute Illness w/ Systemic Symptoms</div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
+                                    <div class="col-1"></div>
                                     <div class="col-1">1+<input type="checkbox" id="acute-illness_1+" name="problem"
                                             value=4>
                                     </div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-8">Chronic w/ Severe Exacerbation/progression/side effects</div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
+                                    <div class="col-1"></div>
+                                    <div class="col-1"></div>
                                     <div class="col-1">1+<input type="checkbox" id="chronic-severe_1+" name="problem"
                                             value=5>
                                     </div>
@@ -117,9 +118,9 @@
                                 <div class="row">
                                     <div class="col-8">Acute or Chronic Illness/injury threat to life/bodily function
                                     </div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
+                                    <div class="col-1"></div>
+                                    <div class="col-1"></div>
                                     <div class="col-1">1+<input type="checkbox" id="acute-chronic_1+" name="problem"
                                             value=5>
                                     </div>
@@ -132,21 +133,16 @@
             <div class="accordion-item">
                 <div class="risk">
                     <div class="container" id="risk_div" onchange="select_level('risk', 'risk_level')">
-                        <h3 class="accordion-header" id="accordion-risk-header">
-                            <div class="row">
-                                <div class="col-8" style="color:red"> <u>Risk</u> <button class="btn btn-primary btn-sm"
+                        <h2 class="accordion-header row" id="accordion-risk-header">
+                                <div class="col-8">Risk <button class="btn btn-primary btn-sm"
                                         type="button" onclick="clear_risk()"> Clear</button><span
                                         style="float:right;color:#00008B;">Level</span>
                                 </div>
-                                <div class="col-1">2<input type="radio" id="risk_level-2" name="risk_level" value=2>
-                                </div>
-                                <div class="col-1">3<input type="radio" id="risk_level-3" name="risk_level" value=3>
-                                </div>
-                                <div class="col-1">4<input type="radio" id="risk_level-4" name="risk_level" value=4>
-                                </div>
-                                <div class="col-1">5<input type="radio" id="risk_level-5" name="risk_level" value=5>
-                                </div>
-                        </h3>
+                                <div class="col-1">2<input type="radio" id="risk_level-2" name="risk_level" value=2></div>
+                                <div class="col-1">3<input type="radio" id="risk_level-3" name="risk_level" value=3></div>
+                                <div class="col-1">4<input type="radio" id="risk_level-4" name="risk_level" value=4></div>
+                                <div class="col-1">5<input type="radio" id="risk_level-5" name="risk_level" value=5></div>
+                        </h2>
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
                             data-bs-target="#accordion-risk-collapse" aria-expanded="true"
                             aria-controls="accordion-risk-collapse">
@@ -162,9 +158,9 @@
                                     </div>
                                     <div class="col-1"><input type="checkbox" id="minimal-risk" name="risk" value=2>
                                     </div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
+                                    <div class="col-1"></div>
+                                    <div class="col-1"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-8">Low risk of mordbidity from additional diagnostic testing or
@@ -215,11 +211,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
                                     <div class="col-1"><input type="checkbox" id="low-risk" name="risk" value=3>
                                     </div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
+                                    <div class="col-1"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-8">Moderate risk of morbidity from additional diagnostic testing
@@ -281,11 +277,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
+                                    <div class="col-1"></div>
                                     <div class="col-1"><input type="checkbox" id="moderate-risk" name="risk" value=4>
                                     </div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-8">High risk of mordbidity from additional diagnostic testing or
@@ -338,9 +334,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
+                                    <div class="col-1"></div>
+                                    <div class="col-1"></div>
                                     <div class="col-1"><input type="checkbox" id="high-risk" name="risk" value=5>
                                     </div>
                                 </div>
@@ -353,9 +349,9 @@
             <div class="accordion-item">
                 <div class="data">
                     <div class="container" id="data_div" onchange="select_level('data', 'data_level')">
-                        <h3 class="accordion-header" id="accordion-data-header">
+                        <h2 class="accordion-header" id="accordion-data-header">
                             <div class="row">
-                                <div class="col-8" style="color:red;"><u>Data</u> <button class="btn btn-primary btn-sm"
+                                <div class="col-8"">Data<button class="btn btn-primary btn-sm"
                                         type="button" onclick="clear_category()"> Clear</button><span
                                         style="float:right;color:#00008B;">Level</span>
                                 </div>
@@ -368,7 +364,7 @@
                                 <div class="col-1">5<input type="radio" id="data_level-5" name="data_level" value=5>
                                 </div>
                             </div>
-                        </h3>
+                        </h2>
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
                             data-bs-target="#accordion-data-collapse" aria-expanded="true"
                             aria-controls="accordion-data-collapse">
@@ -503,9 +499,9 @@
                                 <div class="row">
                                     <div class="col-8">0 - 1</div>
                                     <div class="col-1"><input type="checkbox" id="0-1" name="data" value=2></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
+                                    <div class="col-1"></div>
+                                    <div class="col-1"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-8" onchange="get_level('category_a')"><a href="#" class="link-info"
@@ -517,11 +513,11 @@
                                         Or Independent Historian(s) <input type="checkbox" id="indep_hist"
                                             name="category_a" value=3>
                                     </div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
                                     <div class="col-1"><input type="checkbox" id="category_a" name="data" value=3>
                                     </div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
+                                    <div class="col-1"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-8" onchange="get_level('category_b')"><a href="#" class="link-info"
@@ -539,11 +535,11 @@
                                             aria-controls="accordion-categories-collapse">Category 3:</a><span
                                             style="color:red"> 1 </span><input type="checkbox" id="level4_cat3"
                                             name="category_b" value=4></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
+                                    <div class="col-1"></div>
                                     <div class="col-1"><input type="checkbox" id="category_b" name="data" value=4>
                                     </div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-8" onchange="get_level('category_c')">Must Meet 2 of 3
@@ -563,9 +559,9 @@
                                             3:</a><span style="color:red"> 1 </span><input type="checkbox"
                                             id="level5_cat3" name="category_c" value=5>
                                     </div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
-                                    <div class="col-1" style="background-color:#D3D3D3"></div>
+                                    <div class="col-1"></div>
+                                    <div class="col-1"></div>
+                                    <div class="col-1"></div>
                                     <div class="col-1"><input type="checkbox" id="category_c" name="data" value=5>
                                     </div>
                                 </div>
