@@ -10,7 +10,7 @@ CMS Site: https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/Physicia
 
 ## 1995 and 1997 History
 
-[Legacy 1995/1997 Calculator](Legacy/README.md)
+[Legacy 1995/1997 Calculator](legacy/README.md)
 
 https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/PhysicianFeeSched/Evaluation-and-Management-Visits
 
