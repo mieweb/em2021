@@ -80,9 +80,9 @@
                                     <label for="problem_level-5">5</label>
                                 </div>
                             </div>
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-problems-collapse" aria-expanded="false" aria-controls="accordion-problems-collapse">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-problems-collapse" aria-expanded="true" aria-controls="accordion-problems-collapse"> 
                             </button>
-                            <div id="accordion-problems-collapse" class="accordion-collapse collapse" aria-labelledby="accordion-problems-header">
+                            <div id="accordion-problems-collapse" class="accordion-collapse collapse show" aria-labelledby="accordion-problems-header" data-bs-parent="accordion-full">
                                 <div class="accordion-body">
                                     <div class="row">
                                         <div class="col-8">Self-limited or Minor</div>
@@ -116,7 +116,7 @@
                                         <div class="col-1"></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-8">Chronic w/Exacerbation/progression/side effects</div>
+                                        <div class="col-8">Chronic w/ Exacerbation/progression/side effects</div>
                                         <div class="col-1"></div>
                                         <div class="col-1"></div>
                                         <div class="col-1"><input type="checkbox" id="chronic_exacerbation" name="problem" value=4>
@@ -188,7 +188,7 @@
                             </div>
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-risk-collapse" aria-expanded="false" aria-controls="accordion-risk-collapse">
                             </button>
-                            <div id="accordion-risk-collapse" class="accordion-collapse collapse" aria-labelledby="accordion-risk-header">
+                            <div id="accordion-risk-collapse" class="accordion-collapse collapse" aria-labelledby="accordion-risk-header" data-bs-parent="accordion-full">
                                 <div class="accordion-body">
                                     <div class="row">
                                         <div class="col-8">Minimal risk of recurrences morbidity from additional diagnostic testing or treatment
@@ -213,13 +213,13 @@
                                                             <div class="container" id="t1" onchange="get_level('low_risk')">
                                                                 <div class="row">
                                                                     <div class="col-4"><input type="checkbox" id="over_the_counter" name="low_risk" value=3>Over-the-counter drugs</div>
-                                                                    <div class="col-4"><input type="checkbox" id="minor_surgery" name="low_risk" value=3>Minor surgery w/o riskfactors</div>
+                                                                    <div class="col-4"><input type="checkbox" id="minor_surgery" name="low_risk" value=3>Minor surgery w/o risk factors</div>
                                                                     <div class="col-4"><input type="checkbox" id="low_recurrences" name="low_risk" value=3>Low recurrences
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-6"><input type="checkbox" id="Physical_Occupational" name="low_risk" value=3>Physical/Occupational Therapy</div>
-                                                                    <div class="col-6"><input type="checkbox" id="IV_fluids" name="low_risk" value=3>IV fluids without additives</div>
+                                                                    <div class="col-6"><input type="checkbox" id="IV_fluids" name="low_risk" value=3>IV fluids w/o additives</div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-4"><input type="checkbox" id="low_other" name="low_risk" value=3>Other
@@ -262,7 +262,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
-                                                                    <div class="col-6"><input type="checkbox" id="IV_with_additives" name="moderate_risk" value=4>IV with additives (Fe infusion)
+                                                                    <div class="col-6"><input type="checkbox" id="IV_with_additives" name="moderate_risk" value=4>IV w/ additives (Fe infusion)
                                                                     </div>
                                                                     <div class="col-6"><input type="checkbox" id="moderate_other" name="moderate_risk" value=4>Other</div>
                                                                 </div>
@@ -347,7 +347,7 @@
                             </div>
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-data-collapse" aria-expanded="false" aria-controls="accordion-data-collapse">
                             </button>
-                            <div id="accordion-data-collapse" class="accordion-collapse collapse" aria-labelledby="accordion-data-header">
+                            <div id="accordion-data-collapse" class="accordion-collapse collapse" aria-labelledby="accordion-data-header" data-bs-parent="accordion-full">
                                 <div class="accordion-body">
                                     <div class="accordion m-2" id="accordion-categories">
                                         <div class="accordion-item">
@@ -602,7 +602,7 @@
                 } else {
                     this.num_examples = this.num_examples - 1;
                 }
-                this.examples[example_name] = bool;
+                this.esxamples[example_name] = bool;
             }
         }
 
