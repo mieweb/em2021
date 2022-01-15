@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE  html>
 <html>
 
 <head>
@@ -6,12 +6,10 @@
         Outpatient Audit Form
     </title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
-        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
-        integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous">
     </script>
 </head>
 
@@ -21,34 +19,34 @@
         font-weight: bolder;
         display: inline;
     }
-
+    
     .h2-label {
         float: right;
         font-size: 1.17em;
         font-weight: bolder;
         display: inline;
     }
-
+    
     h3 {
         font-size: 1.10em;
         font-weight: bolder;
     }
-
+    
     .cat_1_text {
         color: #00BFFF;
         text-decoration: underline;
     }
-
+    
     .cat_2_text {
         color: green;
         text-decoration: underline;
     }
-
+    
     .cat_3_text {
         color: red;
         text-decoration: underline;
     }
-
+    
     .red_word {
         color: red;
     }
@@ -76,13 +74,11 @@
             <div class="row">
                 <div class="col-12">
                     <!-- NOTE - mt-5 / pt-5 are used to space content so the sticky top doesn't initially overlap this area, basically padding-top and margin-top -->
-                    <div class="accordion m-auto order-2 mt-5 pt-5" id="accordion-full">
+                    <div class="accordion m-auto order-2 mt-5 pt-5" id="accordion-problems">
                         <div class="accordion-item">
                             <h2 class="accordion-header">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#accordion-problems-collapse" aria-expanded="true"
-                                    aria-controls="accordion-problems-collapse">
-                                    Number and Complexity of Problems Addressed
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-problems-collapse" aria-expanded="true" aria-controls="accordion-problems-collapse">
+                                   Problems
                                 </button>
                             </h2>
                             <div class="problems">
@@ -96,41 +92,35 @@
                                         <div class="col-1">
                                             <!-- NOTE - BOOTSTRAP WRAPPER CLASSES AND FORM CLASSES -->
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" id="problem_level-2" name="problem_level"
-                                                    value=2>
+                                                <input class="form-check-input" type="radio" id="problem_level-2" name="problem_level" value=2>
                                                 <label class="form-check-label" for="problem_level-2">2</label>
                                             </div>
                                         </div>
                                         <div class="col-1">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" id="problem_level-3" name="problem_level"
-                                                    value=3>
+                                                <input class="form-check-input" type="radio" id="problem_level-3" name="problem_level" value=3>
                                                 <label class="form-check-label" for="problem_level-3">3</label>
                                             </div>
                                         </div>
                                         <div class="col-1">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" id="problem_level-4" name="problem_level"
-                                                    value=4>
+                                                <input class="form-check-input" type="radio" id="problem_level-4" name="problem_level" value=4>
                                                 <label class="form-check-label" for="problem_level-4">4</label>
                                             </div>
                                         </div>
                                         <div class="col-1">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" id="problem_level-5" name="problem_level"
-                                                    value=5>
+                                                <input class="form-check-input" type="radio" id="problem_level-5" name="problem_level" value=5>
                                                 <label class="form-check-label" for="problem_level-5">5</label>
                                             </div>
                                         </div>
                                         <!-- ADDED CLEAR BUTTON AFTER LEVELS -->
                                         <div class="col-1">
-                                            <button class="btn btn-primary btn-sm" type="button"
-                                    onclick="clear_section('problems')">Clear</button>
+                                            <button class="btn btn-primary btn-sm" type="button" onclick="clear_section('problems')">Clear</button>
                                         </div>
                                     </div>
                                     <!-- BODY / MEAT OF ACCORDION -->
-                                    <div id="accordion-problems-collapse" class="accordion-collapse collapse show"
-                                        aria-labelledby="accordion-problems-header">
+                                    <div id="accordion-problems-collapse" class="accordion-collapse collapse show" aria-labelledby="accordion-problems-header">
                                         <div class="accordion-body">
                                             <!-- NOTE - ADDED SELECTIVE BORDER CLASSES FOR SUBTLE SEPARATION OF LINES -->
                                             <div class="row border border-top-0 border-start-0 border-end-0 border-light">
@@ -139,16 +129,14 @@
                                                     <!-- NOTE - BOOTSTRAP WRAPPER CLASSES AND FORM CLASSES -->
                                                     <div class="form-check">
 
-                                                        <input class="form-check-input" type="checkbox" id="self-limited_1" name="problem"
-                                                            value=2 onchange="one_per_row('self-limited_1', 'problem')">
+                                                        <input class="form-check-input" type="checkbox" id="self-limited_1" name="problem" value=2 onchange="one_per_row('self-limited_1', 'problem')">
                                                         <label class="form-check-label" for="self-limited_1">1</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-1">
                                                     <div class="form-check">
 
-                                                        <input class="form-check-input" type="checkbox" id="self-limited_2" name="problem"
-                                                            value=3 onchange="one_per_row('self-limited_2', 'problem')">
+                                                        <input class="form-check-input" type="checkbox" id="self-limited_2" name="problem" value=3 onchange="one_per_row('self-limited_2', 'problem')">
                                                         <label class="form-check-label" for="self-limited_2">2+</label>
                                                     </div>
                                                 </div>
@@ -162,17 +150,13 @@
                                                 <div class="col-1">
                                                     <div class="form-check">
 
-                                                        <input class="form-check-input" type="checkbox" id="stable-chronic_1"
-                                                            name="problem" value=3
-                                                            onchange="one_per_row('stable-chronic_1', 'problem')">
+                                                        <input class="form-check-input" type="checkbox" id="stable-chronic_1" name="problem" value=3 onchange="one_per_row('stable-chronic_1', 'problem')">
                                                         <label class="form-check-label" for="stable-chronic_1">1</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-1">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="stable-chronic_2"
-                                                            name="problem" value=4
-                                                            onchange="one_per_row('stable-chronic_2', 'problem')">
+                                                        <input class="form-check-input" type="checkbox" id="stable-chronic_2" name="problem" value=4 onchange="one_per_row('stable-chronic_2', 'problem')">
                                                         <label class="form-check-label" for="stable-chronic_2">2+</label>
                                                     </div>
                                                 </div>
@@ -184,8 +168,7 @@
                                                 <div class="col-1"></div>
                                                 <div class="col-1">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="acute-uncomplicated_1"
-                                                            name="problem" value=3>
+                                                        <input class="form-check-input" type="checkbox" id="acute-uncomplicated_1" name="problem" value=3>
                                                         <label class="form-check-label" for="acute-uncomplicated_1">1+</label>
                                                     </div>
                                                 </div>
@@ -199,8 +182,7 @@
                                                 <div class="col-1"></div>
                                                 <div class="col-1">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="chronic-exacerbation_1"
-                                                            name="problem" value=4>
+                                                        <input class="form-check-input" type="checkbox" id="chronic-exacerbation_1" name="problem" value=4>
                                                         <label class="form-check-label" for="chronic-exacerbation_1">1+</label>
                                                     </div>
                                                 </div>
@@ -213,8 +195,7 @@
                                                 <div class="col-1"></div>
                                                 <div class="col-1">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="undiagnosed_1" name="problem"
-                                                            value=4>
+                                                        <input class="form-check-input" type="checkbox" id="undiagnosed_1" name="problem" value=4>
                                                         <label class="form-check-label" for="chronic-exacerbation_1">1+</label>
                                                     </div>
                                                 </div>
@@ -227,8 +208,7 @@
                                                 <div class="col-1"></div>
                                                 <div class="col-1">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="acute-illness_1"
-                                                            name="problem" value=4>
+                                                        <input class="form-check-input" type="checkbox" id="acute-illness_1" name="problem" value=4>
                                                         <label class="form-check-label" for="acute-illness_1">1+</label>
                                                     </div>
                                                 </div>
@@ -243,24 +223,21 @@
                                                 <div class="col-1"></div>
                                                 <div class="col-1">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="chronic-severe_1"
-                                                            name="problem" value=5>
+                                                        <input class="form-check-input" type="checkbox" id="chronic-severe_1" name="problem" value=5>
                                                         <label class="form-check-label" for="acute-illness_1">1+</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-1"></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-7">Acute or Chronic Illness/injury threat to life/bodily
-                                                    function
+                                                <div class="col-7">Acute or Chronic Illness/injury threat to life/bodily function
                                                 </div>
                                                 <div class="col-1"></div>
                                                 <div class="col-1"></div>
                                                 <div class="col-1"></div>
                                                 <div class="col-1">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="acute-chronic_1"
-                                                            name="problem" value=5>
+                                                        <input class="form-check-input" type="checkbox" id="acute-chronic_1" name="problem" value=5>
                                                         <label class="form-check-label" for="acute-chronic_1">1+</label>
                                                     </div>
                                                 </div>
@@ -271,506 +248,1283 @@
                                     </div>
                                 </div>
                             </div>
-                            <script>
-                                let problems_array = [];
-                                $(".problems").find(":checkbox").each(function () {
-                                    problems_array.push($(this));
-                                })
-                            </script>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
         <!-- END FIRST CONTAINER AND ACCORDION -->
 
 
         <!-- TODO: USE PATTERNS FROM THE FIRST CONTAINER TO BREAK OUT THE OTHER 2 SECTIONS INTO THEIR OWN CONTAINERS / ACCORDIONS, APPLY BOOTSTRAPPY FORM CLASSES AND STRUCTURE PATTERNS -->
-        <div class="accordion m-auto order-2 mt-5" id="accordion-full">
+        <!-- START SECOND CONTAINER AND ACCORDION -->
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
 
-            <div class="accordion-item">
-                <div class="risk">
-                    <div class="container" id="risk_div" onchange="select_level('risk')">
-                        <div class="row" class="accordion-header" id="accordion-risk-header">
-                            <div class="col-8">
-                                <h2>Risk</h2> <button class="btn btn-primary btn-sm" type="button"
-                                    onclick="clear_section('risk')"> Clear</button><span class="h2-label">Level</span>
-                            </div>
-                            <div class="col-1"><input type="radio" id="risk_level-2" name="risk_level" value=2> <label
-                                    for="risk_level-2">2</label></div>
+                    <div class="accordion m-auto order-2 mt-5 pt-5" id="accordion-risk">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-risk-collapse" aria-expanded="true" aria-controls="accordion-risk-collapse">
+                                    Risk
+                                </button>
+                            </h2>
+                            <div class="risk">
+                                <div class="container" id="risk_div" onchange="select_level('risk')">
+                                    <div class="row py-2 d-flex align-items-center" id="accordion-risk-header">
+                                        <div class="col-7 text-end">
+                                            <strong>Level</strong>
+                                        </div>
+                                        <div class="col-1">
+                                            <div class="form-check">
 
-                            <div class="col-1"><input type="radio" id="risk_level-3" name="risk_level" value=3> <label
-                                    for="risk_level-3">3</label></div>
+                                                <input class="form-check-input" type="radio" id="risk_level-2" name="risk_level" value=2>
+                                                <label class="form-check-label" for="risk_level-2">2</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-1">
+                                            <div class="form-check">
 
-                            <div class="col-1"><input type="radio" id="risk_level-4" name="risk_level" value=4> <label
-                                    for="risk_level-4">4</label></div>
+                                                <input class="form-check-input" type="radio" id="risk_level-3" name="risk_level" value=3>
+                                                <label class="form-check-label" for="risk_level-3">3</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-1">
+                                            <div class="form-check">
 
-                            <div class="col-1"><input type="radio" id="risk_level-5" name="risk_level" value=5> <label
-                                    for="risk_level-5">5</label></div>
+                                                <input class="form-check-input" type="radio" id="risk_level-4" name="risk_level" value=4>
+                                                <label class="form-check-label" for="risk_level-4">4</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-1">
+                                            <div class="form-check">
 
-                        </div>
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#accordion-risk-collapse" aria-expanded="true"
-                            aria-controls="accordion-risk-collapse">
-                        </button>
-                        <div id="accordion-risk-collapse" class="accordion-collapse collapse show"
-                            aria-labelledby="accordion-risk-header">
-                            <div class="accordion-body">
-                                <div class="row">
-                                    <div class="col-8">Minimal risk of recurrences morbidity from additional
-                                        diagnostic
-                                        testing or
-                                        treatment
+                                                <input class="form-check-input" type="radio" id="risk_level-5" name="risk_level" value=5>
+                                                <label class="form-check-label" for="risk_level-5">5</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-1">
+                                            <button class="btn btn-primary btn-sm" type="button" onclick="clear_section('risk')">Clear</button>
+                                        </div>
                                     </div>
-                                    <div class="col-1"><input type="checkbox" id="minimal-risk" name="risk" value=2>
-                                    </div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-8">Low risk of mordbidity from additional diagnostic testing or
-                                        treatment
-                                        <!-- NOTE - We may not want an accordion in an accordion for these, but it may be easier to make that call when the parent UI gets cleaned up -->
-                                        <!-- Maybe we consider making our own UX where when you check the parent line-item, the respective examples expand into view under it? I'm not sure if that's an acceptable way to display it, but we should think about this -->
-                                        <div class="accordion" id="accordion-low-morbidity">
-                                            <!-- NOTE - There a few sub-sections like this one in the last two sections that contain selection UI, 
+                                    <div id="accordion-risk-collapse" class="accordion-collapse collapse show" aria-labelledby="accordion-risk-header">
+                                        <div class="accordion-body">
+                                            <div class="row border border-top-0 border-start-0 border-end-0 border-light">
+                                                <div class="col-7">Minimal risk of recurrences morbidity from additional diagnostic testing or treatment</div>
+                                                <div class="col-1">
+                                                    <div class="form-check">
+
+                                                        <input class="form-check-input" type="checkbox" id="minimal-risk" name="risk" value=2>
+                                                    </div>
+                                                </div>
+                                                <div class="col-1"></div>
+                                                <div class="col-1"></div>
+                                                <div class="col-1"></div>
+                                            </div>
+                                            <div class="row border border-top-0 border-start-0 border-end-0 border-light">
+                                                <div class="col-7">Low risk of mordbidity from additional diagnostic testing or treatment
+                                                    <!-- NOTE - We may not want an accordion in an accordion for these, but it may be easier to make that call when the parent UI gets cleaned up -->
+                                                    <!-- Maybe we consider making our own UX where when you check the parent line-item, the respective examples expand into view under it? I'm not sure if that's an acceptable way to display it, but we should think about this -->
+                                                    <div class="accordion" id="accordion-low-morbidity">
+                                                        <!-- NOTE - There a few sub-sections like this one in the last two sections that contain selection UI, 
                                             lets play with cleaning those up so the form elements (checks and radios) all line up 
                                             and there are neat stacks of selectable items. Right now the jumbles seem over-complicated but only
                                             (probably) because they're not that organized. -->
+                                                        <div class="accordion-item">
+                                                            <h6 class="accordion-header">
+                                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-low-morbidity-collapse" aria-expanded="true" aria-controls="accordion-low-morbidity-collapse">
+                                                                    Low Morbidity Examples
+                                                                </button>
+                                                            </h6>
+                                                            <div class="container" id="t1" onchange="get_level('low-risk')">
+                                                                <div id="accordion-low-morbidity-collapse" class="accordion-collapse collapse show" aria-labelledby="accordion-low-morbidity-header">
+                                                                    <div class="accordion-body">
+                                                                        <div class="row border border-top-0 border-start-0 border-end-0 border-light">
+                                                                            <div class="col-6">
+                                                                                <div class="form-check">
 
-                                            <div class="accordion-item">
-                                                <h6 class="accordion-header" id="accordion-low-morbidity-header">
-                                                    <button class="accordion-button" type="button"
-                                                        data-bs-toggle="collapse"
-                                                        data-bs-target="#accordion-low-morbidity-collapse"
-                                                        aria-expanded="true"
-                                                        aria-controls="accordion-low-morbidity-collapse">
-                                                        Low Morbidity Examples
-                                                    </button>
-                                                </h6>
-                                                <div id="accordion-low-morbidity-collapse"
-                                                    class="accordion-collapse collapse show"
-                                                    aria-labelledby="accordion-low-morbidity-header">
-                                                    <div class="accordion-body">
-                                                        <div class="container" id="t1" onchange="get_level('low-risk')">
-                                                            <div class="row">
-                                                                <div class="col-4"><input type="checkbox"
-                                                                        id="over-the-counter" name="low-risk"
-                                                                        value=3>Over-the-counter drugs</div>
-                                                                <div class="col-4"><input type="checkbox"
-                                                                        id="minor-surgery" name="low-risk" value=3>Minor
-                                                                    surgery w/o riskfactors</div>
-                                                                <div class="col-4"><input type="checkbox"
-                                                                        id="low-recurrences" name="low-risk" value=3>Low
-                                                                    recurrences</div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="Physical/Occupational" name="low-risk"
-                                                                        value=3>Physical/Occupational Therapy</div>
-                                                                <div class="col-6"><input type="checkbox" id="IV-fluids"
-                                                                        name="low-risk" value=3>IV
-                                                                    fluids
-                                                                    without additives</div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-4"><input type="checkbox" id="low-other"
-                                                                        name="low-risk" value=3>Other</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"><input type="checkbox" id="low-risk" name="risk" value=3>
-                                    </div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-8">Moderate risk of morbidity from additional diagnostic testing
-                                        or
-                                        treatment
-                                        <div class="accordion" id="accordion-moderate-mordbidity">
-                                            <div class="accordion-item">
-                                                <h6 class="accordion-header" id="accordion-moderate-morbidity-header">
-                                                    <button class="accordion-button" type="button"
-                                                        data-bs-toggle="collapse"
-                                                        data-bs-target="#accordion-moderate-morbidity-collapse"
-                                                        aria-expanded="true"
-                                                        aria-controls="accordion-moderate-morbidity-collapse">
-                                                        Moderate Morbidity Examples
-                                                    </button>
-                                                </h6>
-                                                <div id="accordion-moderate-morbidity-collapse"
-                                                    class="accordion-collapse collapse show"
-                                                    aria-labelledby="accordion-moderate-morbidity-header">
-                                                    <div class="accordion-body">
-                                                        <div class="container" id="t2"
-                                                            onchange="get_level('moderate-risk')">
-                                                            <div class="row">
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="RX-minor-surgery" name="moderate-risk"
-                                                                        value=4>RX Minor surgery w/o risk
-                                                                    factors
-                                                                </div>
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="Elective-major-surgery" name="moderate-risk"
-                                                                        value=4>Elective major surgery w/o risk
-                                                                    factors</div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="Diagnosis/treatment" name="moderate-risk"
-                                                                        value=4>Diagnosis/treatment
-                                                                    significantly
-                                                                    limited by social determinants of
-                                                                    health
-                                                                </div>
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="moderate-risk-recurrence"
-                                                                        name="moderate-risk" value=4>Moderate risk of
-                                                                    recurrence</div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="IV-with-additives" name="moderate-risk"
-                                                                        value=4>IV with additives (Fe infusion)
-                                                                </div>
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="moderate-other" name="moderate-risk"
-                                                                        value=4>Other</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"><input type="checkbox" id="moderate-risk" name="risk" value=4>
-                                    </div>
-                                    <div class="col-1"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-8">High risk of mordbidity from additional diagnostic testing or
-                                        treatment
-                                        <div class="accordion" id="accordion-high-mordbidity">
-                                            <div class="accordion-item">
-                                                <h6 class="accordion-header" id="accordion-high-morbidity-header">
-                                                    <button class="accordion-button" type="button"
-                                                        data-bs-toggle="collapse"
-                                                        data-bs-target="#accordion-high-morbidity-collapse"
-                                                        aria-expanded="true"
-                                                        aria-controls="accordion-high-morbidity-collapse">
-                                                        High Morbidity Examples
-                                                    </button>
-                                                </h6>
-                                                <div id="accordion-high-morbidity-collapse"
-                                                    class="accordion-collapse collapse show"
-                                                    aria-labelledby="accordion-high-morbidity-header">
-                                                    <div class="accordion-body">
-                                                        <div class="container" id="t3"
-                                                            onchange="get_level('high-risk')">
-                                                            <div class="row">
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="drug-therapy" name="high-risk" value=5>Drug
-                                                                    Therapy intensive monitoring for toxicity</div>
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="major_surgery_risks" name="high-risk"
-                                                                        value=5>Major surgery w/ risk factors</div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="hospitalization" name="high-risk"
-                                                                        value=5>Hospitalization</div>
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="de-escalate" name="high-risk"
-                                                                        value=5>De-escalate care/poor prognosis
-                                                                    (example hospice)</div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="high-risk-recurrence" name="high-risk"
-                                                                        value=5>High risk of recurrence</div>
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="high-other" name="high-risk" value=5>Other
+                                                                                    <input class="form-check-input" type="checkbox" id="over-the-counter" name="low-risk" value=3>
+                                                                                    <label class="form-check-label" for="over-the-counter">Over-the-counter drugs</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <div class="form-check">
+
+                                                                                    <input class="form-check-input" type="checkbox" id="minor-surgery" name="low-risk" value=3>
+                                                                                    <label class="form-check-label" for="minor-surgery">Minor surgery w/o riskfactors</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row border border-top-0 border-start-0 border-end-0 border-light">
+                                                                            <div class="col-6">
+                                                                                <div class="form-check">
+
+                                                                                    <input class="form-check-input" type="checkbox" id="low-recurrences" name="low-risk" value=3>
+                                                                                    <label class="form-check-label" for="low-recurrences">Low recurrences</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <div class="form-check">
+
+                                                                                    <input class="form-check-input" type="checkbox" id="Physical/Occupational" name="low-risk" value=3>
+                                                                                    <label class="form-check-label" for="Physical/Occupational">Physical/Occupational Therapy</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row border border-top-0 border-start-0 border-end-0 border-light">
+                                                                            <div class="col-6">
+                                                                                <div class="form-check">
+
+                                                                                    <input class="form-check-input" type="checkbox" id="IV-fluids" name="low-risk" value=3>
+                                                                                    <label class="form-check-label" for="IV-fluids">IV fluids without additives</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <div class="form-check">
+
+                                                                                    <input class="form-check-input" type="checkbox" id="low-other" name="low-risk" value=3>
+                                                                                    <label class="form-check-label" for="low-other">Other</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="col-1"></div>
+                                                <div class="col-1">
+                                                    <div class="form-check">
+
+                                                        <input class="form-check-input" type="checkbox" id="low-risk" name="risk" value=3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-1"></div>
+                                                <div class="col-1"></div>
+                                            </div>
+                                            <div class="row border border-top-0 border-start-0 border-end-0 order-light">
+                                                <div class="col-7">Moderate risk of morbidity from additional diagnostic testing or treatment
+                                                    <div class="accordion" id="accordion-moderate-mordbidity">
+                                                        <div class="accordion-item">
+                                                            <h6 class="accordion-header">
+                                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-moderate-morbidity-collapse" aria-expanded="true" aria-controls="accordion-moderate-morbidity-collapse">
+                                                                        Moderate Morbidity Examples
+                                                                    </button>
+                                                            </h6>
+                                                            <div class="container" id="t2" onchange="get_level('moderate-risk')">
+                                                                <div id="accordion-moderate-morbidity-collapse" class="accordion-collapse collapse show" aria-labelledby="accordion-moderate-morbidity-header">
+                                                                    <div class="accordion-body">
+                                                                        <div class="row border border-top-0 border-start-0 border-end-0 order-light">
+                                                                            <div class="col-6">
+                                                                                <div class="form-check">
+
+                                                                                    <input class="form-check-input" type="checkbox" id="RX-minor-surgery" name="moderate-risk" value=4>
+                                                                                    <label class="form-check-label" for="RX-minor-surgery">RX Minor surgery w/o risk factors</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <div class="form-check">
+
+                                                                                    <input class="form-check-input" type="checkbox" id="Elective-major-surgery" name="moderate-risk" value=4>
+                                                                                    <label class="form-check-label" for="Elective-major-surgery">Elective major surgery w/o risk factors</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row border border-top-0 border-start-0 border-end-0 order-light">
+                                                                            <div class="col-6">
+                                                                                <div class="form-check">
+
+                                                                                    <input class="form-check-input" type="checkbox" id="Diagnosis/treatment" name="moderate-risk" value=4>
+                                                                                    <label class="form-check-label" for="Diagnosis/treatment">Diagnosis/treatment significantly limited by social determinants of health</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <div class="form-check">
+
+                                                                                    <input class="form-check-input" type="checkbox" id="moderate-risk-recurrence" name="moderate-risk" value=4>
+                                                                                    <label class="form-check-label" for="moderate-risk-recurrence">Moderate risk of recurrence</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row border border-top-0 border-start-0 border-end-0 order-light">
+                                                                            <div class="col-6">
+                                                                                <div class="form-check">
+
+                                                                                    <input class="form-check-input" type="checkbox" id="IV-with-additives" name="moderate-risk" value=4>
+                                                                                    <label class="form-check-label" for="IV-with-additives">IV with additives (Fe infusion)</label>
+                                                                                </div>
+                                                                                <div class="form-check">
+
+                                                                                    <input type="checkbox" id="moderate-other" name="moderate-risk" value=4>
+                                                                                    <label class="form-check-label" for="moderate-other">Other</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-1"></div>
+                                                <div class="col-1"></div>
+                                                <div class="col-1">
+                                                    <div class="form-check">
+
+                                                        <input class="form-check-input" type="checkbox" id="moderate-risk" name="risk" value=4>
+                                                    </div>
+                                                </div>
+                                                <div class="col-1"></div>
+                                            </div>
+                                            <div class="row border border-top-0 border-start-0 border-end-0 order-light">
+                                                <div class="col-7">High risk of mordbidity from additional diagnostic testing or treatment
+                                                    <div class="accordion" id="accordion-high-mordbidity">
+                                                        <div class="accordion-item">
+                                                            <h6 class="accordion-header">
+                                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-high-morbidity-collapse" aria-expanded="true" aria-controls="accordion-high-morbidity-collapse">
+                                                                High Morbidity Examples
+                                                            </button>
+                                                            </h6>
+                                                            <div class="container" id="t3" onchange="get_level('high-risk')">
+                                                                <div id="accordion-high-morbidity-collapse" class="accordion-collapse collapse show" aria-labelledby="accordion-high-morbidity-header">
+                                                                    <div class="accordion-body">
+                                                                        <div class="row border border-top-0 border-start-0 border-end-0 order-light">
+                                                                            <div class="col-6">
+                                                                                <div class="form-check">
+
+                                                                                    <input class="form-check-input" type="checkbox" id="drug-therapy" name="high-risk" value=5>
+                                                                                    <label class="form-check-label" for="drug-therapy">Drug Therapy intensive monitoring for toxicity</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <div class="form-check">
+
+                                                                                    <input class="form-check-input" type="checkbox" id="major_surgery_risks" name="high-risk" value=5>
+                                                                                    <label class="form-check-label" for="major_surgery_risks">Major surgery w/ risk factors</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row border border-top-0 border-start-0 border-end-0 order-light">
+                                                                            <div class="col-6">
+                                                                                <div class="form-check">
+
+                                                                                    <input class="form-check-input" type="checkbox" id="hospitalization" name="high-risk" value=5>
+                                                                                    <label class="form-check-label" for="hospitalization">Hospitalization</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <div class="form-check">
+
+                                                                                    <input class="form-check-input" type="checkbox" id="de-escalate" name="high-risk" value=5>
+                                                                                    <label class="form-check-label" for="de-escalate">De-escalate care/poor prognosis (example hospice)</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row border border-top-0 border-start-0 border-end-0 order-light">
+                                                                            <div class="col-6">
+                                                                                <div class="form-check">
+
+                                                                                    <input class="form-check-input" type="checkbox" id="high-risk-recurrence" name="high-risk" value=5>
+                                                                                    <label class="form-check-label" for="high-risk-recurrence">High risk of recurrence</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <div class="form-check">
+
+                                                                                    <input class="form-check-input" type="checkbox" id="high-other" name="high-risk" value=5>
+                                                                                    <label class="form-check-label" for="high-other">Other</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-1"></div>
+                                                <div class="col-1"></div>
+                                                <div class="col-1"></div>
+                                                <div class="col-1">
+                                                    <div class="form-check">
+
+                                                        <input class="form-check-input" type="checkbox" id="high-risk" name="risk" value=5>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"><input type="checkbox" id="high-risk" name="risk" value=5>
-                                    </div>
                                 </div>
+
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
-            <div class="accordion-item">
-                <div class="data">
-                    <div class="container" id="data_div" onchange="select_level('data')">
-                        <div class="row" class="accordion-header" id="accordion-data-header">
-                            <div class="col-8">
-                                <h2>Data</h2><button class="btn btn-primary btn-sm" type="button"
-                                    onclick="clear_section('data')"> Clear</button><span class="h2-label">Level</span>
-                            </div>
-                            <div class="col-1"><input type="radio" id="data_level-2" name="data_level" value=2> <label
-                                    for="data_level-2">2</label>
-                            </div>
+            <!-- END SECOND CONTAINER AND ACCORDION -->
 
-                            <div class="col-1"><input type="radio" id="data_level-3" name="data_level" value=3> <label
-                                    for="data_level-3">3</label>
+            <!-- START THIRD CONTAINER AND ACCORDION -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="accordion m-auto order-2 mt-5 pt-5" id="accordion-data">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-data-collapse" aria-expanded="true" aria-controls="accordion-data-collapse">
+                                    Data
+                                </button>
+                                </h2>
                             </div>
-
-                            <div class="col-1"><input type="radio" id="data_level-4" name="data_level" value=4> <label
-                                    for="data_level-4">4</label>
-                            </div>
-
-                            <div class="col-1"><input type="radio" id="data_level-5" name="data_level" value=5> <label
-                                    for="data_level-5">5</label>
-                            </div>
-
                         </div>
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#accordion-data-collapse" aria-expanded="true"
-                            aria-controls="accordion-data-collapse">
-                        </button>
-                        <div id="accordion-data-collapse" class="accordion-collapse collapse show"
-                            aria-labelledby="accordion-data-header">
-                            <div class="accordion-body">
-                                <div class="accordion m-2" id="accordion-categories">
-                                    <div class="accordion-item">
-                                        <h6 class="accordion-categories-header" id="accordion-categories-header">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#accordion-categories-collapse" aria-expanded="true"
-                                                aria-controls="accordion-categories-collapse">
-                                                Category Criterea Examples
-                                            </button>
-                                        </h6>
-                                        <div id="accordion-categories-collapse" class="accordion-collapse collapse show"
-                                            aria-labelledby="accordion-categories-header"
-                                            data-bs-parent="#accordion-categories">
-                                            <div class="accordion-body">
-                                                <div class="category1">
-                                                    <div class="container" id="t4" onchange='category_level()'>
-                                                        <div class="row">
-                                                            <div class="col-12 cat_1_text">
-                                                                Category
-                                                                1:
-                                                                Tests,
-                                                                documents, or
-                                                                independent historian(s)</div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-12">
-                                                                <input type="checkbox" id="review_prior_1"
-                                                                    name="category1" value=1
-                                                                    onchange="one_per_row('review_prior_1', 'category')">
-                                                                <label for="review_prior_1">1</label>
-                                                                <input type="checkbox" id="review_prior_2"
-                                                                    name="category1" value=2
-                                                                    onchange="one_per_row('review_prior_2', 'category')">
-                                                                <label for="review_prior_2">2</label>
-                                                                <input type="checkbox" id="review_prior_3"
-                                                                    name="category1" value=3
-                                                                    onchange="one_per_row('review_prior_3', 'category')">
-                                                                <label for="review_prior_3">3+</label>
-                                                                Review of
-                                                                prior
-                                                                external note(s) from each
-                                                                <span class="red_word">unique</span> source (not your
-                                                                own
-                                                                notes)
+                        <div class="data">
+                            <div class="container" id="data_div" onchange="select_level('data')">
+                                <div class="row py-2 d-flex align-items-center" id="accordion-data-header">
+                                    <div class="col-7 text-end">
+                                        <strong>Level</strong>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="data_level-2" name="data_level" value=2>
+                                            <label class="form-check-label" for="data_level-2">2</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="data_level-3" name="data_level" value=3>
+                                            <label class="form-check-label" for="data_level-3">3</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="data_level-4" name="data_level" value=4>
+                                            <label class="form-check-label" for="data_level-4">4</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="data_level-5" name="data_level" value=5>
+                                            <label class="form-check-label" for="data_level-5">5</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <button class="btn btn-primary btn-sm" type="button" onclick="clear_section('data')">Clear</button>
+                                    </div>
+                                </div>
+                                <div id="accordion-data-collapse" class="accordion-collapse collapse show" aria-labelledby="accordion-data-header">
+                                    <div class="accordion-body">
+                                        <div class="container" id="category_examples">
+                                            <div class="accordion" id="accordion-categories">
+                                                <div class="accordion-item">
+                                                    <h6 class="accordion-header">
+                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-categories-collapse" aria-expanded="true" aria-controls="accordion-categories-collapse">
+                                                    Category Criterea Examples
+                                                </button>
+                                                    </h6>
+
+                                                    <div id="accordion-categories-collapse" class="accordion-collapse collapse show" aria-labelledby="accordion-categories-header" data-bs-parent="#accordion-categories">
+                                                        <div class="accordion-body">
+                                                            <div class="category1" onchange="category_level()">
+                                                                <div class="container" id="t4">
+                                                                    <div class="row border border-top-0 border-start-0 border-end-0 border-light">
+                                                                        <div class="col-12 cat_1_text">
+                                                                            Category 1: Tests, documents, or independent historian(s)
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row border border-top-0 border-start-0 border-end-0 border-light">
+                                                                        <div class="col-12">
+                                                                            <div class="form-check form-check-inline">
+
+                                                                                <input class="form-check-input" type="checkbox" id="review_prior_1" name="category1" value=1 onchange="one_per_row('review_prior_1', 'category')">
+                                                                                <label class="form-check-label" for="review_prior_1">1</label>
+                                                                            </div>
+                                                                            <div class="form-check form-check-inline">
+                                                                                <input class="form-check-input" type="checkbox" id="review_prior_2" name="category1" value=2 onchange="one_per_row('review_prior_2', 'category')">
+                                                                                <label class="form-check-label" for="review_prior_2">2</label>
+                                                                            </div>
+                                                                            <div class="form-check form-check-inline">
+                                                                                <input class="form-check-input" type="checkbox" id="review_prior_3" name="category1" value=3 onchange="one_per_row('review_prior_3', 'category')">
+                                                                                <label class="form-check-label" for="review_prior_3">3+</label>
+                                                                            </div>
+                                                                            Review of prior external note(s) from each <span class="red_word">unique</span> source (not your own notes)
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row border border-top-0 border-start-0 border-end-0 border-light">
+                                                                        <div class="col-12">
+                                                                            <div class="form-check form-check-inline">
+
+                                                                                <input class="form-check-input" type="checkbox" id="review_results_1" name="category1" value=1 onchange="one_per_row('review_results_1', 'category')">
+                                                                                <label class="form-check-label" for="review_results_1">1</label>
+                                                                            </div>
+                                                                            <div class="form-check form-check-inline">
+
+                                                                                <input class="form-check-input" type="checkbox" id="review_results_2" name="category1" value=2 onchange="one_per_row('review_results_2', 'category')">
+                                                                                <label class="form-check-label" for="review_results_2">2</label>
+                                                                            </div>
+                                                                            <div class="form-check form-check-inline">
+                                                                                <input class="form-check-input" type="checkbox" id="review_results_3" name="category1" value=3 onchange="one_per_row('review_results_3', 'category')">
+                                                                                <label class="form-check-label" for="review_results_3">3+</label>
+                                                                            </div>
+                                                                            Review of the result(s) of each <span class="red_word">unique</span> test (Not previously used in prior visit(s))
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row border border-top-0 border-start-0 border-end-0 border-light">
+                                                                        <div class="col-12">
+                                                                            <div class="form-check form-check-inline">
+
+                                                                                <input class="form-check-input" type="checkbox" id="ordering_1" name="category1" value=1 onchange="one_per_row('ordering_1', 'category')">
+                                                                                <label class="form-check-label" for="ordering_1">1</label>
+                                                                            </div>
+                                                                            <div class="form-check form-check-inline">
+                                                                                <input class="form-check-input" type="checkbox" id="ordering_2" name="category1" value=2 onchange="one_per_row('ordering_2', 'category')">
+                                                                                <label class="form-check-label" for="ordering_2">2</label>
+                                                                            </div>
+                                                                            <div class="form-check form-check-inline">
+                                                                                <input class="form-check-input" type="checkbox" id="ordering_3" name="category1" value=3 onchange="one_per_row('ordering_3', 'category')">
+                                                                                <label class="form-check-label" for="ordering_3">3+</label>
+                                                                            </div>
+                                                                            Ordering of each <span class="red_word">unique</span> test
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row border border-top-0 border-start-0 border-end-0 border-light">
+                                                                        <div class="col-12 ">
+                                                                            <div class="form-check">
+
+                                                                                <input class="form-check-input" type="checkbox" id="assesment" name="category1" value=1>
+                                                                                <label class="form-check-label" for="assesment">Assesment requiring an independent historian(s)</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-12"><input type="checkbox"
-                                                                    id="review_results_1" name="category1" value=1
-                                                                    onchange="one_per_row('review_results_1', 'category')">
-                                                                <label for="review_results_1">1</label>
-                                                                <input type="checkbox" id="review_results_2"
-                                                                    name="category1" value=2
-                                                                    onchange="one_per_row('review_results_2', 'category')">
-                                                                <label for="review_results_2">2</label>
-                                                                <input type="checkbox" id="review_results_3"
-                                                                    name="category1" value=3
-                                                                    onchange="one_per_row('review_results_3', 'category')">
-                                                                <label for="review_results_3">3+</label>
-                                                                Review of the result(s) of each
-                                                                <span class="red_word">unique</span> test (Not
-                                                                previously
-                                                                used
-                                                                in
-                                                                prior
-                                                                visit(s))
+                                                            <div class="category2" onchange='category_level()'>
+                                                                <div class="container" id="t5">
+                                                                    <div class="row border border-top-0 border-start-0 border-end-0 border-light">
+                                                                        <div class="col-12 cat_2_text">
+                                                                            Category 2: Independent interpretation of tests
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row border border-top-0 border-start-0 border-end-0 border-light ">
+                                                                        <div class="col-12 ">
+                                                                            <div class="form-check focm-check-inline">
+
+                                                                                <input class="form-check-input" type="checkbox" id="independent_interpretation" name="category2" value=1>
+                                                                                <label class="form-check-label" for="independent_interpretation">Independent interpretation of a test performed by another physician/other qualified healthcare proffessional (not
+                                                                        separately reported)</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-12"><input type="checkbox" id="ordering_1"
-                                                                    name="category1" value=1
-                                                                    onchange="one_per_row('ordering_1', 'category')">
-                                                                <label for="ordering_1">1</label>
-                                                                <input type="checkbox" id="ordering_2" name="category1"
-                                                                    value=2
-                                                                    onchange="one_per_row('ordering_2', 'category')">
-                                                                <label for="ordering_2">2</label>
-                                                                <input type="checkbox" id="ordering_3" name="category1"
-                                                                    value=3
-                                                                    onchange="one_per_row('ordering_3', 'category')">
-                                                                <label for="ordering_3">3+</label>
-                                                                Ordering
-                                                                of each
-                                                                <span class="red_word">unique</span> test
+                                                            <div class="category3" onchange='category_level()'>
+                                                                <div class="container" id="t6">
+                                                                    <div class="row border border-top-0 border-start-0 border-end-0 border-light">
+                                                                        <div class="col-12 cat_3_text">
+                                                                            Category 3: Disscussion of management or test interpretation
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row border border-top-0 border-start-0 border-end-0 border-light">
+                                                                        <div class="col-12 ">
+                                                                            <div class="form-check form-check-inline">
+                                                                                <input class="form-check-input" type="checkbox" id="disscussion_management" name="category3" value=1>
+                                                                                <label class="form-check-label" for="disscussion_management">Disscussion of management or test interpretation with external physician/other qualified health care professional/appropriate
+                                                                        source (not seperately reported)</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-12"><input type="checkbox" id="assesment"
-                                                                    name="category1" value=1>
-                                                                Assesment
-                                                                requiring an independent historian(s)</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="category2" onchange='category_level()'>
-                                                    <div class="container" id="t5">
-                                                        <div class="row">
-                                                            <div class="col-12 cat_2_text">
-                                                                Category
-                                                                2:
-                                                                Independent
-                                                                interpretation of tests</div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-12"><input type="checkbox"
-                                                                    id="independent_interpretation" name="category2"
-                                                                    value=1>
-                                                                Independent interpretation of a test performed by
-                                                                another
-                                                                physician/other qualified healthcare proffessional (not
-                                                                separately
-                                                                reported)
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="category3" onchange='category_level()'>
-                                                    <div class="container" id="t6">
-                                                        <div class="row">
-                                                            <div class="col-12 cat_3_text">
-                                                                Category
-                                                                3:
-                                                                Disscussion of
-                                                                management or test interpretation</div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-12"><input type="checkbox"
-                                                                    id="disscussion_management" name="category3"
-                                                                    value=1>
-                                                                Disscussion of management or test interpretation with
-                                                                external
-                                                                physician/other qualified health care
-                                                                professional/appropriate source
-                                                                (not seperately reported)</div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-8">0 - 1</div>
-                                    <div class="col-1"><input type="checkbox" id="0-1" name="data" value=2></div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-8" onchange="get_level('category_a')"><a href="#" class="link-info"
-                                            data-bs-toggle="collapse" data-bs-target="#accordion-categories-collapse"
-                                            aria-expanded="true" aria-controls="accordion-categories-collapse">Category
-                                            1:</a>
-                                        <span class="red_word"> 2 </span><input type="radio" id="level3_cat1"
-                                            name="category_a" value=3>
-                                        Or Independent Historian(s) <input type="radio" id="indep_hist"
-                                            name="category_a" value=3>
-                                    </div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"><input type="checkbox" id="category_a" name="data" value=3>
-                                    </div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-8" onchange="get_level('category_b')"><a href="#" class="link-info"
-                                            data-bs-toggle="collapse" data-bs-target="#accordion-categories-collapse"
-                                            aria-expanded="true" aria-controls="accordion-categories-collapse">Category
-                                            1:</a><span class="red_word"> 3 </span><input type="radio" id="level4_cat1"
-                                            name="category_b" value=4> Or <a href="#" class="link-success"
-                                            data-bs-toggle="collapse" data-bs-target="#accordion-categories-collapse"
-                                            aria-expanded="true" aria-controls="accordion-categories-collapse">Category
-                                            2:</a><span class="red_word"> 1
-                                        </span><input type="radio" id="level4_cat2" name="category_b" value=4>
-                                        Or <a href="#" class="link-danger" data-bs-toggle="collapse"
-                                            data-bs-target="#accordion-categories-collapse" aria-expanded="true"
-                                            aria-controls="accordion-categories-collapse">Category 3:</a><span
-                                            class="red_word"> 1 </span><input type="radio" id="level4_cat3"
-                                            name="category_b" value=4></div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"><input type="checkbox" id="category_b" name="data" value=4>
-                                    </div>
-                                    <div class="col-1"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-8" onchange="get_level('category_c')">Must Meet 2 of 3
-                                        Below:<br>
-                                        <a href="#" class="link-info" data-bs-toggle="collapse"
-                                            data-bs-target="#accordion-categories-collapse" aria-expanded="true"
-                                            aria-controls="accordion-categories-collapse">Category
-                                            1:</a><span class="red_word"> 3
-                                        </span><input type="checkbox" id="level5_cat1" name="category_c" value=5>
-                                        <a href="#" class="link-success" data-bs-toggle="collapse"
-                                            data-bs-target="#accordion-categories-collapse" aria-expanded="true"
-                                            aria-controls="accordion-categories-collapse">Category 2:</a><span
-                                            class="red_word"> 1 </span><input type="checkbox" id="level5_cat2"
-                                            name="category_c" value=5> <a href="#" class="link-danger"
-                                            data-bs-toggle="collapse" data-bs-target="#accordion-categories-collapse"
-                                            aria-expanded="true" aria-controls="accordion-categories-collapse">Category
-                                            3:</a><span class="red_word"> 1 </span><input type="checkbox"
-                                            id="level5_cat3" name="category_c" value=5>
-                                    </div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"><input type="checkbox" id="category_c" name="data" value=5>
-                                    </div>
-                                </div>
 
+                                        <div class="row border border-top-0 border-start-0 border-end-0 order-light">
+                                            <div class="col-7">0 - 1</div>
+                                            <div class="col-1">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="0-1" name="data" value=2>
+                                                </div>
+                                            </div>
+                                            <div class="col-1"></div>
+                                            <div class="col-1"></div>
+                                            <div class="col-1"></div>
+                                        </div>
+                                        <div class="row border border-top-0 border-start-0 border-end-0 order-light">
+                                            <div class="col-7" onchange="get_level('category_a')">
+                                                <div class="form-check form-check-inline">
+
+                                                    <input class="form-check-input" type="radio" id="level3_cat1" name="category_a" value=3>
+                                                    <label class="form-check-label red_word" for="level3_cat1"><span class="cat_1_text">Category 1:</span> 2</label>
+                                                </div>
+                                                <strong> or </strong>
+                                                <div class="form-check form-check-inline">
+
+                                                    <input type="radio" id="indep_hist" name="category_a" value=3>
+                                                    <label class="form-check-label" for="ind_hist">Independent Historian(s)</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-1"></div>
+                                            <div class="col-1">
+                                                <div class="form-check">
+
+                                                    <input class="form-check-input" type="checkbox" id="category_a" name="data" value=3>
+                                                </div>
+                                            </div>
+                                            <div class="col-1 "></div>
+                                            <div class="col-1 "></div>
+                                        </div>
+                                        <div class="row border border-top-0 border-start-0 border-end-0 order-light">
+                                            <div class="col-7" onchange="get_level('category_b')">
+                                                <div class="form-check-inline">
+
+                                                    <input class="form-check-input" type="radio" id="level4_cat1" name="category_b" value=4>
+                                                    <label class="form-check-label red_word" for="level4_cat1"><span class="cat_1_text">Category 1:</span> 3</label>
+                                                </div>
+                                                <strong> or </strong>
+                                                <div class="form-check-inline">
+
+                                                    <input class="form-check-input" type="radio" id="level4_cat2" name="category_b" value=4>
+                                                    <label class="form-check-label red_word" for="level4_cat2"><span class="cat_2_text">Category 2:</span> 1</label>
+                                                </div>
+                                                <strong> or </strong>
+                                                <div class="form-check-inline">
+
+                                                    <input class="form-check-input" type="radio" id="level4_cat3" name="category_b" value=4>
+                                                    <label class="form-check-label red_word" for="level4_cat3"><span class="cat_3_text">Category 3:</span> 1</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-1"></div>
+                                            <div class="col-1"></div>
+                                            <div class="col-1">
+                                                <div class="form-check">
+
+                                                    <input class="form-check-input" type="checkbox" id="category_b" name="data" value=4>
+                                                </div>
+                                            </div>
+                                            <div class="col-1"></div>
+                                        </div>
+                                        <div class="row border border-top-0 border-start-0 border-end-0 order-light">
+                                            <div class="col-7" onchange="get_level('category_c')">Must Meet 2 of 3 Below:
+                                                <br>
+                                                <div class="form-check-inline">
+
+                                                    <input class="form-check-input" type="checkbox" id="level5_cat1" name="category_c" value=5>
+                                                    <label class="form-check-label red_word" for="level5_cat1"><span class="cat_1_text">Category 1:</span> 3</label>
+                                                </div>
+                                                <div class="form-check-inline">
+
+                                                    <input class="form-check-input" type="checkbox" id="level5_cat2" name="category_c" value=5>
+                                                    <label class="form-check-label red_word" for="level5_cat2"><span class="cat_2_text">Category 2:</span> 1</label>
+                                                </div>
+                                                <div class="form-check-inline">
+
+                                                    <input class="form-check-input" type="checkbox" id="level5_cat3" name="category_c" value=5>
+                                                    <label class="form-check-label red_word" for="level5_cat3"><span class="cat_3_text">Category 3:</span> 1</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-1"></div>
+                                            <div class="col-1"></div>
+                                            <div class="col-1"></div>
+                                            <div class="col-1">
+                                                <div class="form-check">
+
+                                                    <input class="form-check-input" type="checkbox" id="category_c" name="data" value=5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-    </div>
 </body>
+
+
 <script>
+    //Note: use same key names if not using problems default for constructor
+    let problems_default = {
+        "self_limited_": 0,
+        "stable_chronic_": 0,
+        "acute_uncomplicated": 0,
+        "chronic_exacerbation": 0,
+        "undiagnosed": 0,
+        "acute_illness": 0,
+        "chronic_severe": 0,
+        "acute_chronic": 0
+    };
+
+    class problems {
+
+        constructor(problems_in = problems_default) {
+            this.problems = problems_in;
+        }
+
+        set(problem_name, number) {
+            this.problems[problem_name] = number;
+        }
+
+        get(problem_name) {
+            return this.problems[problem_name];
+        }
+
+        update_from_chart() {
+            for (let x in this.problems) {
+                if (x[x.length - 1] == "_") {
+                    let id_1 = x + "1";
+                    let id_2 = x + "2";
+                    if (document.getElementById(id_2).checked == true) {
+                        if (this.problems[x] < 2) {
+                            this.problems[x] = 2;
+                        }
+                    } else if (document.getElementById(id_1).checked == true) {
+                        if (this.problems[x] != 1) {
+                            this.problems[x] = 1;
+                        }
+                    } else {
+                        this.problems[x] = 0;
+                    }
+
+                } else {
+                    if (document.getElementById(x).checked == true) {
+                        if (this.problems[x] < 1) {
+                            this.problems[x] = 1;
+                        }
+                    }
+                }
+            }
+        }
+
+        fill_chart() {
+            let none_selected = true;
+            for (let x in this.problems) {
+                if (x[x.length - 1] == "_") {
+                    if (this.problems[x] == 1) {
+                        let prob_name = "#" + x + "1";
+                        $(prob_name).prop('checked', true);
+                        prob_name = "#" + x + "2";
+                        $(prob_name).prop('checked', false);
+                        none_selected = false;
+                    } else if (this.problems[x] > 1) {
+                        let prob_name = "#" + x + "2";
+                        $(prob_name).prop('checked', true);
+                        prob_name = "#" + x + "1";
+                        $(prob_name).prop('checked', false);
+                        none_selected = false;
+                    } else {
+                        let prob_name = "#" + x + "1";
+                        $(prob_name).prop('checked', false);
+                        prob_name = "#" + x + "2";
+                        $(prob_name).prop('checked', false);
+                    }
+                } else {
+                    let prob_name = "#" + x;
+                    if (this.problems[x] == 0) {
+                        $(prob_name).prop('checked', false);
+                    } else {
+                        $(prob_name).prop('checked', true);
+                        none_selected = false;
+                    }
+                }
+            }
+            if (none_selected) {
+                $("self_limited_1").prop('checked', true);
+            }
+            select_level('problem');
+        }
+    }
+
+    class examples {
+        //examples_in is a dictionary
+        constructor(examples_in, type_examples_in) {
+            this.examples = examples_in;
+            this.num_examples = 0;
+            for (let x in this.examples) {
+                if (this.examples[x]) {
+                    this.num_examples = this.num_examples + 1;
+                }
+            }
+            this.type_example = type_examples_in;
+        }
+        set(example_name, bool) {
+            if (bool != this.examples[example_name]) {
+                if (bool) {
+                    this.num_examples = this.num_examples + 1;
+                } else {
+                    this.num_examples = this.num_examples - 1;
+                }
+                this.examples[example_name] = bool;
+            }
+        }
+
+        get_example(example_name) {
+            return this.examples[example_name];
+        }
+
+        get_type() {
+            return this.type_example;
+        }
+
+        get_num_examples() {
+            return this.num_examples;
+        }
+
+        update_from_chart() {
+            for (let x in this.examples) {
+                this.set(x, document.getElementById(x).checked);
+
+            }
+        }
+
+        fill_chart() {
+            for (let x in this.examples) {
+                let example_name = "#" + x;
+                $(example_name).prop('checked', this.examples[x]);
+            }
+        }
+    }
+
+    //Note: use same key names if not using low risks for constructor
+    let low_risks = {
+        "over_the_counter": false,
+        "minor_surgery": false,
+        "low_recurrences": false,
+        "Physical_Occupational": false,
+        "IV_fluids": false,
+        "low_other": false
+    };
+
+    //Note: use same key names if not using moderate risks  for constructor
+    let moderate_risks = {
+        "RX_minor_surgery": false,
+        "Elective_major_surgery": false,
+        "Diagnosis_treatment": false,
+        "moderate_risk_recurrence": false,
+        "IV_with_additives": false,
+        "moderate_other": false
+    };
+
+    //Note: use same key names if not using high  risks for constructor
+    let high_risks = {
+        "drug_therapy": false,
+        "major_surgery_risks": false,
+        "hospitalization": false,
+        "deescalate": false,
+        "high_risk_recurrence": false,
+        "high_other": false
+    };
+
+    //Note: use same key names if not using risks default for constructor
+    let risks_default = {
+        "minimal_risk": 0,
+        "low_risk": 0,
+        "moderate_risk": 0,
+        "high_risk": 0
+    };
+
+    class risk {
+        constructor(risks_in = risks_default, low_risk_ex_in = low_risks, moderate_risk_ex_in = moderate_risks, high_risk_ex_in = high_risks) {
+            this.risks = risks_in;
+            this.low_risk_ex = new examples(low_risk_ex_in, "low_risk");
+            this.moderate_risk_ex = new examples(moderate_risk_ex_in, "moderate_risk");
+            this.high_risk_ex = new examples(high_risk_ex_in, "high_risk");
+        }
+
+        //do I need a destructor??
+        destructor() {
+            delete this.low_risk_ex;
+            delete this.moderate_risk_ex;
+            delete this.high_risk_ex;
+        }
+
+        set(risk_name, number) {
+            this.risks[risk_name] = number;
+        }
+
+        get(risk_name) {
+            return this.risks[risk_name];
+        }
+
+        update_from_examples() {
+            this.risks[this.low_risk_ex.type_example] = this.low_risk_ex.num_examples;
+            this.risks[this.moderate_risk_ex.type_example] = this.moderate_risk_ex.num_examples;
+            this.risks[this.high_risk_ex.type_example] = this.high_risk_ex.num_examples;
+        }
+
+        update_from_chart() {
+            this.low_risk_ex.update_from_chart();
+            this.moderate_risk_ex.update_from_chart();
+            this.high_risk_ex.update_from_chart();
+            for (let x in this.risks) {
+                if (document.getElementById(x).checked == true) {
+                    if (this.risks[x] == 0) {
+                        this.risks[x] = 1;
+                    }
+                } else {
+                    this.risks[x] = 0;
+                }
+            }
+        }
+
+        fill_chart() {
+            this.low_risk_ex.fill_chart();
+            this.moderate_risk_ex.fill_chart();
+            this.high_risk_ex.fill_chart();
+            let none_selected = true;
+            for (let x in this.risks) {
+                let risk_name = "#" + x;
+                if (x > 0) {
+                    $(risk_name).prop('checked', true);
+                } else {
+                    $(risk_name).prop('checked', false);
+                }
+            }
+            if (none_selected) {
+                $("#minimal_risk").prop('checked', true);
+            }
+            select_level('risk');
+        }
+    }
+
+    class criteria {
+        constructor(criteria_in, category_in) {
+            this.criteria = criteria_in;
+            this.category = category_in;
+            this.total_criteria = 0;
+            for (let x in this.criteria) {
+                this.total_criteria = this.total_criteria + this.criteria[x];
+            }
+        }
+        set(criteria_name, num) {
+            let diff = num - this.criteria[criteria_name];
+            this.total_criteria = this.total_criteria + diff;
+            this.criteria[criteria_name] = num;
+
+        }
+
+        get_example(criteria_name) {
+            return this.criteria[criteria_name];
+        }
+
+        get_category() {
+            return this.category;
+        }
+
+        get_total_criteria() {
+            return this.total_criteria;
+        }
+
+        update_from_chart() {
+            for (let x in this.criteria) {
+                let row_id = "#" + x + "_row";
+                let row = $(row_id).find(":checked");
+                if (row.length != 0) {
+                    let val = parseInt($(row).attr("value"));
+                    this.set(x, val);
+                } else {
+                    this.set(x, 0);
+                }
+            }
+        }
+
+        fill_chart() {
+            for (let x in this.criteria) {
+                let row_id = "#" + x + "_row";
+                let y = this.criteria[x];
+                let row = $(row_id).find(":checkbox");
+                row.each(function() {
+                    if ($(this).attr("value") == y || ($(this).attr("value") == 3 && y >= 3)) {
+                        $(this).prop("checked", true)
+                    } else {
+                        $(this).prop("checked", false)
+                    }
+                });
+            }
+            category_level();
+        }
+
+    }
+
+    //Note: keep same key names for constructor
+    let category_1 = {
+        "review_prior": 0,
+        "review_results": 0,
+        "ordering": 0,
+        "assesment": 0
+    };
+    let category_2 = {
+        "independent_interpretation": 0
+    };
+    let category_3 = {
+        "disscussion_management": 0
+    };
+
+    //Note: use same key names if not using data default for constructor
+    let data_default = {
+        "0-1": true,
+        "category_a": false,
+        "category_b": false,
+        "category_c": false
+    };
+
+    class data {
+        constructor(data_in = data_default, category_1_in = category_1, category_2_in = category_2, category_3_in = category_3) {
+            this.data = data_in;
+            this.category_1 = new criteria(category_1_in, "category_1");
+            this.category_2 = new criteria(category_2_in, "category_2");
+            this.category_3 = new criteria(category_3_in, "category_3");
+        }
+
+        //do I need a destructor??
+        destructor() {
+            delete this.category_1;
+            delete this.category_2;
+            delete this.category_3;
+        }
+
+        set(data_name, bool) {
+            this.risks[data_name] = bool;
+        }
+
+        get(data_name) {
+            return this.data[data_name];
+        }
+
+        update_from_criteria() {
+            if (this.category_1.criteria["assesment"] == 0 && this.category_1.total_criteria < 2 && this.category_2.total_criteria == 0 && this.category_3.total_criteria == 0) {
+                this.data["0-1"] = true;
+                this.data["category_a"] = false;
+                this.data["category_b"] = false;
+                this.data["category_c"] = false;
+                return;
+            } else {
+                this.data["0-1"] = false;
+            }
+            if ((this.category_1.criteria["assesment"] > 0 || this.category_1.total_criteria == 2) && this.category_2.total_criteria == 0 && this.category_3.total_criteria == 0) {
+                this.data["category_a"] = true;
+                this.data["category_b"] = false;
+                this.data["category_c"] = false;
+                return;
+            } else {
+                this.data["category_a"] = false;
+            }
+            if (this.category_1.total_criteria >= 3) {
+                if (this.category_2.total_criteria > 0 || this.category_3.total_criteria > 0) {
+                    this.data["category_c"] = true;
+                    this.data["category_b"] = false;
+                } else {
+                    this.data["category_b"] = true;
+                    this.data["category_c"] = false;
+                }
+            } else {
+                if (this.category_2.total_criteria > 0 && this.category_3.total_criteria > 0) {
+                    this.data["category_b"] = false;
+                    this.data["category_c"] = true;
+                } else {
+                    this.data["category_c"] = false;
+                    if (this.category_2.total_criteria > 0 || this.category_3.total_criteria > 0) {
+                        this.data["category_b"] = true;
+                    }
+                }
+            }
+
+        }
+
+        update_from_chart() {
+            this.category_1.update_from_chart();
+            this.category_2.update_from_chart();
+            this.category_3.update_from_chart();
+            for (let x in this.data) {
+                this.data[x] = document.getElementById(x).checked;
+            }
+        }
+
+        fill_chart() {
+            this.category_1.fill_chart();
+            this.category_2.fill_chart();
+            this.category_3.fill_chart();
+            for (let x in this.data) {
+                let y = x;
+                document.getElementById(x).checked = this.data[x];
+            }
+            select_level('data');
+        }
+
+    }
+
+    function test_class_functionality() {
+        //TODO: perform testing here
+        //problems class: test constructor default, constructor non-default, update_from_chart, fill_chart
+        //risks: test constructor default, constructor non-default, update_from_examples, update_from_chart, fill_chart
+        //examples: test constructor default, constructor non-default, set (make sure number stays consistent), update, fill
+        //data: test constructor default, constructor non-default, update_from_criteria, update_from_chart, fill_chart
+        //criteria: test constructor default, constructor non-default, set(make sure number stays consistent), update, fill
+
+        //testing default constructors:
+        let example_problems = new problems();
+        let example_risks = new risk();
+        let example_data = new data();
+        for (let x in problems_default) {
+            if (example_problems.problems[x] != problems_default[x]) {
+                console.log("ERROR: Problems Default Constructor")
+            }
+        }
+        for (let x in risks_default) {
+            if (example_risks.risks[x] != risks_default[x]) {
+                console.log("ERROR: Risks Default Constructor")
+            }
+        }
+        for (let x in data_default) {
+            if (example_data.data[x] != data_default[x]) {
+                console.log("ERROR: Data Default Constructor")
+            }
+        }
+
+        delete example_problems;
+        example_risks.destructor();
+        delete example_risks;
+        example_data.destructor();
+        delete example_data;
+
+        //testing non-default constructors:
+        let problems_nondefault = {
+            "self_limited_": 0,
+            "stable_chronic_": 4,
+            "acute_uncomplicated": 0,
+            "chronic_exacerbation": 2,
+            "undiagnosed": 0,
+            "acute_illness": 0,
+            "chronic_severe": 0,
+            "acute_chronic": 3
+        };
+        let risks_nondefault = {
+            "minimal_risk": 0,
+            "low_risk": 0,
+            "moderate_risk": 1,
+            "high_risk": 1
+        };
+        let data_nondefault = {
+            "0-1": false,
+            "category_a": true,
+            "category_b": false,
+            "category_c": false
+        };
+        let ex_low_risks = {
+            "over_the_counter": false,
+            "minor_surgery": true,
+            "low_recurrences": false,
+            "Physical_Occupational": false,
+            "IV_fluids": false,
+            "low_other": false
+        };
+        let ex_moderate_risks = {
+            "RX_minor_surgery": false,
+            "Elective_major_surgery": true,
+            "Diagnosis_treatment": false,
+            "moderate_risk_recurrence": false,
+            "IV_with_additives": false,
+            "moderate_other": false
+        };
+        let ex_high_risks = {
+            "drug_therapy": false,
+            "major_surgery_risks": false,
+            "hospitalization": false,
+            "deescalate": false,
+            "high_risk_recurrence": false,
+            "high_other": false
+        };
+        let ex_category_1 = {
+            "review_prior": 0,
+            "review_results": 1,
+            "ordering": 0,
+            "assesment": 0
+        };
+        let ex_category_2 = {
+            "independent_interpretation": 1
+        };
+        let ex_category_3 = {
+            "disscussion_management": 1
+        };
+        let example2_problems = new problems(problems_nondefault);
+        let example2_risks = new risk(risks_nondefault, ex_low_risks, ex_moderate_risks, ex_high_risks);
+        let example2_data = new data(data_nondefault, ex_category_1, ex_category_2, ex_category_3);
+
+        //test nondefault constructors:
+        for (let x in problems_nondefault) {
+            if (example2_problems.problems[x] != problems_nondefault[x]) {
+                console.log("ERROR: Problems Nondefault Constructor");
+            }
+        }
+        for (let x in risks_nondefault) {
+            if (example2_risks.risks[x] != risks_nondefault[x]) {
+                console.log("ERROR: Risks Nondefault Constructor");
+            }
+        }
+        for (let x in ex_low_risks) {
+            if (example2_risks.low_risk_ex.examples[x] != ex_low_risks[x]) {
+                console.log("ERROR: Examples Nondefault Constructor");
+            }
+        }
+        for (let x in data_nondefault) {
+            if (example2_data.data[x] != data_nondefault[x]) {
+                console.log("ERROR: Data Nondefault Constructor");
+            }
+        }
+        for (let x in ex_category_1) {
+            if (example2_data.category_1.criteria[x] != ex_category_1[x]) {
+                console.log("ERROR: Criteria Nondefault Constructor");
+            }
+        }
+
+        //test examples setter:
+        example2_risks.low_risk_ex.set("over_the_counter", true);
+        if (example2_risks.low_risk_ex.get_num_examples() != 2 || example2_risks.low_risk_ex.get_example("over_the_counter") == false) {
+            console.log("ERROR: Examples Set Function");
+        }
+        example2_risks.low_risk_ex.set("over_the_counter", false);
+        if (example2_risks.low_risk_ex.get_num_examples() != 1 || example2_risks.low_risk_ex.get_example("over_the_counter") == true) {
+            console.log("ERROR: Examples Set Function");
+        }
+        //test update from examples:
+        example2_risks.update_from_examples();
+        if (example2_risks.risks["low_risk"] != 1 || example2_risks.risks["high_risk"] == 1) {
+            console.log("ERROR: update from examples risks");
+        }
+
+        //test criteria setter:
+        example2_data.category_1.set("review_results", 2);
+        if (example2_data.category_1.get_total_criteria() != 2) {
+            console.log("ERROR: Criteria Set Function");
+        }
+        example2_data.category_1.set("review_results", 1);
+        if (example2_data.category_1.get_total_criteria() != 1) {
+            console.log("ERROR: Criteria Set Function");
+        }
+
+        //test update from criteria:
+        example2_data.update_from_criteria();
+        //test 2 cat 1, 1 cat  2, 1  cat 3
+        if (example2_data.data["category_a"] == true || example2_data.data["category_c"] == false || example2_data.data["category_b"] == true || example2_data.data["0-1"] == true) {
+            console.log("ERROR: update from criteria data");
+        }
+        //test 3 cat 1, 0 cat 2, 0 cat 3
+        example2_data.category_1.set("review_prior", 2);
+        example2_data.category_2.set("independent_interpretation", 0);
+        example2_data.category_3.set("disscussion_management", 0);
+        example2_data.update_from_criteria();
+        if (example2_data.data["category_b"] == false || example2_data.data["category_c"] == true || example2_data.data["category_a"] == true || example2_data.data["0-1"] == true) {
+            console.log("ERROR: update from criteria data");
+        }
+        //test 2 cat 1, 0 cat 2, 0 cat 3
+        example2_data.category_1.set("review_prior", 1);
+        example2_data.update_from_criteria();
+        if (example2_data.data["category_b"] == true || example2_data.data["category_c"] == true || example2_data.data["category_a"] == false || example2_data.data["0-1"] == true) {
+            console.log("ERROR: update from criteria data");
+        }
+        //test 1 cat 1, 0 cat 2, 0 cat 3
+        example2_data.category_1.set("review_prior", 0);
+        example2_data.update_from_criteria();
+        if (example2_data.data["category_b"] == true || example2_data.data["category_c"] == true || example2_data.data["category_a"] == true || example2_data.data["0-1"] == false) {
+            console.log("ERROR: update from criteria data");
+        }
+
+        //test 1 cat 1 (indep hist true), 0 cat 2, 0 cat 3
+        example2_data.category_1.set("review_results", 0);
+        example2_data.category_1.set("review_prior", 0);
+        example2_data.category_1.set("assesment", 1);
+        example2_data.update_from_criteria();
+        if (example2_data.data["category_b"] == true || example2_data.data["category_c"] == true || example2_data.data["category_a"] == false || example2_data.data["0-1"] == true) {
+            console.log("ERROR: update from criteria data");
+        }
+        //test 1 cat 1 (indep hist true), 1 cat 2, 0 cat 3
+        example2_data.category_2.set("independent_interpretation", 1);
+        example2_data.update_from_criteria();
+        if (example2_data.data["category_b"] == false || example2_data.data["category_c"] == true || example2_data.data["category_a"] == true || example2_data.data["0-1"] == true) {
+            console.log("ERROR: update from criteria data");
+        }
+        //test 2 cat 1, 0 cat 2, 1 cat 3
+        example2_data.category_1.set("assesment", 0);
+        example2_data.category_1.set("review_prior", 2);
+        example2_data.category_2.set("independent_interpretation", 0);
+        example2_data.category_3.set("disscussion_management", 1);
+        example2_data.update_from_criteria();
+        if (example2_data.data["category_b"] == false || example2_data.data["category_c"] == true || example2_data.data["category_a"] == true || example2_data.data["0-1"] == true) {
+            console.log("ERROR: update from criteria data");
+        }
+        //test 3 cat 1, 0 cat 2, 1 cat 3
+        example2_data.category_1.set("review_prior", 3);
+        example2_data.update_from_criteria();
+        if (example2_data.data["category_b"] == true || example2_data.data["category_c"] == false || example2_data.data["category_a"] == true || example2_data.data["0-1"] == true) {
+            console.log("ERROR: update from criteria data");
+        }
+        //test 3 cat 1, 1 cat 2, 0 cat 3
+        example2_data.category_2.set("independent_interpretation", 1);
+        example2_data.category_3.set("disscussion_management", 0);
+        example2_data.update_from_criteria();
+        if (example2_data.data["category_b"] == true || example2_data.data["category_c"] == false || example2_data.data["category_a"] == true || example2_data.data["0-1"] == true) {
+            console.log("ERROR: update from criteria data");
+        }
+
+        //test fill chart
+        example2_problems.fill_chart();
+        example2_risks.fill_chart();
+        example2_data.fill_chart();
+
+        delete example2_problems;
+        example2_risks.destructor();
+        delete example2_risks;
+        example2_data.destructor();
+        delete example2_data;
+
+    }
+
+
+    function test_update_from_chart() {
+        $(document).ready(
+            function() {
+                $("#self_limited_2").prop('checked', true);
+                $("#low_other").prop('checked', true);
+                $("#low_risk").prop('checked', true);
+                $("#review_results_3").prop('checked', true);
+                $("#category_b").prop('checked', true);
+
+                let example_problems = new problems();
+                let example_risks = new risk();
+                let example_data = new data();
+
+                example_problems.update_from_chart();
+                example_risks.update_from_chart();
+                example_data.update_from_chart();
+
+                if (example_problems.problems["self_limited_"] != 2) {
+                    console.log("ERROR: update from chart problems");
+                }
+
+                if (example_risks.risks["low_risk"] != 1 || example_risks.low_risk_ex.examples["low_other"] == false) {
+                    console.log("ERROR: update from chart risks");
+                }
+
+                if (example_data.data["category_b"] == false || example_data.category_1.criteria["review_results"] != 3) {
+                    console.log("ERROR: update from chart data");
+                }
+
+                delete example_problems;
+                example_risks.destructor();
+                delete example_risks;
+                example_data.destructor();
+                delete example_data;
+            }
+        )
+
+    }
+    //test_class_functionality();
+    //test_update_from_chart();
+
     function select_level(name) {
         let level = name + '_level';
         const checkboxes = document.querySelectorAll('input[name="' + name + '"]:checked');
@@ -808,10 +1562,10 @@
 
     function one_per_row(id, name) {
         $(document).ready(
-            function () {
+            function() {
                 let search = "#" + id;
                 let row = $(search).parent().parent().find('input:checkbox');
-                row.each(function () {
+                row.each(function() {
                     if ($(this).attr("id") != id) {
                         $(this).prop('checked', false)
                     }
@@ -861,7 +1615,7 @@
                 $("#level4_cat1").prop("checked", false);
                 $("#level5_cat1").prop("checked", false);
             } else {
-                $("#level3_cat1").prop("checked", true);
+                $("#level3_cat1").prop("checked", false);
                 if (cat2 > 0 || cat3 > 0) {
                     $("#level5_cat1").prop("checked", true);
                     $("#level4_cat1").prop("checked", false);
@@ -901,9 +1655,9 @@
     }
 
     function clear_section(class_name) {
-        $(document).ready(function () {
+        $(document).ready(function() {
             let c = "." + class_name;
-            $(c).find(':input').each(function () {
+            $(c).find(':input').each(function() {
                 $(this).prop('checked', false)
             });
             overall_level();
@@ -911,8 +1665,8 @@
     }
 
     function clear_form() {
-        $(document).ready(function () {
-            $("*").find(':input').each(function () {
+        $(document).ready(function() {
+            $("*").find(':input').each(function() {
                 $(this).prop('checked', false)
             });
             overall_level();
@@ -929,7 +1683,6 @@
             levels.push(risk_level);
             levels.push(data_level);
             levels.sort();
-            console.log(levels[1]);
             document.getElementById("overallLevel").innerHTML = "Level: " + levels[1];
         } catch (e) {
             document.getElementById("overallLevel").innerHTML = "Level: ???";
