@@ -13,7 +13,7 @@
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
+    <script src="emcalculator.js"></script>
     <title>EM Calc</title>
     <style>
         body {
@@ -52,6 +52,22 @@
             background-color: #BA744F;
         }
         
+        .low {
+            color: #C9BE66;
+        }
+        
+        .medium {
+            color: #C3A25A;
+        }
+        
+        .moderate {
+            color: #C69546;
+        }
+        
+        .high {
+            color: #BA744F;
+        }
+        
         .calc-column {
             min-width: 211.656px;
         }
@@ -65,241 +81,18 @@
             text-align: center;
         }
     </style>
-    <script>
-        var calculatorData = {
-            levelClass: ["low", "medium", "moderate", "high"],
-            levels: {
-                "problems": 0,
-                "risk": 0,
-                "data": 0
-            },
-            overallLevel: 0
-        }
-
-        function overallLevel(name, level) {
-            calculatorData.levels[name] = level;
-            let levelValues = Object.values(calculatorData.levels);
-            if (calculatorData.overallLevel !== 0) {
-                $(calculatorData.overallLevelElement).removeClass(calculatorData.levelClass[calculatorData.overallLevel - 2]);
-            }
-            if (!levelValues.includes(0)) {
-                calculatorData.overallLevel = levelValues.sort()[1];
-                $(calculatorData.overallLevelElement).addClass(calculatorData.levelClass[calculatorData.overallLevel - 2]);
-            } else {
-                calculatorData.overallLevel = 0;
-            }
-        }
-
-        class Section {
-            constructor(name) {
-                this.name = name;
-                this.items = $('[data-section="' + name + '"]');
-                this.header = this.items.first();
-                this.level = 0;
-            }
-            getSelected = () => {
-                return this.items.find('[data-selected="true"]');
-            }
-            clear() {
-                var selected = this.getSelected();
-                selected.each((i) => {
-                    var x = $(selected[i]);
-                    x.data("selected", false).attr("data-selected", false).removeClass(calculatorData.levelClass[x.index()]);
-                })
-                this.header.find(".level-box").not(".erase").empty();
-                this.level = 0;
-                this.header.find(".text-right").text("Level: " + this.level);
-                overallLevel(this.name, this.level);
-            }
-            levelSelect = (level) => {
-                var x = this.header.find(".level-box").not(".erase");
-                x.empty();
-                if (level !== 0) {
-                    $(x[level - 2]).append('<i class="fa-solid fa-circle-dot"></i>');
-                }
-                this.level = level;
-                this.header.find(".text-right").text("Level: " + this.level);
-                overallLevel(this.name, this.level);
-            }
-            maxLevelSelect = () => {
-                var selected = this.getSelected();
-                selected.each((i) => {
-                    var x = $(selected[i]).index() + 2;
-                    if (x > this.level) {
-                        this.level = x;
-                    }
-                });
-                this.levelSelect(this.level);
-            }
-            select(box) {
-                if ($(box).data("selected")) {
-                    $(box).data("selected", false).attr("data-selected", false);
-                    this.level = 0;
-                } else {
-                    $(box).data("selected", true).attr("data-selected", true);
-                };
-                $(box).toggleClass(calculatorData.levelClass[$(box).index()]);
-                this.maxLevelSelect();
-            }
-            selectIfNotSelected(x) {
-                var box = $(x).find("[data-selected]");
-                if (!$(box).data("selected")) {
-                    this.select(box);
-                }
-            }
-            selectHeader = (e) => {
-                this.clear();
-                this.levelSelect($(e.currentTarget).index() + 1);
-            }
-            run() {
-                this.header.find(".erase").on("click", () => {
-                    this.clear()
-                });
-                this.items.find("[data-selected]").on("click", (e) => {
-                    this.select($(e.currentTarget));
-                });
-                this.header.find(".level-box").not(".erase").on("click", {
-                    event
-                }, this.selectHeader);
-            }
-        }
-        class Risk extends Section {
-            constructor() {
-                super("risk");
-                this.collapsibleItems = $(".collapse");
-            }
-            clear() {
-                super.clear();
-                this.collapsibleItems.find(":checked").prop("checked", false);
-            }
-            toggleChevron = (e) => {
-                var parent = $(e.currentTarget).data("bs-parent");
-                $(parent).find("svg").toggleClass("fa-chevron-right fa-chevron-down");
-            }
-            exampleSelected = (e) => {
-                var parent = $(e.currentTarget).data("bs-parent");
-                var checked = $(e.currentTarget).find(":checked").length;
-                if (checked > 0) {
-                    this.selectIfNotSelected($(parent));
-                } else {
-                    this.select($(parent).find("[data-selected]"));
-                }
-            }
-            run() {
-                super.run();
-                this.collapsibleItems.on("show.bs.collapse", {
-                    event
-                }, this.toggleChevron);
-                this.collapsibleItems.on("hide.bs.collapse", {
-                    event
-                }, this.toggleChevron);
-                this.collapsibleItems.on("change", {
-                    event
-                }, this.exampleSelected);
-            }
-        }
-        class Data extends Section {
-            constructor() {
-                super("data");
-                this.examples = $("#categoryCriteria");
-            }
-            clear() {
-                super.clear();
-                this.items.find(":checked").prop("checked", false);
-                this.examples.find(":checked").prop("checked", false);
-                this.items.find(":disabled").prop("disabled", false);
-                this.examples.find(":disabled").prop("disabled", false);
-            }
-            toggleDisable(a) {
-                if ($(a).prop("checked")) {
-                    $(a).parent().siblings().each(function() {
-                        $(this).find(":input").prop("disabled", true);
-                    });
-                } else {
-                    $(a).parent().siblings().each(function() {
-                        $(this).find(":input").prop("disabled", false);
-                    });
-                }
-            }
-            criteria = () => {
-                var calculateCategory = function(category) {
-                    var count = 0;
-                    $('[data-example="' + category + '"]').find(":checked").each(function() {
-                        count += parseInt($(this).val());
-                    });
-                    return count;
-                };
-                var category1 = calculateCategory("category1");
-                var category2 = calculateCategory("category2");
-                var category3 = calculateCategory("category3");
-                if (category2 === 0 && category3 === 0) {
-                    if (category1 > 2) {
-                        this.selectIfNotSelected($(this.items[3]));
-                    } else if (category1 === 2 || $("#assesmentHistorian").prop("checked")) {
-                        this.selectIfNotSelected($(this.items[2]));
-                    } else if (category1 <= 1) {
-                        this.clear();
-                        this.selectIfNotSelected($(this.items[1]));
-                    }
-                } else if (category1 > 2 || (category2 > 0 && category3 > 0)) {
-                    this.selectIfNotSelected($(this.items[4]));
-                } else {
-                    this.selectIfNotSelected($(this.items[3]));
-                }
-            }
-            selectCategory = (e) => {
-                var box = $(e.currentTarget);
-                if ($(box).attr("id")[4] !== '4') {
-                    this.toggleDisable(box);
-                    this.select($(box).parent().parent().parent().find("[data-selected]"));
-                } else {
-                    var x = $(box).parent().parent();
-                    if ($(x).find(":checked").length > 1) {
-                        this.select($(x).parent().find("[data-selected]"));
-                    }
-                }
-
-            }
-            run() {
-                super.run();
-                this.examples.on("change", this.criteria);
-                this.examples.find(":checkbox").on("change", (e) => {
-                    this.toggleDisable($(e.currentTarget));
-                })
-                this.items.find(":checkbox").on("change", {
-                    event
-                }, this.selectCategory);
-            }
-        }
-
-        function run() {
-            calculatorData.overallLevelElement = $('[data-section="overallLevel"]').find(".level-box").not(".erase");
-            var problems = new Section("problems");
-            var risk = new Risk();
-            var data = new Data();
-
-            problems.run();
-            risk.run();
-            data.run();
-
-            $('[data-section="overallLevel"]').find(".erase").on("click", function() {
-                problems.clear();
-                risk.clear();
-                data.clear();
-            })
-
-        };
-
-
-        $(document).ready(function() {
-            run();
-        })
-    </script>
 </head>
 
 <body>
     <div class="container-fluid p-3">
-        <!-- BEGIN - Section Heading UI-->
+        <!-- BEGIN - Overall Level -->
+        <div class="col sticky-top col-auto bg-light d-flex pe-0 calc-column lh-35 justify-content-end" data-section="overallLevel">
+            <div class="me-3">Calculated Level</div>
+            <div class="level-box text-center text-white"></div>
+            <div class="level-box erase bg-light text-center"><i class="fa-solid fa-eraser"></i></div>
+        </div>
+        <!-- END - Overall Level -->
+        <!-- BEGIN - Problems Header -->
         <div class="row">
             <div class="col px-0 bg-light d-flex justify-content-between align-items-center me-2 lh-35" data-section="problems">
                 <div class="h5 my-auto ms-2">Problems</div>
@@ -312,19 +105,22 @@
                     <div class="level-box erase bg-light d-flex align-items-center justify-content-center"><i class="fa-solid fa-eraser"></i></div>
                 </div>
             </div>
-            <!-- THIS WILL NEED MOVED TO THE FIRST SECTION HEADING UI AND CHANGED TO A CALCULATED CLEAR COLUMN -->
-            <div class="col col-auto bg-light d-flex pe-0 calc-column lh-35" data-section="overallLevel">
-                <div class="me-3">Calculated Level</div>
-                <div class="level-box text-center text-white"></div>
-                <div class="level-box erase bg-light text-center"><i class="fa-solid fa-eraser"></i></div>
-            </div>
         </div>
-        <!-- END - Section Heading UI-->
+        <!-- END - Problems Header -->
+
         <!-- BEGIN - Self-Limited Line Item -->
         <div class="row">
             <div class="col px-0 d-flex justify-content-between align-items-center line-item me-2" data-section="problems">
                 <div class="px-2">
-                    Self-limited or Minor
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="" id="selfLimited1" data-level="2">
+                        <label class="form-check-label" for="selfLimited1"> 1 </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="" id="selfLimited2" data-level="3">
+                        <label class="form-check-label" for="selfLimited2"> 2+ </label>
+                    </div>
+                    <span>Self-limited or Minor</span>
                 </div>
                 <div class="d-flex h-100">
                     <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center" data-selected="false">1</div>
@@ -334,18 +130,24 @@
                     <div class="level-box">&nbsp;</div>
                 </div>
             </div>
-            <!-- BEGIN - div.col.calc-column - these divs when filled with a unicode nonbreaking space creates the clear-column for the space used by the original overall calc container on the first line -->
             <div class="col col-auto d-flex pe-0 calc-column">
                 &nbsp;
             </div>
-            <!-- END - div.col.calc-column -->
         </div>
         <!-- END - Self-Limited Line Item -->
         <!-- BEGIN - Stable Chronic Line Item -->
         <div class="row">
             <div class="col px-0 d-flex justify-content-between align-items-center line-item me-2" data-section="problems">
                 <div class="px-2">
-                    Stable Chronic Illness(= at treatment goal)
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="" id="stableChronic1" data-level="3">
+                        <label class="form-check-label" for="stableChronic1"> 1 </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="" id="stableChronic2" data-level="4">
+                        <label class="form-check-label" for="stableChronic2"> 2+ </label>
+                    </div>
+                    <span>Stable Chronic Illness(= at treatment goal)</span>
                 </div>
                 <div class="d-flex h-100">
                     <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
@@ -355,18 +157,20 @@
                     <div class="level-box">&nbsp;</div>
                 </div>
             </div>
-            <!-- BEGIN - div.col.calc-column - these divs when filled with a unicode nonbreaking space creates the clear-column for the space used by the original overall calc container on the first line -->
             <div class="col col-auto d-flex pe-0 calc-column">
                 &nbsp;
             </div>
-            <!-- END - div.col.calc-column -->
         </div>
         <!-- END - Stable Chronic Line Item -->
         <!-- BEGIN - Uncomplicated Illness Line Item -->
         <div class="row">
             <div class="col px-0 d-flex justify-content-between align-items-center line-item me-2" data-section="problems">
                 <div class="px-2">
-                    Acute, Uncomplicated Illness or Injury
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="" id="acuteUncomplicated" data-level="3">
+                        <label class="form-check-label" for="acuteUncomplicated"> 1+ </label>
+                    </div>
+                    <span>Acute, Uncomplicated Illness or Injury</span>
                 </div>
                 <div class="d-flex h-100">
                     <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
@@ -376,18 +180,20 @@
                     <div class="level-box">&nbsp;</div>
                 </div>
             </div>
-            <!-- BEGIN - div.col.calc-column - these divs when filled with a unicode nonbreaking space creates the clear-column for the space used by the original overall calc container on the first line -->
             <div class="col col-auto d-flex pe-0 calc-column">
                 &nbsp;
             </div>
-            <!-- END - div.col.calc-column -->
         </div>
         <!-- END - Uncomplicated Illness Line Item -->
         <!-- BEGIN - Chronic Exacerbation Line Item -->
         <div class="row">
             <div class="col px-0 d-flex justify-content-between align-items-center line-item me-2" data-section="problems">
                 <div class="px-2">
-                    Chronic w/ Exacerbation/progression/side effects
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="" id="chronicExacerbation" data-level="4">
+                        <label class="form-check-label" for="chronicExacerbation"> 1+ </label>
+                    </div>
+                    <span>Chronic w/ Exacerbation/progression/side effects</span>
                 </div>
                 <div class="d-flex h-100">
                     <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
@@ -397,18 +203,20 @@
                     <div class="level-box">&nbsp;</div>
                 </div>
             </div>
-            <!-- BEGIN - div.col.calc-column - these divs when filled with a unicode nonbreaking space creates the clear-column for the space used by the original overall calc container on the first line -->
             <div class="col col-auto d-flex pe-0 calc-column">
                 &nbsp;
             </div>
-            <!-- END - div.col.calc-column -->
         </div>
         <!-- END - Chronic Exacerbation Line Item -->
         <!-- BEGIN - Undiagnosed Line Item -->
         <div class="row">
             <div class="col px-0 d-flex justify-content-between align-items-center line-item me-2" data-section="problems">
                 <div class="px-2">
-                    Undiagnosed New Problem w/ Uncertain Prognosis
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="" id="undiagnosed" data-level="4">
+                        <label class="form-check-label" for="undiagnosed"> 1+ </label>
+                    </div>
+                    <span>Undiagnosed New Problem w/ Uncertain Prognosis</span>
                 </div>
                 <div class="d-flex h-100">
                     <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
@@ -418,18 +226,20 @@
                     <div class="level-box">&nbsp;</div>
                 </div>
             </div>
-            <!-- BEGIN - div.col.calc-column - these divs when filled with a unicode nonbreaking space creates the clear-column for the space used by the original overall calc container on the first line -->
             <div class="col col-auto d-flex pe-0 calc-column">
                 &nbsp;
             </div>
-            <!-- END - div.col.calc-column -->
         </div>
         <!-- END - Undiagnosed Line Item -->
         <!-- BEGIN - Systemic Symptoms Line Item -->
         <div class="row">
             <div class="col px-0 d-flex justify-content-between align-items-center line-item me-2" data-section="problems">
                 <div class="px-2">
-                    Acute Illness w/ Systemic Symptoms
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="" id="acuteIllness" data-level="4">
+                        <label class="form-check-label" for="acuteIllness"> 1+ </label>
+                    </div>
+                    <span>Acute Illness w/ Systemic Symptoms</span>
                 </div>
                 <div class="d-flex h-100">
                     <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
@@ -439,18 +249,20 @@
                     <div class="level-box">&nbsp;</div>
                 </div>
             </div>
-            <!-- BEGIN - div.col.calc-column - these divs when filled with a unicode nonbreaking space creates the clear-column for the space used by the original overall calc container on the first line -->
             <div class="col col-auto d-flex pe-0 calc-column">
                 &nbsp;
             </div>
-            <!-- END - div.col.calc-column -->
         </div>
         <!-- END - Systemic Symptoms Line Item -->
         <!-- BEGIN - Severe Exacerbation Line Item -->
         <div class="row">
             <div class="col px-0 d-flex justify-content-between align-items-center line-item me-2" data-section="problems">
                 <div class="px-2">
-                    Chronic w/ Severe Exacerbation/progression/side effects
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="" id="chronicSevere" data-level="5">
+                        <label class="form-check-label" for="chronicSevere"> 1+ </label>
+                    </div>
+                    <span>Chronic w/ Severe Exacerbation/progression/side effects</span>
                 </div>
                 <div class="d-flex h-100">
                     <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
@@ -460,18 +272,20 @@
                     <div class="level-box">&nbsp;</div>
                 </div>
             </div>
-            <!-- BEGIN - div.col.calc-column - these divs when filled with a unicode nonbreaking space creates the clear-column for the space used by the original overall calc container on the first line -->
             <div class="col col-auto d-flex pe-0 calc-column">
                 &nbsp;
             </div>
-            <!-- END - div.col.calc-column -->
         </div>
         <!-- END - Severe Exacerbation Line Item -->
         <!-- BEGIN - Threat To Life Line Item -->
         <div class="row">
             <div class="col px-0 d-flex justify-content-between align-items-center line-item me-2" data-section="problems">
                 <div class="px-2">
-                    Acute or Chronic Illness/injury threat to life/bodily function
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="" id="acuteChronic" data-level="5">
+                        <label class="form-check-label" for="acuteChronic"> 1+ </label>
+                    </div>
+                    <span>Acute or Chronic Illness/injury threat to life/bodily function</span>
                 </div>
                 <div class="d-flex h-100">
                     <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
@@ -481,14 +295,12 @@
                     <div class="level-box">&nbsp;</div>
                 </div>
             </div>
-            <!-- BEGIN - div.col.calc-column - these divs when filled with a unicode nonbreaking space creates the clear-column for the space used by the original overall calc container on the first line -->
             <div class="col col-auto d-flex pe-0 calc-column">
                 &nbsp;
             </div>
-            <!-- END - div.col.calc-column -->
         </div>
         <!-- END - Threat To Life Line Item -->
-        <!-- BEGIN - Section Heading UI-->
+        <!-- BEGIN - Risk Header -->
         <div class="row">
             <div class="col px-0 bg-light d-flex justify-content-between align-items-center me-2 lh-35" data-section="risk">
                 <div class="h5 my-auto ms-2">Risk</div>
@@ -507,230 +319,205 @@
             </div>
             <!-- END - div.col.calc-column -->
         </div>
-        <!-- END - Section Heading UI-->
-        <!-- BEGIN - Minimal Risk Line Item -->
+        <!-- END - Risk Header -->
+        <!-- BEGIN - Risk Items -->
         <div class="row">
-            <div class="col px-0 d-flex justify-content-between align-items-center line-item me-2" data-section="risk">
-                <div class="px-2">
-                    Minimal risk of recurrences from morbidity from additional diagnostic testing or treatment
-                </div>
-                <div class="d-flex h-100">
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center" data-selected="false"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box">&nbsp;</div>
-                </div>
-            </div>
-            <!-- BEGIN - div.col.calc-column - these divs when filled with a unicode nonbreaking space creates the clear-column for the space used by the original overall calc container on the first line -->
-            <div class="col col-auto d-flex pe-0 calc-column">
-                &nbsp;
-            </div>
-            <!-- END - div.col.calc-column -->
-        </div>
-        <!-- END - Minimal Risk Line Item -->
-        <!-- BEGIN - Low Risk Line Item -->
-        <div class="row">
-            <div id="lowRiskLine" class="col px-0 d-flex justify-content-between align-items-center line-item me-2" data-bs-toggle="collapse" data-bs-target="#lowRisk" aria-expanded="false" aria-controls="lowRisk" data-section="risk">
-                <div class="px-2">
-                    <span class="line-item-expand-icon"><i class="fa-solid fa-chevron-right"></i></span> Low risk of recurrences from morbidity from additional diagnostic testing or treatment
-                </div>
-                <div class="d-flex h-100">
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center" data-selected="false"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box">&nbsp;</div>
-                </div>
-            </div>
-            <div class="col col-auto d-flex pe-0 calc-column">
-                &nbsp;
-            </div>
-        </div>
-        <!-- END - Low Risk Line Item -->
-        <!-- BEGIN - Low Risk Collapse Section  -->
-        <div id="lowRisk" class="row collapse" data-bs-parent="#lowRiskLine">
-            <div class="col bg-light">
+            <div class="col" data-section="risk">
+                <!-- BEGIN - Minimal risk examples-->
                 <div class="row p-1">
-                    <div class="col"><strong>Examples</strong></div>
-                </div>
-                <div class="row">
-                    <div class="col-12 col-md-4 form-check mx-3">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="overTheCounter">
-                        <label class="form-check-label" for="overTheCounter">
-                          Over-the-counter drugs
-                        </label>
-                    </div>
-                    <div class="col-12 col-md-4 form-check mx-3">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="minorSurgery">
-                        <label class="form-check-label" for="minorSurgery">
-                          Minor surgery w/o riskfactors
-                        </label>
-                    </div>
-                    <div class="col-12 col-md-4 form-check mx-3">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="lowRiskCheck">
-                        <label class="form-check-label" for="lowRiskCheck">
-                          Low recurrences 
-                        </label>
-                    </div>
-                    <div class="col-12 col-md-4 form-check mx-3">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="physicalTherapy">
-                        <label class="form-check-label" for="physicalTherapy">
-                            Physical/Occupational Therapy
-                        </label>
-                    </div>
-                    <div class="col-12 col-md-4 form-check mx-3">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="ivNoAdditives">
-                        <label class="form-check-label" for="ivNoAdditives">
-                          IV without additives
-                        </label>
-                    </div>
-                    <div class="col-12 col-md-4 form-check mx-3">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="otherLow">
-                        <label class="form-check-label" for="otherLow">
-                          Other
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="" id="minimalRisk" data-level="2">
+                        <label class="form-check-label" for="minimalRisk">
+                        <strong><span class="low">Minimal</span> risk of recurrences from morbidity from additional diagnostic testing or treatment</strong>
                         </label>
                     </div>
                 </div>
-            </div>
-            <div class="col col-auto d-flex pe-0 calc-column collapse-box"></div>
-        </div>
-        <!-- END - Low Risk Collapse Section  -->
-        <!-- BEGIN - Moderate Risk Line Item -->
-        <div class="row">
-            <div id="moderateRiskLine" class="col px-0 d-flex justify-content-between align-items-center line-item me-2" data-bs-toggle="collapse" data-bs-target="#moderateRisk" aria-expanded="false" aria-controls="moderateRisk" data-section="risk">
-                <div class="px-2">
-                    <span class="line-item-expand-icon"><i class="fa-solid fa-chevron-right"></i></span> Moderate risk of recurrences from morbidity from additional diagnostic testing or treatment
-                </div>
-                <div class="d-flex h-100">
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center" data-selected="false"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box">&nbsp;</div>
-                </div>
-            </div>
-            <div class="col col-auto d-flex pe-0 calc-column">
-                &nbsp;
-            </div>
-        </div>
-        <!-- END - Moderate Risk Line Item -->
-        <!-- BEGIN - Moderate Risk Collapse Section  -->
-        <div id="moderateRisk" class="row collapse" data-bs-parent="#moderateRiskLine">
-            <div class="col bg-light">
+                <!-- END - Minimal risk examples-->
+                <!-- BEGIN - Low risk examples-->
                 <div class="row p-1">
-                    <div class="col"><strong>Examples</strong></div>
-                </div>
-                <div class="row">
-                    <div class="col-12 col-md-4 form-check mx-3">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="rxMinor">
-                        <label class="form-check-label" for="rxMinor">
-                          RX Minor surgery w/o risk factors
-                        </label>
-                    </div>
-                    <div class="col-12 col-md-4 form-check mx-3">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="electiveMajor">
-                        <label class="form-check-label" for="electiveMajor">
-                          Elective major surgery w/o risk factors
-                        </label>
-                    </div>
-                    <div class="col-12 col-md-4 form-check mx-3">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="socialDeterminants">
-                        <label class="form-check-label" for="socialDeterminants">
-                          Diagnosis/treatment significantly limited by social determinants of health 
-                        </label>
-                    </div>
-                    <div class="col-12 col-md-4 form-check mx-3">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="moderateRiskCheck">
-                        <label class="form-check-label" for="moderateRiskCheck">
-                          Moderate risk of recurrence
-                        </label>
-                    </div>
-                    <div class="col-12 col-md-4 form-check mx-3">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="ivAdditives">
-                        <label class="form-check-label" for="ivAdditives">
-                          IV with additives (Fe infusion)
-                        </label>
-                    </div>
-                    <div class="col-12 col-md-4 form-check mx-3">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="otherModerate">
-                        <label class="form-check-label" for="otherModerate">
-                          Other
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="" id="lowRisk" data-level="3">
+                        <label class="form-check-label" for="lowRisk">
+                        <strong><span class="medium">Low</span> risk of recurrences from morbidity from additional diagnostic testing or treatment</strong>
                         </label>
                     </div>
                 </div>
-            </div>
-            <div class="col col-auto d-flex pe-0 calc-column collapse-box"></div>
-        </div>
-        <!-- END - Moderate Risk Collapse Section  -->
-        <!-- BEGIN - High Risk Line Item -->
-        <div class="row">
-            <div id="highRiskLine" class="col px-0 d-flex justify-content-between align-items-center line-item me-2" data-bs-toggle="collapse" data-bs-target="#highRisk" aria-expanded="false" aria-controls="highRisk" data-section="risk">
-                <div class="px-2">
-                    <span class="line-item-expand-icon"><i class="fa-solid fa-chevron-right"></i></span> High risk of recurrences from morbidity from additional diagnostic testing or treatment
+                <div class="row" data-section="risk">
+                    <div class="col-12 col-md-4 form-check mx-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="" id="overTheCounter" data-level="3">
+                            <label class="form-check-label" for="overTheCounter">
+                              Over-the-counter drugs
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 form-check mx-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="" id="minorSurgery" data-level="3">
+                            <label class="form-check-label" for="minorSurgery">
+                              Minor surgery w/o riskfactors
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 form-check mx-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="" id="lowRiskCheck" data-level="3">
+                            <label class="form-check-label" for="lowRiskCheck">
+                              Low recurrences 
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 form-check mx-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="" id="physicalTherapy" data-level="3">
+                            <label class="form-check-label" for="physicalTherapy">
+                                Physical/Occupational Therapy
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 form-check mx-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="" id="ivNoAdditives" data-level="3">
+                            <label class="form-check-label" for="ivNoAdditives">
+                              IV without additives
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 form-check mx-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="" id="otherLow" data-level="3">
+                            <label class="form-check-label" for="otherLow">
+                              Other
+                            </label>
+                        </div>
+                    </div>
                 </div>
-                <div class="d-flex h-100">
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center" data-selected="false"></div>
-                    <div class="level-box">&nbsp;</div>
-                </div>
-            </div>
-            <div class="col col-auto d-flex pe-0 calc-column">
-                &nbsp;
-            </div>
-        </div>
-        <!-- END - High Risk Line Item -->
-        <!-- BEGIN - High Risk Collapse Section  -->
-        <div id="highRisk" class="row collapse" data-bs-parent="#highRiskLine">
-            <div class="col bg-light">
+                <!-- END - Low risk examples-->
+                <!-- BEGIN - Moderate risk examples-->
                 <div class="row p-1">
-                    <div class="col"><strong>Examples</strong></div>
-                </div>
-                <div class="row">
-                    <div class="col-12 col-md-4 form-check mx-3">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="drugTherapy">
-                        <label class="form-check-label" for="drugTherapy">
-                        Drug Therapy intensive monitoring for toxicity
-                      </label>
-                    </div>
-                    <div class="col-12 col-md-4 form-check mx-3">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="electiveMajor">
-                        <label class="form-check-label" for="majorSurgery">
-                        Major surgery w/ risk factors
-                      </label>
-                    </div>
-                    <div class="col-12 col-md-4 form-check mx-3">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="hospitalization">
-                        <label class="form-check-label" for="hospitalization">
-                        Hospitalization 
-                      </label>
-                    </div>
-                    <div class="col-12 col-md-4 form-check mx-3">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="poorPrognosis">
-                        <label class="form-check-label" for="poorPrognosis">
-                        De-escalate care/poor prognosis (example hospice)
-                      </label>
-                    </div>
-                    <div class="col-12 col-md-4 form-check mx-3">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="highRiskCheck">
-                        <label class="form-check-label" for="highRiskCheck">
-                        High risk of recurrence
-                      </label>
-                    </div>
-                    <div class="col-12 col-md-4 form-check mx-3">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="otherHigh">
-                        <label class="form-check-label" for="otherHigh">
-                        Other
-                      </label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="" id="moderateRisk" data-level="4">
+                        <label class="form-check-label" for="moderateRisk">
+                        <strong><span class="moderate">Moderate</span> risk of recurrences from morbidity from additional diagnostic testing or treatment</strong>
+                        </label>
                     </div>
                 </div>
+                <div class="row" data-section="risk">
+                    <div class="col-12 col-md-4 form-check mx-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="" id="rxMinor" data-level="4">
+                            <label class="form-check-label" for="rxMinor">
+                              RX Minor surgery w/o risk factors
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 form-check mx-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="" id="electiveMajor" data-level="4">
+                            <label class="form-check-label" for="electiveMajor">
+                              Elective major surgery w/o risk factors
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 form-check mx-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="" id="socialDeterminants" data-level="4">
+                            <label class="form-check-label" for="socialDeterminants">
+                              Diagnosis/treatment significantly limited by social determinants of health
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 form-check mx-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="" id="moderateRiskCheck" data-level="4">
+                            <label class="form-check-label" for="moderateRiskCheck">
+                              Moderate risk of recurrence
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 form-check mx-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="" id="ivAdditives" data-level="4">
+                            <label class="form-check-label" for="ivAdditives">
+                              IV with additives (Fe infusion)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 form-check mx-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="" id="otherModerate" data-level="4">
+                            <label class="form-check-label" for="otherModerate">
+                              Other
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- END - Moderate risk examples-->
+                <!-- BEGIN - High risk examples-->
+                <div class="row p-1">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="" id="highRisk" data-level="5">
+                        <label class="form-check-label" for="highRisk">
+                        <strong><span class="high">High</span> risk of recurrences from morbidity from additional diagnostic testing or treatment</strong>
+                        </label>
+                    </div>
+                </div>
+                <div class="row" data-section="risk">
+                    <div class="col-12 col-md-4 form-check mx-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="" id="drugTherapy" data-level="5">
+                            <label class="form-check-label" for="drugTherapy">
+                              Drug Therapy intensive monitoring for toxicity
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 form-check mx-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="" id="majorSurgery" data-level="5">
+                            <label class="form-check-label" for="majorSurgery">
+                              Major surgery w/ risk factors
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 form-check mx-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="" id="hospitalization" data-level="5">
+                            <label class="form-check-label" for="hospitalization">
+                              Hospitalization
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 form-check mx-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="" id="poorPrognosis" data-level="5">
+                            <label class="form-check-label" for="poorPrognosis">
+                              De-escalate care/poor prognosis (example hospice)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 form-check mx-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="" id="highRiskCheck" data-level="5">
+                            <label class="form-check-label" for="highRiskCheck">
+                              High risk of recurrence
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 form-check mx-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" value="" id="otherHigh" data-level="5">
+                            <label class="form-check-label" for="otherHigh">
+                              Other
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- END - High risk examples-->
             </div>
-            <div class="col col-auto d-flex pe-0 calc-column collapse-box"></div>
         </div>
-        <!-- END - High Risk Collapse Section  -->
-        <!-- BEGIN - Section Heading UI-->
+        <!-- END - Risk Items -->
+
+        <!-- BEGIN - Data Header -->
         <div class="row">
             <div class="col px-0 bg-light d-flex justify-content-between align-items-center me-2 lh-35" data-section="data">
                 <div class="h5 my-auto ms-2">Data</div>
@@ -749,154 +536,26 @@
             </div>
             <!-- END - div.col.calc-column -->
         </div>
-        <!-- END - Section Heading UI-->
-        <!-- BEGIN - Category 1 (0 - 1) Line Item -->
-        <div class="row">
-            <div class="col px-0 d-flex justify-content-between align-items-center line-item me-2" data-section="data">
-                <div class="px-2">
-                    Category 1 (0 - 1)
-                </div>
-                <div class="d-flex h-100">
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center" data-selected="false"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box">&nbsp;</div>
-                </div>
-            </div>
-            <!-- BEGIN - div.col.calc-column - these divs when filled with a unicode nonbreaking space creates the clear-column for the space used by the original overall calc container on the first line -->
-            <div class="col col-auto d-flex pe-0 calc-column">
-                &nbsp;
-            </div>
-            <!-- END - div.col.calc-column -->
-        </div>
-        <!-- END - Category 1 (0 - 1) Line Item -->
-        <!-- BEGIN - Category 1 (2) or Independent Historians Line Item -->
-        <div class="row">
-            <div class="col px-0 d-flex justify-content-between align-items-center line-item me-2" data-section="data">
-                <div class="px-2">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="line2Category1">
-                        <label class="form-check-label" for="line2Category1">
-                          Category 1 (2)
-                        </label>
-                    </div>
-                    <span> or </span>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="independentHistorians">
-                        <label class="form-check-label" for="independentHistorians">
-                          Independent Historians
-                        </label>
-                    </div>
-                </div>
-                <div class="d-flex h-100">
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center" data-selected="false"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box">&nbsp;</div>
-                </div>
-            </div>
-            <!-- BEGIN - div.col.calc-column - these divs when filled with a unicode nonbreaking space creates the clear-column for the space used by the original overall calc container on the first line -->
-            <div class="col col-auto d-flex pe-0 calc-column">
-                &nbsp;
-            </div>
-            <!-- END - div.col.calc-column -->
-        </div>
-        <!-- END - Category 1 (2) or Independent Historians Line Item -->
-        <!-- BEGIN - Category 1 (3) or Category 2 (1) or Category 3 (1) Line Item-->
-        <div class="row">
-            <div class="col px-0 d-flex justify-content-between align-items-center line-item me-2" data-section="data">
-                <div class="px-2">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="line3Category1">
-                        <label class="form-check-label" for="line3Category1">
-                          Category 1 (3)
-                        </label>
-                    </div>
-                    <span> or </span>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="line3Category2">
-                        <label class="form-check-label" for="line3Category2">
-                          Category 2 (1)
-                        </label>
-                    </div>
-                    <span> or </span>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="line3Category3">
-                        <label class="form-check-label" for="line3Category3">
-                          Category 3 (1)
-                        </label>
-                    </div>
-                </div>
-                <div class="d-flex h-100">
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center" data-selected="false"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box">&nbsp;</div>
-                </div>
-            </div>
-            <!-- BEGIN - div.col.calc-column - these divs when filled with a unicode nonbreaking space creates the clear-column for the space used by the original overall calc container on the first line -->
-            <div class="col col-auto d-flex pe-0 calc-column">
-                &nbsp;
-            </div>
-            <!-- END - div.col.calc-column -->
-        </div>
-        <!-- END - Category 1 (3) or Category 2 (1) or Category 3 (1) Line Item -->
-        <!-- BEGIN - Must meet 2 of 3: Category 1 (3) or Category 2 (1) or Category 3 (1) Line Item-->
-        <div class="row">
-            <div class="col px-0 d-flex justify-content-between align-items-center line-item me-2" data-section="data">
-                <div class="px-2">
-                    Must meet 2 of 3:
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="line4Category1">
-                        <label class="form-check-label" for="line4Category1">
-                        Category 1 (3)
-                      </label>
-                    </div>
-                    <span> and </span>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="line4Category2">
-                        <label class="form-check-label" for="line4Category2">
-                        Category 2 (1)
-                      </label>
-                    </div>
-                    <span> and </span>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input lh-35" type="checkbox" value="" id="line4Category3">
-                        <label class="form-check-label" for="line4Category3">
-                        Category 3 (1)
-                      </label>
-                    </div>
-                </div>
-                <div class="d-flex h-100">
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center"></div>
-                    <div class="level-box text-center border border-light border-top-0 d-flex align-items-center justify-content-center" data-selected="false"></div>
-                    <div class="level-box">&nbsp;</div>
-                </div>
-            </div>
-            <!-- BEGIN - div.col.calc-column - these divs when filled with a unicode nonbreaking space creates the clear-column for the space used by the original overall calc container on the first line -->
-            <div class="col col-auto d-flex pe-0 calc-column">
-                &nbsp;
-            </div>
-            <!-- END - div.col.calc-column -->
-        </div>
-        <!-- END - Category 1 (3) or Category 2 (1) or Category 3 (1) Line Item -->
-        <!-- BEGIN - Data Examples-->
-        <div id="categoryCriteria" class="row">
-            <div class="col bg-light">
+        <!-- END - Data Header -->
+        <!-- BEGIN - Data Items -->
+        <div class="row" data-section="data">
+            <div class="col">
+                <!-- BEGIN - No Data -->
                 <div class="row p-1">
-                    <div class="col"><strong>Category Criteria Examples</strong></div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="0" id="noData" data-level="2">
+                        <label class="form-check-label" for="noData">
+                        <strong>No data</strong>
+                        </label>
+                    </div>
                 </div>
+                <!-- END - No Data -->
                 <!-- BEGIN - Category 1 examples-->
-                <div class="row px-3">
+                <div class="row p-1">
                     <div class="col"><strong>Category 1: Tests, documents, or independent historian(s)</strong></div>
                 </div>
                 <div class="row">
-                    <div class="mx-3" data-example="category1">
+                    <div class="mx-3" data-category="1">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" value="1" id="externalNotes1">
                             <label class="form-check-label" for="externalNotes1"> 1 </label>
@@ -911,7 +570,7 @@
                         </div>
                         <span> Review of prior external note(s) from each unique source (not your own notes)</span>
                     </div>
-                    <div class="mx-3" data-example="category1">
+                    <div class="mx-3" data-category="1">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" value="1" id="resultTest1">
                             <label class="form-check-label" for="resultTest1"> 1 </label>
@@ -926,7 +585,7 @@
                         </div>
                         <span> Review of the result(s) of each unique test (not previously used in prior visit(s))</span>
                     </div>
-                    <div class="mx-3" data-example="category1">
+                    <div class="mx-3" data-category="1">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" value="1" id="orderingTest1">
                             <label class="form-check-label" for="orderingTest1"> 1 </label>
@@ -941,7 +600,7 @@
                         </div>
                         <span> Ordering of each unique test</span>
                     </div>
-                    <div class="mx-3" data-example="category1">
+                    <div class="mx-3" data-category="1">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" value="1" id="assesmentHistorian">
                             <label class="form-check-label" for="assesmentHistorian"> Assesment requiring an independent historian(s)</label>
@@ -950,11 +609,11 @@
                 </div>
                 <!-- END - Category 1 examples-->
                 <!-- BEGIN - Category 2 examples-->
-                <div class="row px-3">
+                <div class="row p-1">
                     <div class="col"><strong>Category 2: Independent interpretation of tests</strong></div>
                 </div>
                 <div class="row">
-                    <div class="mx-3" data-example="category2">
+                    <div class="mx-3" data-category="2">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" value="1" id="independentInterpretation">
                             <label class="form-check-label" for="independentInterpretation"> Independent interpretation of a test performed by another physician/other qualified healthcare proffessional (not separately reported)</label>
@@ -963,11 +622,11 @@
                 </div>
                 <!-- END - Category 2 examples-->
                 <!-- BEGIN - Category 3 examples-->
-                <div class="row px-3">
+                <div class="row p-1">
                     <div class="col"><strong>Category 3: Disscussion of management or test interpretation</strong></div>
                 </div>
                 <div class="row">
-                    <div class="mx-3" data-example="category3">
+                    <div class="mx-3" data-category="3">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" value="1" id="disscussionManagement">
                             <label class="form-check-label" for="disscussionManagement"> Disscussion of management or test interpretation with external physician/other qualified health care professional/appropriate source (not seperately reported)</label>
@@ -976,13 +635,8 @@
                 </div>
                 <!-- END - Category 3 examples-->
             </div>
-            <!-- BEGIN - div.col.calc-column - these divs when filled with a unicode nonbreaking space creates the clear-column for the space used by the original overall calc container on the first line -->
-            <div class="col col-auto d-flex pe-0 calc-column">
-                &nbsp;
-            </div>
-            <!-- END - div.col.calc-column -->
         </div>
-        <!-- END - Data Examples-->
+        <!-- END - Data Items -->
     </div>
 </body>
 
