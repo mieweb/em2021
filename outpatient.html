@@ -637,6 +637,19 @@
             </div>
         </div>
         <!-- END - Data Items -->
+        <div class="row">
+            <div id="jsonSection" class="col px-0 d-flex justify-content-between align-items-center line-item me-2" data-bs-toggle="collapse" data-bs-target="#jsonCollapse" aria-expanded="false" aria-controls="jsonCollapse">
+                Show/Load JSON
+            </div>
+        </div>
+        <div class="form-group row collapse" id="jsonCollapse">
+            <div class="col">
+                <textarea rows="10" class="form-control" id="jsonText"></textarea>
+                <button type="button" class="btn btn-primary" id="showJSONButton">Show JSON</button>
+                <button type="button" class="btn btn-primary" id="prettyJSONButton">Pretty JSON</button>
+                <button type="button" class="btn btn-primary" id="loadJSONButton">Load JSON</button>
+            </div>
+        </div>
     </div>
 </body>
 

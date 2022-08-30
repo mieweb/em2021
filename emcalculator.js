@@ -45,7 +45,14 @@ class Section {
         var selected = this.getSelected().map(function() {
             return '"' + this.id + '"';
         });
-        var text = '"' + this.name + '":{"selected":[' + selected.toArray() + '], "level":' + this.level + '}';
+        var settings = new Map($(this.items).find(":checkbox").map(function() {
+            return [
+                [this.id, $(this).prop("checked")]
+            ]
+        }));
+
+        settings = JSON.stringify(Object.fromEntries(settings));
+        var text = '"' + this.name + '":{"selected":[' + selected.toArray() + '], "settings": ' + settings + ', "level":' + this.level + '}';
         return text;
     }
     clear = () => {
@@ -170,13 +177,22 @@ function get_JSON() {
 
 function from_JSON(json) {
     for (i in json) {
-        if (i !== 'level') {
-            for (item in i["selected"]) {
-                $("#" + item).prop("checked", true);
+        if (i !== "level") {
+            /*if (json[i].selected) {
+                for (j of json[i].selected) {
+                    $("#" + j).prop("checked", true);
+                }
+            } else {
+                for (j in json[i].settings) {
+                    $("#" + j).prop("checked", json[i].settings[j])
+                }
+            }*/
+            for (j in json[i].settings) {
+                $("#" + j).prop("checked", json[i].settings[j])
             }
+            calculatorData.sections[i].calculateSectionLevel();
         }
     }
-    run();
 }
 
 function clearAll() {
@@ -187,6 +203,62 @@ function clearAll() {
     calculatorData.overallLevelElement.text("");
 }
 
+function showJSON() {
+    var json = get_JSON();
+    $("#jsonText").val(JSON.stringify(json));
+}
+
+function prettyJSON() {
+    var json = get_JSON();
+    var prettyJSON = prettify(json);
+    $("#jsonText").val(prettyJSON);
+}
+
+function prettify(json, tabs = 0) {
+    var text = "";
+    for (i in json) {
+        if (typeof json[i] !== "object") {
+            text += "\t".repeat(tabs) + i + ": " + json[i] + "\n";
+        } else if (Array.isArray(json[i])) {
+            text += "\t".repeat(tabs) + i + ": [" + json[i] + "]\n";
+        } else {
+            text += "\t".repeat(tabs) + i + "\n" + prettify(json[i], tabs + 1);
+        }
+    };
+    return text;
+}
+
+function loadJSON() {
+    clearAll();
+    try {
+        var json = JSON.parse($("#jsonText").val());
+    } catch (e) {
+        var json = '{'
+        var text = $("#jsonText").val().split("\n").map(function(x) {
+            return x.split("\t");
+        });
+        for (i in text) {
+            var idx = parseInt(i);
+            var x = text[idx].length - 1;
+            if (idx < text.length - 2) {
+                if (text[idx + 1].length > text[idx].length) {
+                    json += '"' + text[idx][x] + '": {'
+                } else if (text[idx + 1].length < text[idx].length) {
+                    json += '"' + text[idx][x].replace(':', '":') + '}, '
+                } else {
+                    json += '"' + text[idx][x].replace(':', '":') + ", "
+                }
+            } else {
+                if (text[idx][x] !== "") {
+                    json += '"' + text[idx][x].replace(':', '":') + '}'
+                }
+            }
+        }
+        json = JSON.parse(json);
+    }
+    from_JSON(json);
+}
+
 function run() {
     calculatorData.overallLevelElement = $('[data-section="overallLevel"]').find(".level-box").not(".erase");
     calculatorData.erase = $('[data-section="overallLevel"]').find(".erase");
@@ -195,6 +267,9 @@ function run() {
         risk: new Section("risk"),
         data: new Data()
     };
+    $("#showJSONButton").on("click", showJSON);
+    $("#prettyJSONButton").on("click", prettyJSON);
+    $("#loadJSONButton").on("click", loadJSON);
     calculatorData.sections.problems.run();
     calculatorData.sections.risk.run();
     calculatorData.sections.data.run();
