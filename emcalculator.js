@@ -183,6 +183,9 @@ function from_JSON(json) {
         if (i !== "level") {
             for (j in json[i].settings) {
                 $("#" + j).prop("checked", json[i].settings[j])
+                if (json[i].settings[j]) {
+                    calculatorData.sections[i].toggleDisable($("#" + j));
+                }
             }
             calculatorData.sections[i].calculateSectionLevel();
         }
