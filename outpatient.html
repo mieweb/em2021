@@ -69,7 +69,7 @@
         }
         
         .calc-column {
-            min-width: 211.656px;
+            min-width: 0px;
         }
         
         .calc-column.collapse-box {
@@ -104,6 +104,9 @@
                     <div class="level-box high text-center text-white"></div>
                     <div class="level-box erase bg-light d-flex align-items-center justify-content-center"><i class="fa-solid fa-eraser"></i></div>
                 </div>
+            </div>
+            <div class="col col-auto d-flex pe-0 calc-column">
+                &nbsp;
             </div>
         </div>
         <!-- END - Problems Header -->
@@ -646,7 +649,6 @@
             <div class="col">
                 <textarea rows="10" class="form-control" id="jsonText"></textarea>
                 <button type="button" class="btn btn-primary" id="showJSONButton">Show JSON</button>
-                <button type="button" class="btn btn-primary" id="prettyJSONButton">Pretty JSON</button>
                 <button type="button" class="btn btn-primary" id="loadJSONButton">Load JSON</button>
             </div>
         </div>

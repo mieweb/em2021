@@ -123,13 +123,11 @@ class Data extends Section {
         var category1 = this.calculateCategory(this.category1.find(":checked"));
         var category2 = this.calculateCategory(this.category2.find(":checked"));
         var category3 = this.calculateCategory(this.category3.find(":checked"));
-        $("#noData").prop("checked", false);
-        if (category2 === 0 && category3 === 0) {
+        if (category1 === 0 && category2 === 0 && category3 === 0 && !$("#noData").prop("checked")) {
+            this.level = 0;
+        } else if (category2 === 0 && category3 === 0) {
             if (category1 < 2) {
                 this.level = 2;
-                if (category1 === 0) {
-                    $("#noData").prop("checked", true);
-                }
             } else if (category1 === 2 || $("#assesmentHistorian").prop("checked") === true) {
                 this.level = 3;
             } else {
@@ -148,20 +146,25 @@ class Data extends Section {
         this.headerText.text("Level: " + this.level);
         overallLevel(this.name, this.level);
     }
-    toggleNone = (e) => {
-        if ($(e.currentTarget).prop("checked")) {
-            this.clear();
-            this.level = 2;
-            this.levelHeaders.empty();
-            $(this.levelHeaders[this.level - 2]).html('<i class="fa-solid fa-circle-dot"></i>');
-            this.headerText.text("Level: " + this.level);
-            overallLevel(this.name, this.level);
+    toggleDisable = (a) => {
+        if ($("#noData").prop("checked")) {
+            this.category1.find(":checkbox").prop("disabled", true);
+            this.category2.find(":checkbox").prop("disabled", true);
+            this.category3.find(":checkbox").prop("disabled", true);
+        } else {
+            this.category1.find(":checkbox").prop("disabled", false);
+            this.category2.find(":checkbox").prop("disabled", false);
+            this.category3.find(":checkbox").prop("disabled", false);
+            if (this.items.find(":checked").length > 0) {
+                $("#noData").prop("disabled", true);
+            } else {
+                $("#noData").prop("disabled", false);
+            }
         }
+        super.toggleDisable(a);
     }
     run() {
-        $("#noData").on("click", {
-            event
-        }, this.toggleNone);
+
         super.run();
     }
 }
@@ -178,17 +181,11 @@ function get_JSON() {
 function from_JSON(json) {
     for (i in json) {
         if (i !== "level") {
-            /*if (json[i].selected) {
-                for (j of json[i].selected) {
-                    $("#" + j).prop("checked", true);
-                }
-            } else {
-                for (j in json[i].settings) {
-                    $("#" + j).prop("checked", json[i].settings[j])
-                }
-            }*/
             for (j in json[i].settings) {
                 $("#" + j).prop("checked", json[i].settings[j])
+                if (json[i].settings[j]) {
+                    calculatorData.sections[i].toggleDisable($("#" + j));
+                }
             }
             calculatorData.sections[i].calculateSectionLevel();
         }
@@ -205,57 +202,12 @@ function clearAll() {
 
 function showJSON() {
     var json = get_JSON();
-    $("#jsonText").val(JSON.stringify(json));
-}
-
-function prettyJSON() {
-    var json = get_JSON();
-    var prettyJSON = prettify(json);
-    $("#jsonText").val(prettyJSON);
-}
-
-function prettify(json, tabs = 0) {
-    var text = "";
-    for (i in json) {
-        if (typeof json[i] !== "object") {
-            text += "\t".repeat(tabs) + i + ": " + json[i] + "\n";
-        } else if (Array.isArray(json[i])) {
-            text += "\t".repeat(tabs) + i + ": [" + json[i] + "]\n";
-        } else {
-            text += "\t".repeat(tabs) + i + "\n" + prettify(json[i], tabs + 1);
-        }
-    };
-    return text;
+    $("#jsonText").val(JSON.stringify(json, null, 2));
 }
 
 function loadJSON() {
     clearAll();
-    try {
-        var json = JSON.parse($("#jsonText").val());
-    } catch (e) {
-        var json = '{'
-        var text = $("#jsonText").val().split("\n").map(function(x) {
-            return x.split("\t");
-        });
-        for (i in text) {
-            var idx = parseInt(i);
-            var x = text[idx].length - 1;
-            if (idx < text.length - 2) {
-                if (text[idx + 1].length > text[idx].length) {
-                    json += '"' + text[idx][x] + '": {'
-                } else if (text[idx + 1].length < text[idx].length) {
-                    json += '"' + text[idx][x].replace(':', '":') + '}, '
-                } else {
-                    json += '"' + text[idx][x].replace(':', '":') + ", "
-                }
-            } else {
-                if (text[idx][x] !== "") {
-                    json += '"' + text[idx][x].replace(':', '":') + '}'
-                }
-            }
-        }
-        json = JSON.parse(json);
-    }
+    var json = JSON.parse($("#jsonText").val());
     from_JSON(json);
 }
 
@@ -268,7 +220,6 @@ function run() {
         data: new Data()
     };
     $("#showJSONButton").on("click", showJSON);
-    $("#prettyJSONButton").on("click", prettyJSON);
     $("#loadJSONButton").on("click", loadJSON);
     calculatorData.sections.problems.run();
     calculatorData.sections.risk.run();
