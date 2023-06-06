@@ -9,6 +9,10 @@ As part of the [Patients over Paperwork](https://www.cms.gov/About-CMS/Story-Pag
 
 CMS Site: https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/PhysicianFeeSched/Evaluation-and-Management-Visits
 
+AMA Overview: https://www.ama-assn.org/practice-management/cpt/what-physicians-need-know-about-em-code-changes-coming-jan-1
+
+AMA Video Overview: https://www.ama-assn.org/practice-management/cpt/implementing-cpt-evaluation-and-management-em-revisions
+
 ## 1995 and 1997 History
 
 [Legacy 1995/1997 Calculator](legacy/README.md)
