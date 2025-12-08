@@ -477,6 +477,66 @@
             display: block !important;
         }
     }
+
+    /* Mode Toggle Switch */
+    .mode-toggle {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .mode-toggle .form-check-input {
+        width: 2.5rem;
+        height: 1.25rem;
+        margin: 0;
+        cursor: pointer;
+        background-color: rgba(255, 255, 255, 0.3);
+        border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .mode-toggle .form-check-input:checked {
+        background-color: var(--level-4);
+        border-color: var(--level-4);
+    }
+
+    .mode-toggle .mode-label {
+        font-weight: 500;
+        opacity: 0.7;
+        transition: opacity 0.2s;
+    }
+
+    .mode-toggle .mode-label.active {
+        opacity: 1;
+        font-weight: 600;
+    }
+
+    /* WC-specific content visibility */
+    .wc-content {
+        display: none;
+    }
+
+    .wc-content.show {
+        display: block;
+    }
+
+    .wc-content-row {
+        display: none;
+    }
+
+    .wc-content-row.show {
+        display: flex;
+    }
+
+    /* ACOEM link visibility */
+    .wc-link {
+        display: none;
+    }
+
+    .wc-link.show {
+        display: inline;
+    }
 </style>
 
 <body>
@@ -484,9 +544,14 @@
         <div class="header-bar">
             <div>
                 <h1>E&M 2021 Calculator</h1>
-                <p>Outpatient Office Visit E&M Level · <a href="https://acoem.org/acoem/media/News-Library/ACOEM-EM-Coding-Tips_Final-08-23-25.pdf" target="_blank" style="color: rgba(255,255,255,0.85); text-decoration: underline;">WC Coding Guide (ACOEM)</a></p>
+                <p>Outpatient Office Visit E&M Level<span class="wc-link"> · <a href="https://acoem.org/acoem/media/News-Library/ACOEM-EM-Coding-Tips_Final-08-23-25.pdf" target="_blank" style="color: rgba(255,255,255,0.85); text-decoration: underline;">WC Coding Guide (ACOEM)</a></span></p>
             </div>
-            <div class="d-flex align-items-center gap-2">
+            <div class="d-flex align-items-center gap-3">
+                <div class="mode-toggle">
+                    <span class="mode-label active" id="mode-label-standard">Standard</span>
+                    <input class="form-check-input" type="checkbox" role="switch" id="modeToggle" onchange="toggleMode()">
+                    <span class="mode-label" id="mode-label-occ">Occupational</span>
+                </div>
                 <div id="overallLevel">Level: ???</div>
                 <button class="btn btn-primary btn-sm" type="button" onclick="clear_form()" style="background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.3);">Clear All</button>
             </div>
@@ -670,21 +735,23 @@
                                                                     <input type="checkbox" id="minimal-cms-dressings" name="minimal-risk" value=2> Superficial dressings
                                                                 </div>
                                                             </div>
-                                                            <hr>
-                                                            <h6 class="text-primary">Function-Oriented Criteria for WC Injury or Illness <a href="https://acoem.org/acoem/media/News-Library/ACOEM-EM-Coding-Tips_Final-08-23-25.pdf" target="_blank" title="ACOEM E&M Coding Guide" style="font-weight: normal;">📄</a></h6>
-                                                            <div class="row">
-                                                                <div class="col-md-4 col-12 mb-3"><strong>Presenting Problems:</strong><br>
-                                                                    <input type="checkbox" id="minimal-wc-problem" name="minimal-risk" value=2> One self-limited or minor problem
-                                                                </div>
-                                                                <div class="col-md-4 col-12 mb-3"><strong>WC Diagnostic Procedures:</strong><br>
-                                                                    <input type="checkbox" id="minimal-wc-lab" name="minimal-risk" value=2> Laboratory tests<br>
-                                                                    <input type="checkbox" id="minimal-wc-xray" name="minimal-risk" value=2> X-rays<br>
-                                                                    <input type="checkbox" id="minimal-wc-audiology" name="minimal-risk" value=2> Audiology<br>
-                                                                    <input type="checkbox" id="minimal-wc-ekg" name="minimal-risk" value=2> EKG
-                                                                </div>
-                                                                <div class="col-md-4 col-12 mb-3"><strong>Management Options:</strong><br>
-                                                                    <input type="checkbox" id="minimal-wc-bandages" name="minimal-risk" value=2> Elastic bandages<br>
-                                                                    <input type="checkbox" id="minimal-wc-dressings" name="minimal-risk" value=2> Superficial dressings
+                                                            <div class="wc-content">
+                                                                <hr>
+                                                                <h6 class="text-primary">Function-Oriented Criteria for WC Injury or Illness <a href="https://acoem.org/acoem/media/News-Library/ACOEM-EM-Coding-Tips_Final-08-23-25.pdf" target="_blank" title="ACOEM E&M Coding Guide" style="font-weight: normal;">📄</a></h6>
+                                                                <div class="row">
+                                                                    <div class="col-md-4 col-12 mb-3"><strong>Presenting Problems:</strong><br>
+                                                                        <input type="checkbox" id="minimal-wc-problem" name="minimal-risk" value=2> One self-limited or minor problem
+                                                                    </div>
+                                                                    <div class="col-md-4 col-12 mb-3"><strong>WC Diagnostic Procedures:</strong><br>
+                                                                        <input type="checkbox" id="minimal-wc-lab" name="minimal-risk" value=2> Laboratory tests<br>
+                                                                        <input type="checkbox" id="minimal-wc-xray" name="minimal-risk" value=2> X-rays<br>
+                                                                        <input type="checkbox" id="minimal-wc-audiology" name="minimal-risk" value=2> Audiology<br>
+                                                                        <input type="checkbox" id="minimal-wc-ekg" name="minimal-risk" value=2> EKG
+                                                                    </div>
+                                                                    <div class="col-md-4 col-12 mb-3"><strong>Management Options:</strong><br>
+                                                                        <input type="checkbox" id="minimal-wc-bandages" name="minimal-risk" value=2> Elastic bandages<br>
+                                                                        <input type="checkbox" id="minimal-wc-dressings" name="minimal-risk" value=2> Superficial dressings
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -739,26 +806,28 @@
                                                                     <input type="checkbox" id="IV-fluids" name="low-risk" value=3> IV fluids without additives
                                                                 </div>
                                                             </div>
-                                                            <hr>
-                                                            <h6 class="text-primary">Function-Oriented Criteria for WC Injury or Illness <a href="https://acoem.org/acoem/media/News-Library/ACOEM-EM-Coding-Tips_Final-08-23-25.pdf" target="_blank" title="ACOEM E&M Coding Guide" style="font-weight: normal;">📄</a></h6>
-                                                            <div class="row">
-                                                                <div class="col-md-4 col-12 mb-3"><strong>Presenting Problems:</strong><br>
-                                                                    <input type="checkbox" id="low-wc-self-limited" name="low-risk" value=3> Two or more self-limited or minor problems<br>
-                                                                    <input type="checkbox" id="low-wc-stable-chronic" name="low-risk" value=3> One stable chronic condition<br>
-                                                                    <input type="checkbox" id="low-wc-acute" name="low-risk" value=3> Acute uncomplicated injury or illness
-                                                                </div>
-                                                                <div class="col-md-4 col-12 mb-3"><strong>WC Diagnostic Procedures:</strong><br>
-                                                                    <input type="checkbox" id="low-wc-physio" name="low-risk" value=3> Physiologic tests not under stress (e.g. spirometry)<br>
-                                                                    <input type="checkbox" id="low-wc-imaging" name="low-risk" value=3> Imaging studies other than X-rays, without contrast<br>
-                                                                    <input type="checkbox" id="low-wc-allergy" name="low-risk" value=3> Allergy or skin patch testing
-                                                                </div>
-                                                                <div class="col-md-4 col-12 mb-3"><strong>Management Options:</strong><br>
-                                                                    <input type="checkbox" id="low-wc-otc" name="low-risk" value=3> Over the counter drugs<br>
-                                                                    <input type="checkbox" id="low-wc-restrictions" name="low-risk" value=3> Work restrictions addressing only the injured body part<br>
-                                                                    <input type="checkbox" id="low-wc-splints" name="low-risk" value=3> Splints<br>
-                                                                    <input type="checkbox" id="low-wc-pt" name="low-risk" value=3> Physical therapy<br>
-                                                                    <input type="checkbox" id="low-wc-ot" name="low-risk" value=3> Occupational therapy<br>
-                                                                    <input type="checkbox" id="low-wc-counseling" name="low-risk" value=3> Counseling on safe activities and self-care
+                                                            <div class="wc-content">
+                                                                <hr>
+                                                                <h6 class="text-primary">Function-Oriented Criteria for WC Injury or Illness <a href="https://acoem.org/acoem/media/News-Library/ACOEM-EM-Coding-Tips_Final-08-23-25.pdf" target="_blank" title="ACOEM E&M Coding Guide" style="font-weight: normal;">📄</a></h6>
+                                                                <div class="row">
+                                                                    <div class="col-md-4 col-12 mb-3"><strong>Presenting Problems:</strong><br>
+                                                                        <input type="checkbox" id="low-wc-self-limited" name="low-risk" value=3> Two or more self-limited or minor problems<br>
+                                                                        <input type="checkbox" id="low-wc-stable-chronic" name="low-risk" value=3> One stable chronic condition<br>
+                                                                        <input type="checkbox" id="low-wc-acute" name="low-risk" value=3> Acute uncomplicated injury or illness
+                                                                    </div>
+                                                                    <div class="col-md-4 col-12 mb-3"><strong>WC Diagnostic Procedures:</strong><br>
+                                                                        <input type="checkbox" id="low-wc-physio" name="low-risk" value=3> Physiologic tests not under stress (e.g. spirometry)<br>
+                                                                        <input type="checkbox" id="low-wc-imaging" name="low-risk" value=3> Imaging studies other than X-rays, without contrast<br>
+                                                                        <input type="checkbox" id="low-wc-allergy" name="low-risk" value=3> Allergy or skin patch testing
+                                                                    </div>
+                                                                    <div class="col-md-4 col-12 mb-3"><strong>Management Options:</strong><br>
+                                                                        <input type="checkbox" id="low-wc-otc" name="low-risk" value=3> Over the counter drugs<br>
+                                                                        <input type="checkbox" id="low-wc-restrictions" name="low-risk" value=3> Work restrictions addressing only the injured body part<br>
+                                                                        <input type="checkbox" id="low-wc-splints" name="low-risk" value=3> Splints<br>
+                                                                        <input type="checkbox" id="low-wc-pt" name="low-risk" value=3> Physical therapy<br>
+                                                                        <input type="checkbox" id="low-wc-ot" name="low-risk" value=3> Occupational therapy<br>
+                                                                        <input type="checkbox" id="low-wc-counseling" name="low-risk" value=3> Counseling on safe activities and self-care
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <hr>
@@ -820,34 +889,36 @@
                                                                     <input type="checkbox" id="mod-cms-fracture" name="moderate-risk" value=4> Closed treatment of fracture or dislocation, without manipulation
                                                                 </div>
                                                             </div>
-                                                            <hr>
-                                                            <h6 class="text-primary">Function-Oriented Criteria for WC Injury or Illness <a href="https://acoem.org/acoem/media/News-Library/ACOEM-EM-Coding-Tips_Final-08-23-25.pdf" target="_blank" title="ACOEM E&M Coding Guide" style="font-weight: normal;">📄</a></h6>
-                                                            <div class="row">
-                                                                <div class="col-md-4 col-12 mb-3"><strong>Presenting Problems:</strong><br>
-                                                                    <input type="checkbox" id="mod-wc-stable" name="moderate-risk" value=4> Two stable chronic conditions<br>
-                                                                    <input type="checkbox" id="mod-wc-exacerbation" name="moderate-risk" value=4> One chronic condition with mild exacerbation or progression<br>
-                                                                    <input type="checkbox" id="mod-wc-undiagnosed" name="moderate-risk" value=4> Undiagnosed new problem with uncertain prognosis<br>
-                                                                    <input type="checkbox" id="mod-wc-acute-complicated" name="moderate-risk" value=4> Acute complicated injury<br>
-                                                                    <input type="checkbox" id="mod-wc-delayed" name="moderate-risk" value=4> Delayed injury recovery compared to estimated duration of disability<br>
-                                                                    <input type="checkbox" id="mod-wc-opioids-30" name="moderate-risk" value=4> Use of opioids past 30 days<br>
-                                                                    <input type="checkbox" id="mod-wc-work-relationship" name="moderate-risk" value=4> Work relationship problems<br>
-                                                                    <input type="checkbox" id="mod-wc-off-work" name="moderate-risk" value=4> Already off work, less than 4 weeks
-                                                                </div>
-                                                                <div class="col-md-4 col-12 mb-3"><strong>WC Diagnostic Procedures:</strong><br>
-                                                                    <input type="checkbox" id="mod-wc-nerve" name="moderate-risk" value=4> Nerve testing<br>
-                                                                    <input type="checkbox" id="mod-wc-bone" name="moderate-risk" value=4> Bone scans<br>
-                                                                    <input type="checkbox" id="mod-wc-imaging" name="moderate-risk" value=4> Imaging studies with contrast<br>
-                                                                    <input type="checkbox" id="mod-wc-functional" name="moderate-risk" value=4> Functional capacity evaluation<br>
-                                                                    <input type="checkbox" id="mod-wc-physio" name="moderate-risk" value=4> Physiologic tests under stress (e.g., cardiac stress test, pulmonary exercise test)
-                                                                </div>
-                                                                <div class="col-md-4 col-12 mb-3"><strong>Management Options:</strong><br>
-                                                                    <input type="checkbox" id="mod-wc-restrictions" name="moderate-risk" value=4> Work restrictions addressing multiple body parts/functions<br>
-                                                                    <input type="checkbox" id="mod-wc-accommodations" name="moderate-risk" value=4> Management of work accommodations, hazard abatement, equipment or ergonomic modifications<br>
-                                                                    <input type="checkbox" id="mod-wc-environmental" name="moderate-risk" value=4> Addressing environmental tests<br>
-                                                                    <input type="checkbox" id="mod-wc-injection" name="moderate-risk" value=4> Joint aspiration or epidural injection<br>
-                                                                    <input type="checkbox" id="mod-wc-rx" name="moderate-risk" value=4> Prescription drug management<br>
-                                                                    <input type="checkbox" id="mod-wc-fracture" name="moderate-risk" value=4> Closed treatment of fracture or dislocation, without manipulation<br>
-                                                                    <input type="checkbox" id="mod-wc-counseling" name="moderate-risk" value=4> Counseling on self-management for pain, disability risk factors, activities to support return-to-work
+                                                            <div class="wc-content">
+                                                                <hr>
+                                                                <h6 class="text-primary">Function-Oriented Criteria for WC Injury or Illness <a href="https://acoem.org/acoem/media/News-Library/ACOEM-EM-Coding-Tips_Final-08-23-25.pdf" target="_blank" title="ACOEM E&M Coding Guide" style="font-weight: normal;">📄</a></h6>
+                                                                <div class="row">
+                                                                    <div class="col-md-4 col-12 mb-3"><strong>Presenting Problems:</strong><br>
+                                                                        <input type="checkbox" id="mod-wc-stable" name="moderate-risk" value=4> Two stable chronic conditions<br>
+                                                                        <input type="checkbox" id="mod-wc-exacerbation" name="moderate-risk" value=4> One chronic condition with mild exacerbation or progression<br>
+                                                                        <input type="checkbox" id="mod-wc-undiagnosed" name="moderate-risk" value=4> Undiagnosed new problem with uncertain prognosis<br>
+                                                                        <input type="checkbox" id="mod-wc-acute-complicated" name="moderate-risk" value=4> Acute complicated injury<br>
+                                                                        <input type="checkbox" id="mod-wc-delayed" name="moderate-risk" value=4> Delayed injury recovery compared to estimated duration of disability<br>
+                                                                        <input type="checkbox" id="mod-wc-opioids-30" name="moderate-risk" value=4> Use of opioids past 30 days<br>
+                                                                        <input type="checkbox" id="mod-wc-work-relationship" name="moderate-risk" value=4> Work relationship problems<br>
+                                                                        <input type="checkbox" id="mod-wc-off-work" name="moderate-risk" value=4> Already off work, less than 4 weeks
+                                                                    </div>
+                                                                    <div class="col-md-4 col-12 mb-3"><strong>WC Diagnostic Procedures:</strong><br>
+                                                                        <input type="checkbox" id="mod-wc-nerve" name="moderate-risk" value=4> Nerve testing<br>
+                                                                        <input type="checkbox" id="mod-wc-bone" name="moderate-risk" value=4> Bone scans<br>
+                                                                        <input type="checkbox" id="mod-wc-imaging" name="moderate-risk" value=4> Imaging studies with contrast<br>
+                                                                        <input type="checkbox" id="mod-wc-functional" name="moderate-risk" value=4> Functional capacity evaluation<br>
+                                                                        <input type="checkbox" id="mod-wc-physio" name="moderate-risk" value=4> Physiologic tests under stress (e.g., cardiac stress test, pulmonary exercise test)
+                                                                    </div>
+                                                                    <div class="col-md-4 col-12 mb-3"><strong>Management Options:</strong><br>
+                                                                        <input type="checkbox" id="mod-wc-restrictions" name="moderate-risk" value=4> Work restrictions addressing multiple body parts/functions<br>
+                                                                        <input type="checkbox" id="mod-wc-accommodations" name="moderate-risk" value=4> Management of work accommodations, hazard abatement, equipment or ergonomic modifications<br>
+                                                                        <input type="checkbox" id="mod-wc-environmental" name="moderate-risk" value=4> Addressing environmental tests<br>
+                                                                        <input type="checkbox" id="mod-wc-injection" name="moderate-risk" value=4> Joint aspiration or epidural injection<br>
+                                                                        <input type="checkbox" id="mod-wc-rx" name="moderate-risk" value=4> Prescription drug management<br>
+                                                                        <input type="checkbox" id="mod-wc-fracture" name="moderate-risk" value=4> Closed treatment of fracture or dislocation, without manipulation<br>
+                                                                        <input type="checkbox" id="mod-wc-counseling" name="moderate-risk" value=4> Counseling on self-management for pain, disability risk factors, activities to support return-to-work
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <hr>
@@ -907,28 +978,30 @@
                                                                     <input type="checkbox" id="de-escalate" name="high-risk" value=5> Decision not to resuscitate, or to de-escalate care
                                                                 </div>
                                                             </div>
-                                                            <hr>
-                                                            <h6 class="text-primary">Function-Oriented Criteria for WC Injury or Illness <a href="https://acoem.org/acoem/media/News-Library/ACOEM-EM-Coding-Tips_Final-08-23-25.pdf" target="_blank" title="ACOEM E&M Coding Guide" style="font-weight: normal;">📄</a></h6>
-                                                            <div class="row">
-                                                                <div class="col-md-4 col-12 mb-3"><strong>Presenting Problems:</strong><br>
-                                                                    <input type="checkbox" id="high-wc-severe" name="high-risk" value=5> One or more chronic illness, with severe exacerbation/progression<br>
-                                                                    <input type="checkbox" id="high-wc-threat" name="high-risk" value=5> Acute or chronic illness or injury, which poses a threat to life, bodily function or return to work<br>
-                                                                    <input type="checkbox" id="high-wc-disability" name="high-risk" value=5> Presence of more than one disability risk flag<br>
-                                                                    <input type="checkbox" id="high-wc-opioids-60" name="high-risk" value=5> Use of opioids past 60 days<br>
-                                                                    <input type="checkbox" id="high-wc-off-work" name="high-risk" value=5> Off work more than 4 weeks<br>
-                                                                    <input type="checkbox" id="high-wc-job-unavailable" name="high-risk" value=5> Job/modified work not available
-                                                                </div>
-                                                                <div class="col-md-4 col-12 mb-3"><strong>WC Diagnostic Procedures:</strong><br>
-                                                                    <input type="checkbox" id="high-wc-methacholine" name="high-risk" value=5> Methacholine challenge
-                                                                </div>
-                                                                <div class="col-md-4 col-12 mb-3"><strong>Management Options:</strong><br>
-                                                                    <input type="checkbox" id="high-wc-functional" name="high-risk" value=5> Detailed determination of overall functional abilities related to permanent restrictions<br>
-                                                                    <input type="checkbox" id="high-wc-vocational" name="high-risk" value=5> Collaboration with vocational rehabilitation<br>
-                                                                    <input type="checkbox" id="high-wc-parenteral" name="high-risk" value=5> Parenteral controlled substances<br>
-                                                                    <input type="checkbox" id="high-wc-drug-therapy" name="high-risk" value=5> Drug therapy requiring intensive monitoring for toxicity (including chronic opioid management or detoxification)<br>
-                                                                    <input type="checkbox" id="high-wc-cbt" name="high-risk" value=5> Work-focused cognitive behavioral therapy<br>
-                                                                    <input type="checkbox" id="high-wc-restoration" name="high-risk" value=5> Functional restoration program<br>
-                                                                    <input type="checkbox" id="high-wc-pain-mgmt" name="high-risk" value=5> Multidisciplinary pain mgmt. program
+                                                            <div class="wc-content">
+                                                                <hr>
+                                                                <h6 class="text-primary">Function-Oriented Criteria for WC Injury or Illness <a href="https://acoem.org/acoem/media/News-Library/ACOEM-EM-Coding-Tips_Final-08-23-25.pdf" target="_blank" title="ACOEM E&M Coding Guide" style="font-weight: normal;">📄</a></h6>
+                                                                <div class="row">
+                                                                    <div class="col-md-4 col-12 mb-3"><strong>Presenting Problems:</strong><br>
+                                                                        <input type="checkbox" id="high-wc-severe" name="high-risk" value=5> One or more chronic illness, with severe exacerbation/progression<br>
+                                                                        <input type="checkbox" id="high-wc-threat" name="high-risk" value=5> Acute or chronic illness or injury, which poses a threat to life, bodily function or return to work<br>
+                                                                        <input type="checkbox" id="high-wc-disability" name="high-risk" value=5> Presence of more than one disability risk flag<br>
+                                                                        <input type="checkbox" id="high-wc-opioids-60" name="high-risk" value=5> Use of opioids past 60 days<br>
+                                                                        <input type="checkbox" id="high-wc-off-work" name="high-risk" value=5> Off work more than 4 weeks<br>
+                                                                        <input type="checkbox" id="high-wc-job-unavailable" name="high-risk" value=5> Job/modified work not available
+                                                                    </div>
+                                                                    <div class="col-md-4 col-12 mb-3"><strong>WC Diagnostic Procedures:</strong><br>
+                                                                        <input type="checkbox" id="high-wc-methacholine" name="high-risk" value=5> Methacholine challenge
+                                                                    </div>
+                                                                    <div class="col-md-4 col-12 mb-3"><strong>Management Options:</strong><br>
+                                                                        <input type="checkbox" id="high-wc-functional" name="high-risk" value=5> Detailed determination of overall functional abilities related to permanent restrictions<br>
+                                                                        <input type="checkbox" id="high-wc-vocational" name="high-risk" value=5> Collaboration with vocational rehabilitation<br>
+                                                                        <input type="checkbox" id="high-wc-parenteral" name="high-risk" value=5> Parenteral controlled substances<br>
+                                                                        <input type="checkbox" id="high-wc-drug-therapy" name="high-risk" value=5> Drug therapy requiring intensive monitoring for toxicity (including chronic opioid management or detoxification)<br>
+                                                                        <input type="checkbox" id="high-wc-cbt" name="high-risk" value=5> Work-focused cognitive behavioral therapy<br>
+                                                                        <input type="checkbox" id="high-wc-restoration" name="high-risk" value=5> Functional restoration program<br>
+                                                                        <input type="checkbox" id="high-wc-pain-mgmt" name="high-risk" value=5> Multidisciplinary pain mgmt. program
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <hr>
@@ -1191,11 +1264,74 @@
             </div>
         </div>
         <footer class="text-center py-2" style="font-size: 0.6875rem; color: var(--text-muted);">
-            <span>E&M 2021 Calculator — <a href="https://www.mieweb.com/" target="_blank" style="color: var(--primary-medium);">MIE</a> / <a href="https://webchartnow.com" target="_blank" style="color: var(--primary-medium);">WebChart</a></span>
+            <span>E&M 2021 Calculator — <a href="https://www.mieweb.com/" target="_blank" style="color: var(--primary-medium);">MIE</a> / <a href="https://webchartnow.com" target="_blank" style="color: var(--primary-medium);">WebChart</a> / <a href="https://enterprisehealth.com" target="_blank" style="color: var(--primary-medium);">Enterprise Health</a></span>
         </footer>
     </div>
 </body>
 <script>
+    // Mode toggle function - switch between Standard and Occupational (WC) modes
+    function toggleMode(saveToStorage = true) {
+        const toggle = document.getElementById('modeToggle');
+        const isOccupational = toggle.checked;
+        const wcContent = document.querySelectorAll('.wc-content');
+        const wcLinks = document.querySelectorAll('.wc-link');
+        const labelStandard = document.getElementById('mode-label-standard');
+        const labelOcc = document.getElementById('mode-label-occ');
+        
+        // Save preference to localStorage
+        if (saveToStorage) {
+            localStorage.setItem('em2021-mode', isOccupational ? 'occupational' : 'standard');
+        }
+        
+        // Toggle WC content visibility
+        wcContent.forEach(el => {
+            if (isOccupational) {
+                el.classList.add('show');
+            } else {
+                el.classList.remove('show');
+                // Uncheck all WC checkboxes when switching to standard mode
+                el.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                    cb.checked = false;
+                });
+            }
+        });
+        
+        // Toggle WC link visibility
+        wcLinks.forEach(el => {
+            if (isOccupational) {
+                el.classList.add('show');
+            } else {
+                el.classList.remove('show');
+            }
+        });
+        
+        // Update label styling
+        if (isOccupational) {
+            labelStandard.classList.remove('active');
+            labelOcc.classList.add('active');
+        } else {
+            labelStandard.classList.add('active');
+            labelOcc.classList.remove('active');
+        }
+        
+        // Recalculate levels after mode change
+        select_level('risk');
+    }
+    
+    // Initialize mode from localStorage on page load
+    function initMode() {
+        const savedMode = localStorage.getItem('em2021-mode');
+        const toggle = document.getElementById('modeToggle');
+        
+        if (savedMode === 'occupational') {
+            toggle.checked = true;
+            toggleMode(false); // Apply mode without saving again
+        }
+    }
+    
+    // Run initialization when DOM is ready
+    document.addEventListener('DOMContentLoaded', initMode);
+
     // Toggle section when clicking on header row
     function toggleSection(event, collapseId) {
         // Don't toggle if clicking on interactive elements
