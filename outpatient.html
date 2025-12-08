@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>
-        Outpatient Audit Form
-    </title>
+    <title>E&M 2021 Calculator - Outpatient Audit Form</title>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
@@ -16,77 +18,498 @@
 </head>
 
 <style>
+    :root {
+        /* Primary Color Palette */
+        --primary-dark: #1e3a5f;
+        --primary-medium: #2c5282;
+        --primary-light: #4299e1;
+        --primary-lighter: #bee3f8;
+        
+        /* Accent Colors for Levels */
+        --level-2: #38a169;
+        --level-3: #3182ce;
+        --level-4: #d69e2e;
+        --level-5: #e53e3e;
+        
+        /* Category Colors */
+        --cat-1: #0891b2;
+        --cat-2: #059669;
+        --cat-3: #dc2626;
+        
+        /* Neutral Colors */
+        --bg-light: #f7fafc;
+        --bg-white: #ffffff;
+        --border-color: #e2e8f0;
+        --text-primary: #1a202c;
+        --text-secondary: #4a5568;
+        --text-muted: #718096;
+    }
+
+    * {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+        background-color: var(--bg-light);
+        color: var(--text-primary);
+        line-height: 1.6;
+    }
+
+    /* Main Container */
+    .accordion-full-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0.5rem;
+    }
+
+    /* Section Headers */
     h2 {
-        font-size: 1.17em;
-        font-weight: bolder;
-        color: red;
-        text-decoration: underline;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--primary-dark);
+        text-decoration: none;
         display: inline;
+        letter-spacing: -0.025em;
     }
 
     .h2-label {
-        float: right;
-        color: #00008B;
-        font-size: 1.17em;
-        font-weight: bolder;
-        display: inline;
+        color: var(--primary-medium);
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-left: 0.5rem;
     }
 
     h3 {
-        font-size: 1.10em;
-        font-weight: bolder;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin: 0;
     }
 
+    h6 {
+        font-size: 0.8125rem;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    /* Category Colors */
     .cat_1_text {
-        color: #00BFFF;
-        text-decoration: underline;
+        color: var(--cat-1);
+        text-decoration: none;
+        font-weight: 600;
     }
 
     .cat_2_text {
-        color: green;
-        text-decoration: underline;
+        color: var(--cat-2);
+        text-decoration: none;
+        font-weight: 600;
     }
 
     .cat_3_text {
-        color: red;
-        text-decoration: underline;
+        color: var(--cat-3);
+        text-decoration: none;
+        font-weight: 600;
     }
 
     .red_word {
-        color: red;
+        color: var(--level-5);
+        font-weight: 600;
+    }
+
+    /* Accordion Styling */
+    .accordion-item {
+        border: 1px solid var(--border-color);
+        border-radius: 0.375rem !important;
+        margin-bottom: 0.5rem;
+        background: var(--bg-white);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        overflow: hidden;
+    }
+
+    .accordion-button {
+        font-weight: 500;
+        color: var(--text-secondary);
+        background-color: var(--bg-light);
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+        min-height: unset;
+    }
+
+    .accordion-button:not(.collapsed) {
+        background-color: var(--primary-lighter);
+        color: var(--primary-dark);
+    }
+
+    .accordion-button:focus {
+        box-shadow: none;
+    }
+
+    .accordion-button::after {
+        width: 0.875rem;
+        height: 0.875rem;
+        background-size: 0.875rem;
+    }
+
+    .accordion-body {
+        padding: 0.5rem;
+        background-color: var(--bg-white);
+    }
+
+    /* Section Header Row */
+    .section-header-row {
+        display: flex;
+        align-items: center;
+        padding: 0.375rem 0.5rem;
+        background: var(--bg-light);
+        border-bottom: 1px solid var(--border-color);
+        gap: 0.5rem;
+        flex-wrap: nowrap;
+    }
+
+    .section-header-row h2 {
+        margin: 0;
+        white-space: nowrap;
+    }
+
+    .section-header-row .level-selectors {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-left: auto;
+    }
+
+    .section-header-row .level-selectors label {
+        font-size: 0.75rem;
+        margin: 0;
+    }
+
+    /* Inline toggle button in section header */
+    .section-header-row > .accordion-button {
+        width: auto;
+        flex: 0 0 auto;
+        padding: 0;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        margin-right: 0.375rem;
+        pointer-events: none;
+    }
+
+    .section-header-row > .accordion-button::after {
+        width: 1rem;
+        height: 1rem;
+        background-size: 1rem;
+        margin: 0;
+    }
+
+    .section-header-row > .accordion-button:not(.collapsed) {
+        background: transparent;
+    }
+
+    /* Make entire header row clickable */
+    .section-header-row {
+        cursor: pointer;
+    }
+
+    .section-header-row:hover {
+        background: var(--border-color);
+    }
+
+    /* Prevent clicks on interactive elements from toggling */
+    .section-header-row .btn,
+    .section-header-row input,
+    .section-header-row label {
+        pointer-events: auto;
+    }
+
+    /* Form Controls */
+    input[type="checkbox"],
+    input[type="radio"] {
+        width: 0.9375rem;
+        height: 0.9375rem;
+        margin-right: 0.25rem;
+        accent-color: var(--primary-medium);
+        cursor: pointer;
+    }
+
+    label {
+        cursor: pointer;
+        font-weight: 500;
+        color: var(--text-secondary);
+        font-size: 0.8125rem;
+    }
+
+    /* Row Styling */
+    .row {
+        padding: 0;
+        margin: 0;
+    }
+
+    .problems .accordion-body > .row,
+    .risk .accordion-body > .row,
+    .data .accordion-body > .row {
+        border-bottom: 1px solid var(--border-color);
+        align-items: center;
+        margin: 0;
+        padding: 0.25rem 0;
+        font-size: 0.8125rem;
+    }
+
+    .problems .accordion-body > .row:last-child,
+    .risk .accordion-body > .row:last-child,
+    .data .accordion-body > .row:last-child {
+        border-bottom: none;
+    }
+
+    /* Level Indicators */
+    .level-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 2rem;
+        height: 2rem;
+        border-radius: 0.375rem;
+        font-weight: 600;
+        font-size: 0.875rem;
+    }
+
+    /* Buttons */
+    .btn-primary {
+        background-color: var(--primary-medium);
+        border-color: var(--primary-medium);
+        font-weight: 500;
+        padding: 0.25rem 0.75rem;
+        border-radius: 0.25rem;
+        transition: all 0.2s ease;
+        font-size: 0.8125rem;
+    }
+
+    .btn-primary:hover {
+        background-color: var(--primary-dark);
+        border-color: var(--primary-dark);
+    }
+
+    .btn-sm {
+        padding: 0.125rem 0.5rem;
+        font-size: 0.6875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.025em;
+    }
+
+    /* Overall Level Display */
+    #overallLevel {
+        font-size: 1rem;
+        font-weight: 700;
+        color: white;
+        background: rgba(255, 255, 255, 0.15);
+        padding: 0.375rem 1rem;
+        border-radius: 0.375rem;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        text-align: center;
+    }
+
+    /* Header Bar */
+    .header-bar {
+        background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
+        color: white;
+        padding: 0.5rem 1rem;
+        margin-bottom: 0.5rem;
+        border-radius: 0 0 0.5rem 0.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .header-bar h1 {
+        font-size: 1.125rem;
+        font-weight: 700;
+        margin: 0;
+        letter-spacing: -0.025em;
+    }
+
+    .header-bar p {
+        margin: 0;
+        opacity: 0.85;
+        font-size: 0.75rem;
+    }
+
+    /* Section Headers */
+    .section-header {
+        background-color: var(--bg-light);
+        border-bottom: 1px solid var(--primary-light);
+        padding: 0.5rem;
+        margin: 0;
+    }
+
+    /* Nested Accordion for Examples */
+    .accordion-body .accordion {
+        margin-top: 0.375rem;
+    }
+
+    .accordion-body .accordion-item {
+        border: 1px solid var(--border-color);
+        box-shadow: none;
+        margin-bottom: 0;
+    }
+
+    .accordion-body .accordion-button {
+        background-color: var(--bg-light);
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    .accordion-body .accordion-body {
+        background-color: #fafbfc;
+        font-size: 0.75rem;
+        padding: 0.375rem;
+    }
+
+    /* CMS vs WC Section Headers */
+    .text-muted {
+        color: var(--text-muted) !important;
+        font-weight: 600;
+        font-size: 0.6875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 0.25rem;
+        margin-bottom: 0.375rem !important;
+    }
+
+    .text-primary {
+        color: var(--primary-medium) !important;
+        font-weight: 600;
+        font-size: 0.6875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border-bottom: 1px solid var(--primary-light);
+        padding-bottom: 0.25rem;
+        margin-bottom: 0.375rem !important;
+    }
+
+    /* Column Headers in Detail Sections */
+    .accordion-body strong {
+        color: var(--text-primary);
+        font-weight: 600;
+        font-size: 0.6875rem;
+        display: block;
+        margin-bottom: 0.25rem;
+        padding-bottom: 0.125rem;
+        border-bottom: 1px dashed var(--border-color);
+    }
+
+    /* Checkbox Items in Detail Sections */
+    .accordion-body .container .row > div {
+        font-size: 0.6875rem;
+        line-height: 1.5;
+        color: var(--text-secondary);
+    }
+
+    /* Horizontal Rule */
+    hr {
+        border-color: var(--border-color);
+        opacity: 0.5;
+        margin: 0.375rem 0;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .header-bar {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .header-bar h1 {
+            font-size: 0.9375rem;
+        }
+        
+        #overallLevel {
+            font-size: 0.875rem;
+            padding: 0.375rem 0.75rem;
+        }
+        
+        h2 {
+            font-size: 0.8125rem;
+        }
+        
+        .section-header-row {
+            flex-wrap: wrap;
+            padding: 0.375rem 0.5rem;
+        }
+
+        .section-header-row h2 {
+            flex: 1 1 auto;
+        }
+
+        .section-header-row .level-selectors {
+            gap: 0.375rem;
+            width: 100%;
+            justify-content: flex-end;
+            margin-top: 0.25rem;
+        }
+
+        .section-header-row .btn-sm {
+            padding: 0.125rem 0.375rem;
+            font-size: 0.625rem;
+        }
+    }
+
+    /* Print Styles */
+    @media print {
+        body {
+            background: white;
+        }
+        
+        .btn {
+            display: none;
+        }
+        
+        .accordion-collapse {
+            display: block !important;
+        }
     }
 </style>
 
 <body>
-    <div class="d-flex flex-column">
-        <div class="accordion m-auto order-2" id="accordion-full">
+    <div class="accordion-full-container">
+        <div class="header-bar">
+            <div>
+                <h1>E&M 2021 Calculator</h1>
+                <p>Outpatient Office Visit E&M Level · <a href="https://acoem.org/acoem/media/News-Library/ACOEM-EM-Coding-Tips_Final-08-23-25.pdf" target="_blank" style="color: rgba(255,255,255,0.85); text-decoration: underline;">WC Coding Guide (ACOEM)</a></p>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <div id="overallLevel">Level: ???</div>
+                <button class="btn btn-primary btn-sm" type="button" onclick="clear_form()" style="background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.3);">Clear All</button>
+            </div>
+        </div>
+        <div class="accordion" id="accordion-full">
             <div class="accordion-item">
                 <div class="problems">
-                    <div class="container" id="problems_div" onchange="select_level('problem')">
-                        <div class="row" class="accordion-header" id="accordion-problems-header">
-                            <div class="col-8">
-                                <h2>Number and Complexity of Problems Addressed</h2>
-                                <button class="btn btn-primary btn-sm" type="button"
-                                    onclick="clear_section('problems')">Clear</button>
-                                <span class="h2-label">Level</span>
-                            </div>
-                            <div class="col-1"><input type="radio" id="problem_level-2" name="problem_level" value=2>
-                                <label for="problem_level-2">2</label>
-                            </div>
-                            <div class="col-1"><input type="radio" id="problem_level-3" name="problem_level" value=3>
-                                <label for="problem_level-3">3</label>
-                            </div>
-                            <div class="col-1"><input type="radio" id="problem_level-4" name="problem_level" value=4>
-                                <label for="problem_level-4">4</label>
-                            </div>
-                            <div class="col-1"><input type="radio" id="problem_level-5" name="problem_level" value=5>
-                                <label for="problem_level-5">5</label>
+                    <div class="container-fluid" id="problems_div" onchange="select_level('problem')">
+                        <div class="section-header-row" id="accordion-problems-header" onclick="toggleSection(event, 'accordion-problems-collapse')">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#accordion-problems-collapse" aria-expanded="true"
+                                aria-controls="accordion-problems-collapse"></button>
+                            <h2>Problems Addressed</h2>
+                            <button class="btn btn-primary btn-sm" type="button"
+                                onclick="event.stopPropagation(); clear_section('problems')">Clear</button>
+                            <div class="level-selectors">
+                                <span class="h2-label">Level:</span>
+                                <input type="radio" id="problem_level-2" name="problem_level" value=2><label for="problem_level-2">2</label>
+                                <input type="radio" id="problem_level-3" name="problem_level" value=3><label for="problem_level-3">3</label>
+                                <input type="radio" id="problem_level-4" name="problem_level" value=4><label for="problem_level-4">4</label>
+                                <input type="radio" id="problem_level-5" name="problem_level" value=5><label for="problem_level-5">5</label>
                             </div>
                         </div>
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#accordion-problems-collapse" aria-expanded="true"
-                            aria-controls="accordion-problems-collapse">
-                        </button>
                         <div id="accordion-problems-collapse" class="accordion-collapse collapse show"
                             aria-labelledby="accordion-problems-header">
                             <div class="accordion-body">
@@ -189,82 +612,158 @@
             </div>
             <div class="accordion-item">
                 <div class="risk">
-                    <div class="container" id="risk_div" onchange="select_level('risk')">
-                        <div class="row" class="accordion-header" id="accordion-risk-header">
-                            <div class="col-8">
-                                <h2>Risk</h2> <button class="btn btn-primary btn-sm" type="button"
-                                    onclick="clear_section('risk')"> Clear</button><span class="h2-label">Level</span>
+                    <div class="container-fluid" id="risk_div" onchange="select_level('risk')">
+                        <div class="section-header-row" id="accordion-risk-header" onclick="toggleSection(event, 'accordion-risk-collapse')">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#accordion-risk-collapse" aria-expanded="true"
+                                aria-controls="accordion-risk-collapse"></button>
+                            <h2>Risk</h2>
+                            <button class="btn btn-primary btn-sm" type="button"
+                                onclick="event.stopPropagation(); clear_section('risk')">Clear</button>
+                            <div class="level-selectors">
+                                <span class="h2-label">Level:</span>
+                                <input type="radio" id="risk_level-2" name="risk_level" value=2><label for="risk_level-2">2</label>
+                                <input type="radio" id="risk_level-3" name="risk_level" value=3><label for="risk_level-3">3</label>
+                                <input type="radio" id="risk_level-4" name="risk_level" value=4><label for="risk_level-4">4</label>
+                                <input type="radio" id="risk_level-5" name="risk_level" value=5><label for="risk_level-5">5</label>
                             </div>
-                            <div class="col-1"><input type="radio" id="risk_level-2" name="risk_level" value=2> <label for="risk_level-2">2</label></div>
-                            
-                            <div class="col-1"><input type="radio" id="risk_level-3" name="risk_level" value=3> <label for="risk_level-3">3</label></div>
-                            
-                            <div class="col-1"><input type="radio" id="risk_level-4" name="risk_level" value=4> <label for="risk_level-4">4</label></div>
-                            
-                            <div class="col-1"><input type="radio" id="risk_level-5" name="risk_level" value=5> <label for="risk_level-5">5</label></div>
-                            
                         </div>
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#accordion-risk-collapse" aria-expanded="true"
-                            aria-controls="accordion-risk-collapse">
-                        </button>
                         <div id="accordion-risk-collapse" class="accordion-collapse collapse show"
                             aria-labelledby="accordion-risk-header">
                             <div class="accordion-body">
+                                <!-- MINIMAL RISK -->
                                 <div class="row">
-                                    <div class="col-8">Minimal risk of recurrences morbidity from additional
-                                        diagnostic
-                                        testing or
-                                        treatment
+                                    <div class="col-md-8 col-12">Minimal risk of morbidity from additional diagnostic testing or treatment
+                                        <div class="accordion" id="accordion-minimal-morbidity">
+                                            <div class="accordion-item">
+                                                <h6 class="accordion-header" id="accordion-minimal-morbidity-header">
+                                                    <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#accordion-minimal-morbidity-collapse"
+                                                        aria-expanded="false"
+                                                        aria-controls="accordion-minimal-morbidity-collapse">
+                                                        Minimal Risk Examples
+                                                    </button>
+                                                </h6>
+                                                <div id="accordion-minimal-morbidity-collapse"
+                                                    class="accordion-collapse collapse"
+                                                    aria-labelledby="accordion-minimal-morbidity-header">
+                                                    <div class="accordion-body">
+                                                        <div class="container" onchange="get_level('minimal-risk')">
+                                                            <h6 class="text-muted">CMS Criteria for MDM-Based Coding</h6>
+                                                            <div class="row mb-2">
+                                                                <div class="col-md-4 col-12 mb-3"><strong>Presenting Problems:</strong><br>
+                                                                    <input type="checkbox" id="minimal-cms-problem" name="minimal-risk" value=2> One self-limited or minor problem
+                                                                </div>
+                                                                <div class="col-md-4 col-12 mb-3"><strong>Diagnostic Procedures:</strong><br>
+                                                                    <input type="checkbox" id="minimal-cms-lab" name="minimal-risk" value=2> Laboratory tests<br>
+                                                                    <input type="checkbox" id="minimal-cms-xray" name="minimal-risk" value=2> Chest X-rays<br>
+                                                                    <input type="checkbox" id="minimal-cms-ekg" name="minimal-risk" value=2> EKG/EEG<br>
+                                                                    <input type="checkbox" id="minimal-cms-urinalysis" name="minimal-risk" value=2> Urinalysis<br>
+                                                                    <input type="checkbox" id="minimal-cms-ultrasound" name="minimal-risk" value=2> Ultrasound/Echocardiogram<br>
+                                                                    <input type="checkbox" id="minimal-cms-koh" name="minimal-risk" value=2> KOH prep
+                                                                </div>
+                                                                <div class="col-md-4 col-12 mb-3"><strong>Management Options:</strong><br>
+                                                                    <input type="checkbox" id="minimal-cms-rest" name="minimal-risk" value=2> Rest<br>
+                                                                    <input type="checkbox" id="minimal-cms-gargles" name="minimal-risk" value=2> Gargles<br>
+                                                                    <input type="checkbox" id="minimal-cms-bandages" name="minimal-risk" value=2> Elastic bandages<br>
+                                                                    <input type="checkbox" id="minimal-cms-dressings" name="minimal-risk" value=2> Superficial dressings
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <h6 class="text-primary">Function-Oriented Criteria for WC Injury or Illness <a href="https://acoem.org/acoem/media/News-Library/ACOEM-EM-Coding-Tips_Final-08-23-25.pdf" target="_blank" title="ACOEM E&M Coding Guide" style="font-weight: normal;">📄</a></h6>
+                                                            <div class="row">
+                                                                <div class="col-md-4 col-12 mb-3"><strong>Presenting Problems:</strong><br>
+                                                                    <input type="checkbox" id="minimal-wc-problem" name="minimal-risk" value=2> One self-limited or minor problem
+                                                                </div>
+                                                                <div class="col-md-4 col-12 mb-3"><strong>WC Diagnostic Procedures:</strong><br>
+                                                                    <input type="checkbox" id="minimal-wc-lab" name="minimal-risk" value=2> Laboratory tests<br>
+                                                                    <input type="checkbox" id="minimal-wc-xray" name="minimal-risk" value=2> X-rays<br>
+                                                                    <input type="checkbox" id="minimal-wc-audiology" name="minimal-risk" value=2> Audiology<br>
+                                                                    <input type="checkbox" id="minimal-wc-ekg" name="minimal-risk" value=2> EKG
+                                                                </div>
+                                                                <div class="col-md-4 col-12 mb-3"><strong>Management Options:</strong><br>
+                                                                    <input type="checkbox" id="minimal-wc-bandages" name="minimal-risk" value=2> Elastic bandages<br>
+                                                                    <input type="checkbox" id="minimal-wc-dressings" name="minimal-risk" value=2> Superficial dressings
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-1"><input type="checkbox" id="minimal-risk" name="risk" value=2>
+                                    <div class="col-3 col-md-1"><input type="checkbox" id="minimal-risk" name="risk" value=2>
                                     </div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"></div>
+                                    <div class="col-3 col-md-1"></div>
+                                    <div class="col-3 col-md-1"></div>
+                                    <div class="col-3 col-md-1"></div>
                                 </div>
+                                <!-- LOW RISK -->
                                 <div class="row">
-                                    <div class="col-8">Low risk of mordbidity from additional diagnostic testing or
-                                        treatment
+                                    <div class="col-md-8 col-12">Low risk of morbidity from additional diagnostic testing or treatment
                                         <div class="accordion" id="accordion-low-morbidity">
                                             <div class="accordion-item">
                                                 <h6 class="accordion-header" id="accordion-low-morbidity-header">
-                                                    <button class="accordion-button" type="button"
+                                                    <button class="accordion-button collapsed" type="button"
                                                         data-bs-toggle="collapse"
                                                         data-bs-target="#accordion-low-morbidity-collapse"
-                                                        aria-expanded="true"
+                                                        aria-expanded="false"
                                                         aria-controls="accordion-low-morbidity-collapse">
-                                                        Low Morbidity Examples
+                                                        Low Risk Examples
                                                     </button>
                                                 </h6>
                                                 <div id="accordion-low-morbidity-collapse"
-                                                    class="accordion-collapse collapse show"
+                                                    class="accordion-collapse collapse"
                                                     aria-labelledby="accordion-low-morbidity-header">
                                                     <div class="accordion-body">
                                                         <div class="container" id="t1" onchange="get_level('low-risk')">
-                                                            <div class="row">
-                                                                <div class="col-4"><input type="checkbox"
-                                                                        id="over-the-counter" name="low-risk"
-                                                                        value=3>Over-the-counter drugs</div>
-                                                                <div class="col-4"><input type="checkbox"
-                                                                        id="minor-surgery" name="low-risk" value=3>Minor
-                                                                    surgery w/o riskfactors</div>
-                                                                <div class="col-4"><input type="checkbox"
-                                                                        id="low-recurrences" name="low-risk" value=3>Low
-                                                                    recurrences</div>
+                                                            <h6 class="text-muted">CMS Criteria for MDM-Based Coding</h6>
+                                                            <div class="row mb-2">
+                                                                <div class="col-md-4 col-12 mb-3"><strong>Presenting Problems:</strong><br>
+                                                                    <input type="checkbox" id="low-cms-self-limited" name="low-risk" value=3> Two or more self-limited or minor problems<br>
+                                                                    <input type="checkbox" id="low-cms-stable-chronic" name="low-risk" value=3> One stable chronic illness<br>
+                                                                    <input type="checkbox" id="low-cms-acute" name="low-risk" value=3> Acute uncomplicated injury or illness
+                                                                </div>
+                                                                <div class="col-md-4 col-12 mb-3"><strong>Diagnostic Procedures:</strong><br>
+                                                                    <input type="checkbox" id="low-cms-physio" name="low-risk" value=3> Physiologic tests not under stress<br>
+                                                                    <input type="checkbox" id="low-cms-imaging" name="low-risk" value=3> Non-cardiovascular imaging studies with contrast<br>
+                                                                    <input type="checkbox" id="low-cms-biopsy" name="low-risk" value=3> Superficial needle biopsy<br>
+                                                                    <input type="checkbox" id="low-cms-abg" name="low-risk" value=3> ABG<br>
+                                                                    <input type="checkbox" id="low-cms-skin-biopsy" name="low-risk" value=3> Skin biopsies
+                                                                </div>
+                                                                <div class="col-md-4 col-12 mb-3"><strong>Management Options:</strong><br>
+                                                                    <input type="checkbox" id="over-the-counter" name="low-risk" value=3> Over-the-counter drugs<br>
+                                                                    <input type="checkbox" id="minor-surgery" name="low-risk" value=3> Minor surgery w/o risk factors<br>
+                                                                    <input type="checkbox" id="Physical/Occupational" name="low-risk" value=3> Physical/Occupational Therapy<br>
+                                                                    <input type="checkbox" id="IV-fluids" name="low-risk" value=3> IV fluids without additives
+                                                                </div>
                                                             </div>
+                                                            <hr>
+                                                            <h6 class="text-primary">Function-Oriented Criteria for WC Injury or Illness <a href="https://acoem.org/acoem/media/News-Library/ACOEM-EM-Coding-Tips_Final-08-23-25.pdf" target="_blank" title="ACOEM E&M Coding Guide" style="font-weight: normal;">📄</a></h6>
                                                             <div class="row">
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="Physical/Occupational" name="low-risk"
-                                                                        value=3>Physical/Occupational Therapy</div>
-                                                                <div class="col-6"><input type="checkbox" id="IV-fluids"
-                                                                        name="low-risk" value=3>IV
-                                                                    fluids
-                                                                    without additives</div>
+                                                                <div class="col-md-4 col-12 mb-3"><strong>Presenting Problems:</strong><br>
+                                                                    <input type="checkbox" id="low-wc-self-limited" name="low-risk" value=3> Two or more self-limited or minor problems<br>
+                                                                    <input type="checkbox" id="low-wc-stable-chronic" name="low-risk" value=3> One stable chronic condition<br>
+                                                                    <input type="checkbox" id="low-wc-acute" name="low-risk" value=3> Acute uncomplicated injury or illness
+                                                                </div>
+                                                                <div class="col-md-4 col-12 mb-3"><strong>WC Diagnostic Procedures:</strong><br>
+                                                                    <input type="checkbox" id="low-wc-physio" name="low-risk" value=3> Physiologic tests not under stress (e.g. spirometry)<br>
+                                                                    <input type="checkbox" id="low-wc-imaging" name="low-risk" value=3> Imaging studies other than X-rays, without contrast<br>
+                                                                    <input type="checkbox" id="low-wc-allergy" name="low-risk" value=3> Allergy or skin patch testing
+                                                                </div>
+                                                                <div class="col-md-4 col-12 mb-3"><strong>Management Options:</strong><br>
+                                                                    <input type="checkbox" id="low-wc-otc" name="low-risk" value=3> Over the counter drugs<br>
+                                                                    <input type="checkbox" id="low-wc-restrictions" name="low-risk" value=3> Work restrictions addressing only the injured body part<br>
+                                                                    <input type="checkbox" id="low-wc-splints" name="low-risk" value=3> Splints<br>
+                                                                    <input type="checkbox" id="low-wc-pt" name="low-risk" value=3> Physical therapy<br>
+                                                                    <input type="checkbox" id="low-wc-ot" name="low-risk" value=3> Occupational therapy<br>
+                                                                    <input type="checkbox" id="low-wc-counseling" name="low-risk" value=3> Counseling on safe activities and self-care
+                                                                </div>
                                                             </div>
+                                                            <hr>
                                                             <div class="row">
-                                                                <div class="col-4"><input type="checkbox" id="low-other"
-                                                                        name="low-risk" value=3>Other</div>
+                                                                <div class="col-4"><input type="checkbox" id="low-other" name="low-risk" value=3> Other</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -272,65 +771,89 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"><input type="checkbox" id="low-risk" name="risk" value=3>
+                                    <div class="col-3 col-md-1"></div>
+                                    <div class="col-3 col-md-1"><input type="checkbox" id="low-risk" name="risk" value=3>
                                     </div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"></div>
+                                    <div class="col-3 col-md-1"></div>
+                                    <div class="col-3 col-md-1"></div>
                                 </div>
+                                <!-- MODERATE RISK -->
                                 <div class="row">
-                                    <div class="col-8">Moderate risk of morbidity from additional diagnostic testing
-                                        or
-                                        treatment
+                                    <div class="col-md-8 col-12">Moderate risk of morbidity from additional diagnostic testing or treatment
                                         <div class="accordion" id="accordion-moderate-mordbidity">
                                             <div class="accordion-item">
                                                 <h6 class="accordion-header" id="accordion-moderate-morbidity-header">
-                                                    <button class="accordion-button" type="button"
+                                                    <button class="accordion-button collapsed" type="button"
                                                         data-bs-toggle="collapse"
                                                         data-bs-target="#accordion-moderate-morbidity-collapse"
-                                                        aria-expanded="true"
+                                                        aria-expanded="false"
                                                         aria-controls="accordion-moderate-morbidity-collapse">
-                                                        Moderate Morbidity Examples
+                                                        Moderate Risk Examples
                                                     </button>
                                                 </h6>
                                                 <div id="accordion-moderate-morbidity-collapse"
-                                                    class="accordion-collapse collapse show"
+                                                    class="accordion-collapse collapse"
                                                     aria-labelledby="accordion-moderate-morbidity-header">
                                                     <div class="accordion-body">
-                                                        <div class="container" id="t2"
-                                                            onchange="get_level('moderate-risk')">
-                                                            <div class="row">
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="RX-minor-surgery" name="moderate-risk"
-                                                                        value=4>RX Minor surgery w/o risk
-                                                                    factors
+                                                        <div class="container" id="t2" onchange="get_level('moderate-risk')">
+                                                            <h6 class="text-muted">CMS Criteria for MDM-Based Coding</h6>
+                                                            <div class="row mb-2">
+                                                                <div class="col-md-4 col-12 mb-3"><strong>Presenting Problems:</strong><br>
+                                                                    <input type="checkbox" id="mod-cms-stable" name="moderate-risk" value=4> Two stable chronic illnesses<br>
+                                                                    <input type="checkbox" id="mod-cms-exacerbation" name="moderate-risk" value=4> One chronic illness with mild exacerbation or progression<br>
+                                                                    <input type="checkbox" id="mod-cms-undiagnosed" name="moderate-risk" value=4> Undiagnosed new problem with uncertain prognosis<br>
+                                                                    <input type="checkbox" id="mod-cms-acute-complicated" name="moderate-risk" value=4> Acute complicated injury
                                                                 </div>
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="Elective-major-surgery" name="moderate-risk"
-                                                                        value=4>Elective major surgery w/o risk
-                                                                    factors</div>
+                                                                <div class="col-md-4 col-12 mb-3"><strong>Diagnostic Procedures:</strong><br>
+                                                                    <input type="checkbox" id="mod-cms-stress" name="moderate-risk" value=4> Physiologic tests under stress (e.g., cardiac stress test, fetal contraction stress test)<br>
+                                                                    <input type="checkbox" id="mod-cms-endoscopy" name="moderate-risk" value=4> Diagnostic endoscopies, with no identified risk factors<br>
+                                                                    <input type="checkbox" id="mod-cms-biopsy" name="moderate-risk" value=4> Deep needle, or incisional biopsies<br>
+                                                                    <input type="checkbox" id="mod-cms-cv-imaging" name="moderate-risk" value=4> Cardiovascular imaging studies, with contrast, with no identified risk factors (e.g., arteriogram, cardiac catheterization)<br>
+                                                                    <input type="checkbox" id="mod-cms-fluid" name="moderate-risk" value=4> Obtain fluid from body cavity (e.g., LP/thoracentesis)
+                                                                </div>
+                                                                <div class="col-md-4 col-12 mb-3"><strong>Management Options:</strong><br>
+                                                                    <input type="checkbox" id="RX-minor-surgery" name="moderate-risk" value=4> Minor surgery, with identified risk factors<br>
+                                                                    <input type="checkbox" id="Elective-major-surgery" name="moderate-risk" value=4> Elective major surgery w/o risk factors<br>
+                                                                    <input type="checkbox" id="mod-cms-rx" name="moderate-risk" value=4> Prescription drug management<br>
+                                                                    <input type="checkbox" id="mod-cms-nuclear" name="moderate-risk" value=4> Therapeutic nuclear medicine<br>
+                                                                    <input type="checkbox" id="IV-with-additives" name="moderate-risk" value=4> IV fluids, with additives<br>
+                                                                    <input type="checkbox" id="mod-cms-fracture" name="moderate-risk" value=4> Closed treatment of fracture or dislocation, without manipulation
+                                                                </div>
                                                             </div>
+                                                            <hr>
+                                                            <h6 class="text-primary">Function-Oriented Criteria for WC Injury or Illness <a href="https://acoem.org/acoem/media/News-Library/ACOEM-EM-Coding-Tips_Final-08-23-25.pdf" target="_blank" title="ACOEM E&M Coding Guide" style="font-weight: normal;">📄</a></h6>
                                                             <div class="row">
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="Diagnosis/treatment" name="moderate-risk"
-                                                                        value=4>Diagnosis/treatment
-                                                                    significantly
-                                                                    limited by social determinants of
-                                                                    health
+                                                                <div class="col-md-4 col-12 mb-3"><strong>Presenting Problems:</strong><br>
+                                                                    <input type="checkbox" id="mod-wc-stable" name="moderate-risk" value=4> Two stable chronic conditions<br>
+                                                                    <input type="checkbox" id="mod-wc-exacerbation" name="moderate-risk" value=4> One chronic condition with mild exacerbation or progression<br>
+                                                                    <input type="checkbox" id="mod-wc-undiagnosed" name="moderate-risk" value=4> Undiagnosed new problem with uncertain prognosis<br>
+                                                                    <input type="checkbox" id="mod-wc-acute-complicated" name="moderate-risk" value=4> Acute complicated injury<br>
+                                                                    <input type="checkbox" id="mod-wc-delayed" name="moderate-risk" value=4> Delayed injury recovery compared to estimated duration of disability<br>
+                                                                    <input type="checkbox" id="mod-wc-opioids-30" name="moderate-risk" value=4> Use of opioids past 30 days<br>
+                                                                    <input type="checkbox" id="mod-wc-work-relationship" name="moderate-risk" value=4> Work relationship problems<br>
+                                                                    <input type="checkbox" id="mod-wc-off-work" name="moderate-risk" value=4> Already off work, less than 4 weeks
                                                                 </div>
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="moderate-risk-recurrence"
-                                                                        name="moderate-risk" value=4>Moderate risk of
-                                                                    recurrence</div>
+                                                                <div class="col-md-4 col-12 mb-3"><strong>WC Diagnostic Procedures:</strong><br>
+                                                                    <input type="checkbox" id="mod-wc-nerve" name="moderate-risk" value=4> Nerve testing<br>
+                                                                    <input type="checkbox" id="mod-wc-bone" name="moderate-risk" value=4> Bone scans<br>
+                                                                    <input type="checkbox" id="mod-wc-imaging" name="moderate-risk" value=4> Imaging studies with contrast<br>
+                                                                    <input type="checkbox" id="mod-wc-functional" name="moderate-risk" value=4> Functional capacity evaluation<br>
+                                                                    <input type="checkbox" id="mod-wc-physio" name="moderate-risk" value=4> Physiologic tests under stress (e.g., cardiac stress test, pulmonary exercise test)
+                                                                </div>
+                                                                <div class="col-md-4 col-12 mb-3"><strong>Management Options:</strong><br>
+                                                                    <input type="checkbox" id="mod-wc-restrictions" name="moderate-risk" value=4> Work restrictions addressing multiple body parts/functions<br>
+                                                                    <input type="checkbox" id="mod-wc-accommodations" name="moderate-risk" value=4> Management of work accommodations, hazard abatement, equipment or ergonomic modifications<br>
+                                                                    <input type="checkbox" id="mod-wc-environmental" name="moderate-risk" value=4> Addressing environmental tests<br>
+                                                                    <input type="checkbox" id="mod-wc-injection" name="moderate-risk" value=4> Joint aspiration or epidural injection<br>
+                                                                    <input type="checkbox" id="mod-wc-rx" name="moderate-risk" value=4> Prescription drug management<br>
+                                                                    <input type="checkbox" id="mod-wc-fracture" name="moderate-risk" value=4> Closed treatment of fracture or dislocation, without manipulation<br>
+                                                                    <input type="checkbox" id="mod-wc-counseling" name="moderate-risk" value=4> Counseling on self-management for pain, disability risk factors, activities to support return-to-work
+                                                                </div>
                                                             </div>
+                                                            <hr>
                                                             <div class="row">
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="IV-with-additives" name="moderate-risk"
-                                                                        value=4>IV with additives (Fe infusion)
-                                                                </div>
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="moderate-other" name="moderate-risk"
-                                                                        value=4>Other</div>
+                                                                <div class="col-6"><input type="checkbox" id="Diagnosis/treatment" name="moderate-risk" value=4> Diagnosis/treatment significantly limited by social determinants of health</div>
+                                                                <div class="col-6"><input type="checkbox" id="moderate-other" name="moderate-risk" value=4> Other</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -338,56 +861,80 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"><input type="checkbox" id="moderate-risk" name="risk" value=4>
+                                    <div class="col-3 col-md-1"></div>
+                                    <div class="col-3 col-md-1"></div>
+                                    <div class="col-3 col-md-1"><input type="checkbox" id="moderate-risk" name="risk" value=4>
                                     </div>
-                                    <div class="col-1"></div>
+                                    <div class="col-3 col-md-1"></div>
                                 </div>
+                                <!-- HIGH RISK -->
                                 <div class="row">
-                                    <div class="col-8">High risk of mordbidity from additional diagnostic testing or
-                                        treatment
+                                    <div class="col-md-8 col-12">High risk of morbidity from additional diagnostic testing or treatment
                                         <div class="accordion" id="accordion-high-mordbidity">
                                             <div class="accordion-item">
                                                 <h6 class="accordion-header" id="accordion-high-morbidity-header">
-                                                    <button class="accordion-button" type="button"
+                                                    <button class="accordion-button collapsed" type="button"
                                                         data-bs-toggle="collapse"
                                                         data-bs-target="#accordion-high-morbidity-collapse"
-                                                        aria-expanded="true"
+                                                        aria-expanded="false"
                                                         aria-controls="accordion-high-morbidity-collapse">
-                                                        High Morbidity Examples
+                                                        High Risk Examples
                                                     </button>
                                                 </h6>
                                                 <div id="accordion-high-morbidity-collapse"
-                                                    class="accordion-collapse collapse show"
+                                                    class="accordion-collapse collapse"
                                                     aria-labelledby="accordion-high-morbidity-header">
                                                     <div class="accordion-body">
-                                                        <div class="container" id="t3"
-                                                            onchange="get_level('high-risk')">
-                                                            <div class="row">
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="drug-therapy" name="high-risk" value=5>Drug
-                                                                    Therapy intensive monitoring for toxicity</div>
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="major_surgery_risks" name="high-risk"
-                                                                        value=5>Major surgery w/ risk factors</div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="hospitalization" name="high-risk"
-                                                                        value=5>Hospitalization</div>
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="de-escalate" name="high-risk"
-                                                                        value=5>De-escalate care/poor prognosis
-                                                                    (example hospice)</div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="high-risk-recurrence" name="high-risk"
-                                                                        value=5>High risk of recurrence</div>
-                                                                <div class="col-6"><input type="checkbox"
-                                                                        id="high-other" name="high-risk" value=5>Other
+                                                        <div class="container" id="t3" onchange="get_level('high-risk')">
+                                                            <h6 class="text-muted">CMS Criteria for MDM-Based Coding</h6>
+                                                            <div class="row mb-2">
+                                                                <div class="col-md-4 col-12 mb-3"><strong>Presenting Problems:</strong><br>
+                                                                    <input type="checkbox" id="high-cms-severe" name="high-risk" value=5> One or more chronic illness, with severe exacerbation or progression<br>
+                                                                    <input type="checkbox" id="high-cms-threat" name="high-risk" value=5> Acute or chronic illness or injury, which poses a threat to life or bodily function<br>
+                                                                    <input type="checkbox" id="high-cms-neuro" name="high-risk" value=5> An abrupt change in neurological status
                                                                 </div>
+                                                                <div class="col-md-4 col-12 mb-3"><strong>Diagnostic Procedures:</strong><br>
+                                                                    <input type="checkbox" id="high-cms-cv-imaging" name="high-risk" value=5> Cardiovascular imaging, with contrast, with identified risk factors<br>
+                                                                    <input type="checkbox" id="high-cms-ep" name="high-risk" value=5> Cardiac EP studies<br>
+                                                                    <input type="checkbox" id="high-cms-endoscopy" name="high-risk" value=5> Diagnostic endoscopies, with identified risk factors<br>
+                                                                    <input type="checkbox" id="high-cms-discography" name="high-risk" value=5> Discography
+                                                                </div>
+                                                                <div class="col-md-4 col-12 mb-3"><strong>Management Options:</strong><br>
+                                                                    <input type="checkbox" id="major_surgery_risks" name="high-risk" value=5> Elective major surgery with identified risk factors<br>
+                                                                    <input type="checkbox" id="high-cms-emergency" name="high-risk" value=5> Emergency major surgery<br>
+                                                                    <input type="checkbox" id="high-cms-parenteral" name="high-risk" value=5> Parenteral controlled substances<br>
+                                                                    <input type="checkbox" id="drug-therapy" name="high-risk" value=5> Drug therapy requiring intensive monitoring for toxicity<br>
+                                                                    <input type="checkbox" id="de-escalate" name="high-risk" value=5> Decision not to resuscitate, or to de-escalate care
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <h6 class="text-primary">Function-Oriented Criteria for WC Injury or Illness <a href="https://acoem.org/acoem/media/News-Library/ACOEM-EM-Coding-Tips_Final-08-23-25.pdf" target="_blank" title="ACOEM E&M Coding Guide" style="font-weight: normal;">📄</a></h6>
+                                                            <div class="row">
+                                                                <div class="col-md-4 col-12 mb-3"><strong>Presenting Problems:</strong><br>
+                                                                    <input type="checkbox" id="high-wc-severe" name="high-risk" value=5> One or more chronic illness, with severe exacerbation/progression<br>
+                                                                    <input type="checkbox" id="high-wc-threat" name="high-risk" value=5> Acute or chronic illness or injury, which poses a threat to life, bodily function or return to work<br>
+                                                                    <input type="checkbox" id="high-wc-disability" name="high-risk" value=5> Presence of more than one disability risk flag<br>
+                                                                    <input type="checkbox" id="high-wc-opioids-60" name="high-risk" value=5> Use of opioids past 60 days<br>
+                                                                    <input type="checkbox" id="high-wc-off-work" name="high-risk" value=5> Off work more than 4 weeks<br>
+                                                                    <input type="checkbox" id="high-wc-job-unavailable" name="high-risk" value=5> Job/modified work not available
+                                                                </div>
+                                                                <div class="col-md-4 col-12 mb-3"><strong>WC Diagnostic Procedures:</strong><br>
+                                                                    <input type="checkbox" id="high-wc-methacholine" name="high-risk" value=5> Methacholine challenge
+                                                                </div>
+                                                                <div class="col-md-4 col-12 mb-3"><strong>Management Options:</strong><br>
+                                                                    <input type="checkbox" id="high-wc-functional" name="high-risk" value=5> Detailed determination of overall functional abilities related to permanent restrictions<br>
+                                                                    <input type="checkbox" id="high-wc-vocational" name="high-risk" value=5> Collaboration with vocational rehabilitation<br>
+                                                                    <input type="checkbox" id="high-wc-parenteral" name="high-risk" value=5> Parenteral controlled substances<br>
+                                                                    <input type="checkbox" id="high-wc-drug-therapy" name="high-risk" value=5> Drug therapy requiring intensive monitoring for toxicity (including chronic opioid management or detoxification)<br>
+                                                                    <input type="checkbox" id="high-wc-cbt" name="high-risk" value=5> Work-focused cognitive behavioral therapy<br>
+                                                                    <input type="checkbox" id="high-wc-restoration" name="high-risk" value=5> Functional restoration program<br>
+                                                                    <input type="checkbox" id="high-wc-pain-mgmt" name="high-risk" value=5> Multidisciplinary pain mgmt. program
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-6"><input type="checkbox" id="hospitalization" name="high-risk" value=5> Hospitalization</div>
+                                                                <div class="col-6"><input type="checkbox" id="high-other" name="high-risk" value=5> Other</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -395,10 +942,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"></div>
-                                    <div class="col-1"><input type="checkbox" id="high-risk" name="risk" value=5>
+                                    <div class="col-3 col-md-1"></div>
+                                    <div class="col-3 col-md-1"></div>
+                                    <div class="col-3 col-md-1"></div>
+                                    <div class="col-3 col-md-1"><input type="checkbox" id="high-risk" name="risk" value=5>
                                     </div>
                                 </div>
                             </div>
@@ -409,39 +956,32 @@
             </div>
             <div class="accordion-item">
                 <div class="data">
-                    <div class="container" id="data_div" onchange="select_level('data')">
-                        <div class="row" class="accordion-header" id="accordion-data-header">
-                            <div class="col-8">
-                                <h2>Data</h2><button class="btn btn-primary btn-sm" type="button"
-                                    onclick="clear_section('data')"> Clear</button><span class="h2-label">Level</span>
+                    <div class="container-fluid" id="data_div" onchange="select_level('data')">
+                        <div class="section-header-row" id="accordion-data-header" onclick="toggleSection(event, 'accordion-data-collapse')">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#accordion-data-collapse" aria-expanded="true"
+                                aria-controls="accordion-data-collapse"></button>
+                            <h2>Data</h2>
+                            <button class="btn btn-primary btn-sm" type="button"
+                                onclick="event.stopPropagation(); clear_section('data')">Clear</button>
+                            <div class="level-selectors">
+                                <span class="h2-label">Level:</span>
+                                <input type="radio" id="data_level-2" name="data_level" value=2><label for="data_level-2">2</label>
+                                <input type="radio" id="data_level-3" name="data_level" value=3><label for="data_level-3">3</label>
+                                <input type="radio" id="data_level-4" name="data_level" value=4><label for="data_level-4">4</label>
+                                <input type="radio" id="data_level-5" name="data_level" value=5><label for="data_level-5">5</label>
                             </div>
-                            <div class="col-1"><input type="radio" id="data_level-2" name="data_level" value=2> <label for="data_level-2">2</label>
-                            </div>
-                            
-                            <div class="col-1"><input type="radio" id="data_level-3" name="data_level" value=3> <label for="data_level-3">3</label>
-                            </div>
-                            
-                            <div class="col-1"><input type="radio" id="data_level-4" name="data_level" value=4> <label for="data_level-4">4</label>
-                            </div>
-                            
-                            <div class="col-1"><input type="radio" id="data_level-5" name="data_level" value=5> <label for="data_level-5">5</label>
-                            </div>
-                            
                         </div>
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#accordion-data-collapse" aria-expanded="true"
-                            aria-controls="accordion-data-collapse">
-                        </button>
                         <div id="accordion-data-collapse" class="accordion-collapse collapse show"
                             aria-labelledby="accordion-data-header">
                             <div class="accordion-body">
-                                <div class="accordion m-2" id="accordion-categories">
+                                <div class="accordion" id="accordion-categories">
                                     <div class="accordion-item">
                                         <h6 class="accordion-categories-header" id="accordion-categories-header">
                                             <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#accordion-categories-collapse" aria-expanded="true"
                                                 aria-controls="accordion-categories-collapse">
-                                                Category Criterea Examples
+                                                Category Criteria Examples
                                             </button>
                                         </h6>
                                         <div id="accordion-categories-collapse" class="accordion-collapse collapse show"
@@ -650,15 +1190,30 @@
                 </div>
             </div>
         </div>
-        <div class="d-flex flex-wrap order-1 p-2">
-            <div>
-                <h1 id="overallLevel"></h1>
-            </div>
-            <button class="btn btn-primary m-2" type="button" onclick="clear_form()"> Clear </button>
-        </div>
+        <footer class="text-center py-2" style="font-size: 0.6875rem; color: var(--text-muted);">
+            <span>E&M 2021 Calculator — <a href="https://www.mieweb.com/" target="_blank" style="color: var(--primary-medium);">MIE</a> / <a href="https://webchartnow.com" target="_blank" style="color: var(--primary-medium);">WebChart</a></span>
+        </footer>
     </div>
 </body>
 <script>
+    // Toggle section when clicking on header row
+    function toggleSection(event, collapseId) {
+        // Don't toggle if clicking on interactive elements
+        if (event.target.matches('input, button, label, a')) {
+            return;
+        }
+        const collapse = document.getElementById(collapseId);
+        const bsCollapse = new bootstrap.Collapse(collapse, { toggle: true });
+        
+        // Update the accordion button state
+        const header = event.currentTarget;
+        const btn = header.querySelector('.accordion-button');
+        if (btn) {
+            btn.classList.toggle('collapsed');
+            btn.setAttribute('aria-expanded', btn.classList.contains('collapsed') ? 'false' : 'true');
+        }
+    }
+
     function select_level(name) {
         let level = name + '_level';
         const checkboxes = document.querySelectorAll('input[name="' + name + '"]:checked');
